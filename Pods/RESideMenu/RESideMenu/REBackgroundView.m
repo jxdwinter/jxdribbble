@@ -37,6 +37,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self addSubview:_imageView];
@@ -44,6 +46,7 @@
     return self;
 }
 
+/*
 - (void)setBackgroundImage:(UIImage *)backgroundImage
 {
     _backgroundImage = backgroundImage;
@@ -109,6 +112,6 @@
     
     
 }
-
+*/
 
 @end

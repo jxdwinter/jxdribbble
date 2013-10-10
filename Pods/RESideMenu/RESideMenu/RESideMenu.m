@@ -61,11 +61,10 @@ NSString * const RESideMenuDidClose = @"RESideMenuDidClose";
 {
     if (self = [super init]) {
         self.verticalPortraitOffset = self.verticalLandscapeOffset = 100;
-        self.horizontalPortraitOffset = self.horizontalLandscapeOffset = 50;
-        self.itemHeight = 50;
+        self.horizontalPortraitOffset = self.horizontalLandscapeOffset = 80;
+        self.itemHeight = 65;
         self.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
         self.textColor = [UIColor whiteColor];
-#warning change the color of RESideMenu textcolor
         self.highlightedTextColor = [UIColor lightGrayColor];
         self.hideStatusBarArea = YES;
         self.openStatusBarStyle = UIStatusBarStyleDefault;
@@ -258,6 +257,7 @@ NSString * const RESideMenuDidClose = @"RESideMenuDidClose";
         _tableView.backgroundView = nil;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+#warning RESideMenu headerView
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.verticalOffset)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.alpha = 0;

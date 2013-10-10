@@ -27,13 +27,12 @@
 {
     [super viewDidLoad];
     self.title = @"Following";
-    
-}
 
+}
 #ifdef __IPHONE_7_0
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 #endif
 
@@ -44,3 +43,5 @@
 }
 
 @end
+
+

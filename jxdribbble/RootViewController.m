@@ -22,10 +22,14 @@
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    
+    /*
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
     [self.view addGestureRecognizer:gestureRecognizer];
+    */
     
-    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.view.backgroundColor = [UIColor whiteColor];
     
 }
 

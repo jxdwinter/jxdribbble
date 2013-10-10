@@ -27,13 +27,13 @@
 {
     [super viewDidLoad];
     self.title = @"Popular";
-    
+
 }
 
 #ifdef __IPHONE_7_0
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 #endif
 

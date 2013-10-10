@@ -21,15 +21,18 @@ PODS:
     - AFNetworking/NSURLConnection
   - MBProgressHUD (0.8)
   - RESideMenu (2.0.2)
+  - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - MBProgressHUD (~> 0.8)
   - RESideMenu (~> 2.0.2)
+  - SVPullToRefresh (~> 0.4.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 3fa983b1beaba69566a3374612511e2a6e3fe845
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   RESideMenu: 5314c5386ffc3c78858d08812bf7e60a71bc5701
+  SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
 
 COCOAPODS: 0.26.2
