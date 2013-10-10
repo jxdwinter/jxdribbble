@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44CB78C8DA0F488DB7076FFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F94FEC927F45BBB40815E8 /* libPods.a */; };
 		72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FB18064D4200A3BDA8 /* Foundation.framework */; };
 		72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */; };
 		72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FF18064D4200A3BDA8 /* UIKit.framework */; };
@@ -19,6 +20,16 @@
 		72B8011718064D4200A3BDA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FF18064D4200A3BDA8 /* UIKit.framework */; };
 		72B8011F18064D4200A3BDA8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72B8011D18064D4200A3BDA8 /* InfoPlist.strings */; };
 		72B8012118064D4200A3BDA8 /* jxdribbbleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8012018064D4200A3BDA8 /* jxdribbbleTests.m */; };
+		72B8013318064F6D00A3BDA8 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8012D18064F6D00A3BDA8 /* Icon-60@2x.png */; };
+		72B8013418064F6D00A3BDA8 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8012E18064F6D00A3BDA8 /* Icon-Small@2x.png */; };
+		72B8013518064F6D00A3BDA8 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8012F18064F6D00A3BDA8 /* Icon-60.png */; };
+		72B8013618064F6D00A3BDA8 /* Icon-Spotlight-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8013018064F6D00A3BDA8 /* Icon-Spotlight-40.png */; };
+		72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8013118064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png */; };
+		72B8013818064F6D00A3BDA8 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8013218064F6D00A3BDA8 /* Icon-Small.png */; };
+		72B8013A1806516000A3BDA8 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 72B801391806516000A3BDA8 /* Podfile */; };
+		72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8013C1806525000A3BDA8 /* Crashlytics.framework */; };
+		72B8013F1806539F00A3BDA8 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8013E1806539F00A3BDA8 /* Reveal.framework */; };
+		72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B80140180653C900A3BDA8 /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7139F2FF20114F5CA4EC73A9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		72B800F818064D4200A3BDA8 /* jxdribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jxdribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B800FB18064D4200A3BDA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,6 +60,17 @@
 		72B8011C18064D4200A3BDA8 /* jxdribbbleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jxdribbbleTests-Info.plist"; sourceTree = "<group>"; };
 		72B8011E18064D4200A3BDA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		72B8012018064D4200A3BDA8 /* jxdribbbleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jxdribbbleTests.m; sourceTree = "<group>"; };
+		72B8012D18064F6D00A3BDA8 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		72B8012E18064F6D00A3BDA8 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		72B8012F18064F6D00A3BDA8 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
+		72B8013018064F6D00A3BDA8 /* Icon-Spotlight-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Spotlight-40.png"; sourceTree = "<group>"; };
+		72B8013118064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Spotlight-40@2x.png"; sourceTree = "<group>"; };
+		72B8013218064F6D00A3BDA8 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		72B801391806516000A3BDA8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		72B8013C1806525000A3BDA8 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		72B8013E1806539F00A3BDA8 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		72B80140180653C900A3BDA8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,9 +78,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */,
 				72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */,
+				72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */,
 				72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */,
+				72B8013F1806539F00A3BDA8 /* Reveal.framework in Frameworks */,
 				72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */,
+				44CB78C8DA0F488DB7076FFE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +108,7 @@
 				72B8011A18064D4200A3BDA8 /* jxdribbbleTests */,
 				72B800FA18064D4200A3BDA8 /* Frameworks */,
 				72B800F918064D4200A3BDA8 /* Products */,
+				7139F2FF20114F5CA4EC73A9 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,10 +124,14 @@
 		72B800FA18064D4200A3BDA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72B80140180653C900A3BDA8 /* CFNetwork.framework */,
+				72B8013E1806539F00A3BDA8 /* Reveal.framework */,
+				72B8013C1806525000A3BDA8 /* Crashlytics.framework */,
 				72B800FB18064D4200A3BDA8 /* Foundation.framework */,
 				72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */,
 				72B800FF18064D4200A3BDA8 /* UIKit.framework */,
 				72B8011418064D4200A3BDA8 /* XCTest.framework */,
+				A2F94FEC927F45BBB40815E8 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -118,6 +150,8 @@
 		72B8010218064D4200A3BDA8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				72B8012C18064EF000A3BDA8 /* icon */,
+				72B801391806516000A3BDA8 /* Podfile */,
 				72B8010318064D4200A3BDA8 /* jxdribbble-Info.plist */,
 				72B8010418064D4200A3BDA8 /* InfoPlist.strings */,
 				72B8010718064D4200A3BDA8 /* main.m */,
@@ -144,6 +178,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		72B8012C18064EF000A3BDA8 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				72B8012F18064F6D00A3BDA8 /* Icon-60.png */,
+				72B8012D18064F6D00A3BDA8 /* Icon-60@2x.png */,
+				72B8013218064F6D00A3BDA8 /* Icon-Small.png */,
+				72B8012E18064F6D00A3BDA8 /* Icon-Small@2x.png */,
+				72B8013018064F6D00A3BDA8 /* Icon-Spotlight-40.png */,
+				72B8013118064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png */,
+			);
+			name = icon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,9 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 72B8012418064D4200A3BDA8 /* Build configuration list for PBXNativeTarget "jxdribbble" */;
 			buildPhases = (
+				783CDC9536B64D2AB288AA65 /* Check Pods Manifest.lock */,
 				72B800F418064D4200A3BDA8 /* Sources */,
 				72B800F518064D4200A3BDA8 /* Frameworks */,
 				72B800F618064D4200A3BDA8 /* Resources */,
+				FD0FD8BF2232459D8F8E8C38 /* Copy Pods Resources */,
+				72B8013B1806520A00A3BDA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -192,6 +242,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Jiang Xiaodong";
 				TargetAttributes = {
+					72B800F718064D4200A3BDA8 = {
+						DevelopmentTeam = LRW83L7QAK;
+					};
 					72B8011218064D4200A3BDA8 = {
 						TestTargetID = 72B800F718064D4200A3BDA8;
 					};
@@ -221,7 +274,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				72B8010618064D4200A3BDA8 /* InfoPlist.strings in Resources */,
+				72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */,
+				72B8013518064F6D00A3BDA8 /* Icon-60.png in Resources */,
 				72B8010E18064D4200A3BDA8 /* Images.xcassets in Resources */,
+				72B8013418064F6D00A3BDA8 /* Icon-Small@2x.png in Resources */,
+				72B8013618064F6D00A3BDA8 /* Icon-Spotlight-40.png in Resources */,
+				72B8013A1806516000A3BDA8 /* Podfile in Resources */,
+				72B8013318064F6D00A3BDA8 /* Icon-60@2x.png in Resources */,
+				72B8013818064F6D00A3BDA8 /* Icon-Small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +294,52 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		72B8013B1806520A00A3BDA8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run adb6c6dba2e462026e3494de452a18ec98b17ee6";
+		};
+		783CDC9536B64D2AB288AA65 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD0FD8BF2232459D8F8E8C38 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		72B800F418064D4200A3BDA8 /* Sources */ = {
@@ -357,26 +463,42 @@
 		};
 		72B8012518064D4200A3BDA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7139F2FF20114F5CA4EC73A9 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jiangxiaodong/Documents/jxdribbble,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jxdribbble/jxdribbble-Prefix.pch";
 				INFOPLIST_FILE = "jxdribbble/jxdribbble-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		72B8012618064D4200A3BDA8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7139F2FF20114F5CA4EC73A9 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jiangxiaodong/Documents/jxdribbble,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jxdribbble/jxdribbble-Prefix.pch";
 				INFOPLIST_FILE = "jxdribbble/jxdribbble-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -442,6 +564,7 @@
 				72B8012618064D4200A3BDA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		72B8012718064D4200A3BDA8 /* Build configuration list for PBXNativeTarget "jxdribbbleTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +573,7 @@
 				72B8012918064D4200A3BDA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
