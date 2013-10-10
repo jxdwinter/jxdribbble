@@ -36,6 +36,8 @@
 		72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015118065DB300A3BDA8 /* jxdribbble_PopularViewController.m */; };
 		72B8015518065DC900A3BDA8 /* jxdribbble_FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */; };
 		72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */; };
+		72B8015B180684CC00A3BDA8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B80159180684CC00A3BDA8 /* Default@2x.png */; };
+		72B8015C180684CC00A3BDA8 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8015A180684CC00A3BDA8 /* Default~iphone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_FollowingViewController.m; sourceTree = "<group>"; };
 		72B80156180666AD00A3BDA8 /* jxdribbble_SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_SettingsViewController.h; sourceTree = "<group>"; };
 		72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_SettingsViewController.m; sourceTree = "<group>"; };
+		72B80159180684CC00A3BDA8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		72B8015A180684CC00A3BDA8 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -206,6 +210,8 @@
 		72B8012C18064EF000A3BDA8 /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				72B80159180684CC00A3BDA8 /* Default@2x.png */,
+				72B8015A180684CC00A3BDA8 /* Default~iphone.png */,
 				72B8012F18064F6D00A3BDA8 /* Icon-60.png */,
 				72B8012D18064F6D00A3BDA8 /* Icon-60@2x.png */,
 				72B8013218064F6D00A3BDA8 /* Icon-Small.png */,
@@ -345,6 +351,8 @@
 			files = (
 				72B8010618064D4200A3BDA8 /* InfoPlist.strings in Resources */,
 				72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */,
+				72B8015C180684CC00A3BDA8 /* Default~iphone.png in Resources */,
+				72B8015B180684CC00A3BDA8 /* Default@2x.png in Resources */,
 				72B8013518064F6D00A3BDA8 /* Icon-60.png in Resources */,
 				72B8010E18064D4200A3BDA8 /* Images.xcassets in Resources */,
 				72B8013418064F6D00A3BDA8 /* Icon-Small@2x.png in Resources */,
@@ -543,8 +551,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bo Hu (ERUNV6TC7F)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaodong Jiang (P2X3356V75)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaodong Jiang (P2X3356V75)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
@@ -565,7 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaodong Jiang (P2X3356V75)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaodong Jiang (P2X3356V75)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -63,7 +63,7 @@ NSString * const RESideMenuDidClose = @"RESideMenuDidClose";
         self.verticalPortraitOffset = self.verticalLandscapeOffset = 100;
         self.horizontalPortraitOffset = self.horizontalLandscapeOffset = 50;
         self.itemHeight = 50;
-        self.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
+        self.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
         self.textColor = [UIColor whiteColor];
         self.highlightedTextColor = [UIColor lightGrayColor];
         self.hideStatusBarArea = YES;

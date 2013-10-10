@@ -27,23 +27,14 @@
 {
     [super viewDidLoad];
     self.title = @"Following";
-    NSLog(@"dddddddddd");
+    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
     
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.view.backgroundColor = [UIColor colorWithRed:0.302 green:0.859 blue:0.987 alpha:1.000];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor greenColor]];
 }
 
 #ifdef __IPHONE_7_0
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 #endif
 

@@ -27,23 +27,14 @@
 {
     [super viewDidLoad];
     self.title = @"Popular";
-    NSLog(@"aaaaaaaaa");
+    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
     
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.view.backgroundColor = [UIColor colorWithRed:0.902 green:0.059 blue:0.487 alpha:1.000];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor purpleColor]];
 }
 
 #ifdef __IPHONE_7_0
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 #endif
 
