@@ -30,6 +30,12 @@
 		72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8013C1806525000A3BDA8 /* Crashlytics.framework */; };
 		72B8013F1806539F00A3BDA8 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8013E1806539F00A3BDA8 /* Reveal.framework */; };
 		72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B80140180653C900A3BDA8 /* CFNetwork.framework */; };
+		72B8014918065BEA00A3BDA8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8014818065BEA00A3BDA8 /* RootViewController.m */; };
+		72B8014C18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8014B18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m */; };
+		72B8014F18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8014E18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m */; };
+		72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015118065DB300A3BDA8 /* jxdribbble_PopularViewController.m */; };
+		72B8015518065DC900A3BDA8 /* jxdribbble_FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */; };
+		72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +76,18 @@
 		72B8013C1806525000A3BDA8 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		72B8013E1806539F00A3BDA8 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		72B80140180653C900A3BDA8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		72B8014718065BEA00A3BDA8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		72B8014818065BEA00A3BDA8 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		72B8014A18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_EveryoneViewController.h; sourceTree = "<group>"; };
+		72B8014B18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_EveryoneViewController.m; sourceTree = "<group>"; };
+		72B8014D18065D9300A3BDA8 /* jxdribbble_DebutsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_DebutsViewController.h; sourceTree = "<group>"; };
+		72B8014E18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_DebutsViewController.m; sourceTree = "<group>"; };
+		72B8015018065DB300A3BDA8 /* jxdribbble_PopularViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PopularViewController.h; sourceTree = "<group>"; };
+		72B8015118065DB300A3BDA8 /* jxdribbble_PopularViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PopularViewController.m; sourceTree = "<group>"; };
+		72B8015318065DC900A3BDA8 /* jxdribbble_FollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_FollowingViewController.h; sourceTree = "<group>"; };
+		72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_FollowingViewController.m; sourceTree = "<group>"; };
+		72B80156180666AD00A3BDA8 /* jxdribbble_SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_SettingsViewController.h; sourceTree = "<group>"; };
+		72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_SettingsViewController.m; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -139,8 +157,15 @@
 		72B8010118064D4200A3BDA8 /* jxdribbble */ = {
 			isa = PBXGroup;
 			children = (
+				72B8014318065AA800A3BDA8 /* Everyone */,
+				72B8014218065A6700A3BDA8 /* Debuts */,
+				72B8014418065AF200A3BDA8 /* Popular */,
+				72B8014518065B0100A3BDA8 /* Following */,
+				72B8014618065B2C00A3BDA8 /* Settings */,
 				72B8010A18064D4200A3BDA8 /* jxdribbble_AppDelegate.h */,
 				72B8010B18064D4200A3BDA8 /* jxdribbble_AppDelegate.m */,
+				72B8014718065BEA00A3BDA8 /* RootViewController.h */,
+				72B8014818065BEA00A3BDA8 /* RootViewController.m */,
 				72B8010D18064D4200A3BDA8 /* Images.xcassets */,
 				72B8010218064D4200A3BDA8 /* Supporting Files */,
 			);
@@ -189,6 +214,51 @@
 				72B8013118064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png */,
 			);
 			name = icon;
+			sourceTree = "<group>";
+		};
+		72B8014218065A6700A3BDA8 /* Debuts */ = {
+			isa = PBXGroup;
+			children = (
+				72B8014D18065D9300A3BDA8 /* jxdribbble_DebutsViewController.h */,
+				72B8014E18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m */,
+			);
+			name = Debuts;
+			sourceTree = "<group>";
+		};
+		72B8014318065AA800A3BDA8 /* Everyone */ = {
+			isa = PBXGroup;
+			children = (
+				72B8014A18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.h */,
+				72B8014B18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m */,
+			);
+			name = Everyone;
+			sourceTree = "<group>";
+		};
+		72B8014418065AF200A3BDA8 /* Popular */ = {
+			isa = PBXGroup;
+			children = (
+				72B8015018065DB300A3BDA8 /* jxdribbble_PopularViewController.h */,
+				72B8015118065DB300A3BDA8 /* jxdribbble_PopularViewController.m */,
+			);
+			name = Popular;
+			sourceTree = "<group>";
+		};
+		72B8014518065B0100A3BDA8 /* Following */ = {
+			isa = PBXGroup;
+			children = (
+				72B8015318065DC900A3BDA8 /* jxdribbble_FollowingViewController.h */,
+				72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */,
+			);
+			name = Following;
+			sourceTree = "<group>";
+		};
+		72B8014618065B2C00A3BDA8 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				72B80156180666AD00A3BDA8 /* jxdribbble_SettingsViewController.h */,
+				72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,8 +416,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B8014F18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m in Sources */,
 				72B8010C18064D4200A3BDA8 /* jxdribbble_AppDelegate.m in Sources */,
+				72B8014C18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m in Sources */,
+				72B8015518065DC900A3BDA8 /* jxdribbble_FollowingViewController.m in Sources */,
 				72B8010818064D4200A3BDA8 /* main.m in Sources */,
+				72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */,
+				72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */,
+				72B8014918065BEA00A3BDA8 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
@@ -489,6 +566,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaodong Jiang (P2X3356V75)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,

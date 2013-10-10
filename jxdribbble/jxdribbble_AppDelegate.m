@@ -9,23 +9,93 @@
 #import "jxdribbble_AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
 
+
+#define IS_WIDESCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+
 @implementation jxdribbble_AppDelegate
+{
+    NSMutableArray *_addedItems;
+    NSMutableArray *_menuItems;
+
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Crashlytics startWithAPIKey:@"adb6c6dba2e462026e3494de452a18ec98b17ee6"];
-    
-    
-    
-    
-    
-    
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    
+    
+    
+    _addedItems = [NSMutableArray array];
+    _menuItems = [NSMutableArray array];
+    
+    // Simple menus
+    //
+    RESideMenuItem *everyoneItem = [[RESideMenuItem alloc] initWithTitle:@"Everyone" action:^(RESideMenu *menu, RESideMenuItem *item) {
+        
+        if (!self.everyoneViewController)
+        {
+            self.everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.everyoneViewController];
+        [menu displayContentController:navigationController];
+    }];
+    
+    RESideMenuItem *debutsItem = [[RESideMenuItem alloc] initWithTitle:@"Debuts" action:^(RESideMenu *menu, RESideMenuItem *item) {
+        if (!self.debutsViewController)
+        {
+            self.debutsViewController = [[jxdribbble_DebutsViewController alloc] init];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.debutsViewController];
+        [menu displayContentController:navigationController];
+    }];
+    
+    RESideMenuItem *popularItem = [[RESideMenuItem alloc] initWithTitle:@"Popular" action:^(RESideMenu *menu, RESideMenuItem *item) {
+        if (!self.popularViewController)
+        {
+            self.popularViewController = [[jxdribbble_PopularViewController alloc] init];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.popularViewController];
+        [menu displayContentController:navigationController];
+    }];
+    
+    RESideMenuItem *followingItem = [[RESideMenuItem alloc] initWithTitle:@"Following" action:^(RESideMenu *menu, RESideMenuItem *item) {
+        if (!self.followingViewController)
+        {
+            self.followingViewController = [[jxdribbble_FollowingViewController alloc] init];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.followingViewController];
+        [menu displayContentController:navigationController];
+    }];
+    
+    
+    RESideMenuItem *settingsItem = [[RESideMenuItem alloc] initWithTitle:@"Settings" action:^(RESideMenu *menu, RESideMenuItem *item) {
+        if (!self.settingsViewController)
+        {
+            self.settingsViewController = [[jxdribbble_SettingsViewController alloc] init];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.settingsViewController];
+        [menu displayContentController:navigationController];
+    }];
+    
+    _sideMenu = [[RESideMenu alloc] initWithItems:@[everyoneItem, debutsItem, popularItem, followingItem,settingsItem]];
+    
+    _sideMenu.verticalPortraitOffset = IS_WIDESCREEN ? 110 : 76;
+    _sideMenu.verticalLandscapeOffset = 16;
+    _sideMenu.openStatusBarStyle = UIStatusBarStyleLightContent;
+    
+    // Call the home action rather than duplicating the initialisation
+    everyoneItem.action(_sideMenu, everyoneItem);
+    
+    self.window.rootViewController = _sideMenu;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+    
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
