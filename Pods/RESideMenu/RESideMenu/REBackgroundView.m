@@ -64,7 +64,8 @@
 }
 
 - (void)drawGradientInRect:(CGRect)rect
-{    
+{
+
     //// General Declarations
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -80,7 +81,7 @@
     
 #warning change the color of RESideMenu background
 
-    
+   
     //// Gradient Declarations
     NSArray* gradientColors = [NSArray arrayWithObjects:
                                (id)strokeColor.CGColor,
@@ -89,6 +90,8 @@
                                (id)gradientColor2.CGColor,
                                (id)gradientColor3.CGColor,
                                (id)fillColor.CGColor, nil];
+    
+    
     CGFloat gradientLocations[] = {0, 0.16, 0.29, 0.58, 0.8, 1};
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
     
@@ -103,6 +106,9 @@
     //// Cleanup
     CGGradientRelease(gradient);
     CGColorSpaceRelease(colorSpace);
+    
+    
 }
+
 
 @end

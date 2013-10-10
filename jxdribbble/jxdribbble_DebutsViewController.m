@@ -28,7 +28,6 @@
     [super viewDidLoad];
 
     self.title = @"Debuts";
-    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
     
 }
 

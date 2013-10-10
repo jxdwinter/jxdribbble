@@ -26,9 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Following";
-    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
-    
+    self.title = @"Settings";
+
 }
 
 #ifdef __IPHONE_7_0

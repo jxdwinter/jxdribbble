@@ -17,10 +17,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(showMenu)];
-    
+
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+    [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
+    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
     [self.view addGestureRecognizer:gestureRecognizer];
+    
+    self.view.backgroundColor = [UIColor colorWithWhite:0.902 alpha:1.000];
+    
 }
 
 - (void)swipeHandler:(UIPanGestureRecognizer *)sender

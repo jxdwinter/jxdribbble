@@ -38,6 +38,7 @@
 		72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */; };
 		72B8015B180684CC00A3BDA8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B80159180684CC00A3BDA8 /* Default@2x.png */; };
 		72B8015C180684CC00A3BDA8 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8015A180684CC00A3BDA8 /* Default~iphone.png */; };
+		72B8015E1806870000A3BDA8 /* nav_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8015D1806870000A3BDA8 /* nav_menu.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_SettingsViewController.m; sourceTree = "<group>"; };
 		72B80159180684CC00A3BDA8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		72B8015A180684CC00A3BDA8 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
+		72B8015D1806870000A3BDA8 /* nav_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_menu.png; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 		72B8010218064D4200A3BDA8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				72B8015F1806870B00A3BDA8 /* image */,
 				72B8012C18064EF000A3BDA8 /* icon */,
 				72B801391806516000A3BDA8 /* Podfile */,
 				72B8010318064D4200A3BDA8 /* jxdribbble-Info.plist */,
@@ -267,6 +270,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		72B8015F1806870B00A3BDA8 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				72B8015D1806870000A3BDA8 /* nav_menu.png */,
+			);
+			name = image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -353,6 +364,7 @@
 				72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */,
 				72B8015C180684CC00A3BDA8 /* Default~iphone.png in Resources */,
 				72B8015B180684CC00A3BDA8 /* Default@2x.png in Resources */,
+				72B8015E1806870000A3BDA8 /* nav_menu.png in Resources */,
 				72B8013518064F6D00A3BDA8 /* Icon-60.png in Resources */,
 				72B8010E18064D4200A3BDA8 /* Images.xcassets in Resources */,
 				72B8013418064F6D00A3BDA8 /* Icon-Small@2x.png in Resources */,
