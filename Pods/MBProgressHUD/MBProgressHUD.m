@@ -626,7 +626,10 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
     if (self.color) {
         CGContextSetFillColorWithColor(context, self.color.CGColor);
     } else {
-        CGContextSetGrayFillColor(context, 0.0f, self.opacity);
+        //CGContextSetGrayFillColor(context, 0.0f, self.opacity);
+#warning change the MBProgressHUD background color
+        CGFloat fillColor[4]    = {0.05,0.05,1.0,1.0};
+        CGContextSetFillColor(context, fillColor);
     }
 
 	
