@@ -25,7 +25,10 @@
 
 - (void)swipeHandler:(UIPanGestureRecognizer *)sender
 {
-    [[self sideMenu] showFromPanGesture:sender];
+    /**
+     *  comment this line, there's a bug when slide right quickly
+     */
+    //[[self sideMenu] showFromPanGesture:sender];
 }
 
 #pragma mark -
