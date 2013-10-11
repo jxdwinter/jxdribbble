@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
 
+@interface RootViewController : UIViewController<UIScrollViewDelegate>
+{
+    CGFloat lastOffsetY;
+    BOOL isDecelerating;
+}
 
-@interface RootViewController : UIViewController
-
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollForHideNavigation;
 
 @end

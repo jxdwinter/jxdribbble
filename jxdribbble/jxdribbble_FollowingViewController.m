@@ -29,12 +29,6 @@
     self.title = @"Following";
 
 }
-#ifdef __IPHONE_7_0
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-#endif
 
 - (void)didReceiveMemoryWarning
 {

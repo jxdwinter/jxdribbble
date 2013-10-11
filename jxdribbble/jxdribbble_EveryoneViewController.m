@@ -32,8 +32,9 @@
     [super viewDidLoad];
     
     self.title = @"Everyone";
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 5.0, 320.0, [UIScreen mainScreen].bounds.size.height - 44.0 - 5.0) style:UITableViewStylePlain];
+
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(1.0, 21.0, 320.0 - 2.0 , [UIScreen mainScreen].bounds.size.height - 20.0 - 2.0) style:UITableViewStylePlain];
+    self.scrollForHideNavigation = self.tableView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setBackgroundView:nil];
@@ -43,15 +44,11 @@
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
+    
+    [self getData];
 
 }
 
-#ifdef __IPHONE_7_0
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-#endif
 
 - (void)didReceiveMemoryWarning
 {
@@ -69,22 +66,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataSource count];
+    //return [self.dataSource count];
+    return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 175.0;
+    return 44.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger row = [indexPath row];
-
     static NSString *CellIdentifier = @"Cell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+    if ( cell == nil )
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)row];
     
     return cell;
     
@@ -99,6 +99,15 @@
 
 }
 
+#pragma mark - getdata
 
+
+- (void)getData
+{
+    if ([AFNetworkReachabilityManager sharedManager].reachable)
+    {
+        NSLog(@"----------------");
+    }
+}
 
 @end

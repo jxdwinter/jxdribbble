@@ -10,6 +10,7 @@
 		44CB78C8DA0F488DB7076FFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F94FEC927F45BBB40815E8 /* libPods.a */; };
 		724FFC1218079C6500854BF5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC1018079C6500854BF5 /* Default@2x.png */; };
 		724FFC1318079C6500854BF5 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC1118079C6500854BF5 /* Default~iphone.png */; };
+		724FFC181807F90A00854BF5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC171807F90A00854BF5 /* logo.png */; };
 		72596EDE1806CA2C00E23181 /* nav_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 72596EDD1806CA2C00E23181 /* nav_menu.png */; };
 		72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FB18064D4200A3BDA8 /* Foundation.framework */; };
 		72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */; };
@@ -55,6 +56,7 @@
 		7139F2FF20114F5CA4EC73A9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		724FFC1018079C6500854BF5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		724FFC1118079C6500854BF5 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
+		724FFC171807F90A00854BF5 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		72596EDD1806CA2C00E23181 /* nav_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_menu.png; sourceTree = "<group>"; };
 		72B800F818064D4200A3BDA8 /* jxdribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jxdribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B800FB18064D4200A3BDA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -273,6 +275,7 @@
 		72B8015F1806870B00A3BDA8 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				724FFC171807F90A00854BF5 /* logo.png */,
 				72596EDD1806CA2C00E23181 /* nav_menu.png */,
 			);
 			name = image;
@@ -360,6 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724FFC181807F90A00854BF5 /* logo.png in Resources */,
 				72B8010618064D4200A3BDA8 /* InfoPlist.strings in Resources */,
 				72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */,
 				72596EDE1806CA2C00E23181 /* nav_menu.png in Resources */,

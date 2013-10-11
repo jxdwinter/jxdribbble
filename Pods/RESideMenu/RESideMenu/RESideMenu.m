@@ -258,8 +258,11 @@ NSString * const RESideMenuDidClose = @"RESideMenuDidClose";
         _tableView.backgroundView = nil;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-#warning RESideMenu headerView
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.verticalOffset)];
+        
+        UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 110.0)];
+        logoImageView.image = [UIImage imageNamed:@"logo"];
+        _tableView.tableHeaderView = logoImageView;
+        
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.alpha = 0;
     }
