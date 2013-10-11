@@ -39,7 +39,6 @@
 		72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015118065DB300A3BDA8 /* jxdribbble_PopularViewController.m */; };
 		72B8015518065DC900A3BDA8 /* jxdribbble_FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */; };
 		72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */; };
-		72B801641806AD4100A3BDA8 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 72B801631806AD4100A3BDA8 /* Podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +94,6 @@
 		72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_FollowingViewController.m; sourceTree = "<group>"; };
 		72B80156180666AD00A3BDA8 /* jxdribbble_SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_SettingsViewController.h; sourceTree = "<group>"; };
 		72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_SettingsViewController.m; sourceTree = "<group>"; };
-		72B801631806AD4100A3BDA8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -185,7 +183,6 @@
 			children = (
 				72B8015F1806870B00A3BDA8 /* image */,
 				72B8012C18064EF000A3BDA8 /* icon */,
-				72B801631806AD4100A3BDA8 /* Podfile */,
 				72B8010318064D4200A3BDA8 /* jxdribbble-Info.plist */,
 				72B8010418064D4200A3BDA8 /* InfoPlist.strings */,
 				72B8010718064D4200A3BDA8 /* main.m */,
@@ -368,7 +365,6 @@
 				72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */,
 				72596EDE1806CA2C00E23181 /* nav_menu.png in Resources */,
 				72B8013518064F6D00A3BDA8 /* Icon-60.png in Resources */,
-				72B801641806AD4100A3BDA8 /* Podfile in Resources */,
 				724FFC1218079C6500854BF5 /* Default@2x.png in Resources */,
 				72B8010E18064D4200A3BDA8 /* Images.xcassets in Resources */,
 				72B8013418064F6D00A3BDA8 /* Icon-Small@2x.png in Resources */,

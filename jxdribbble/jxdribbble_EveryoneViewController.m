@@ -44,8 +44,6 @@
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
-    
-    [self getData];
 
 }
 
@@ -100,14 +98,5 @@
 }
 
 #pragma mark - getdata
-
-
-- (void)getData
-{
-    if ([AFNetworkReachabilityManager sharedManager].reachable)
-    {
-        NSLog(@"----------------");
-    }
-}
 
 @end
