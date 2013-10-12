@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
+#import "jxdribbble_NavigationViewController.h"
 
 @interface RootViewController : UIViewController<UIScrollViewDelegate>
 {

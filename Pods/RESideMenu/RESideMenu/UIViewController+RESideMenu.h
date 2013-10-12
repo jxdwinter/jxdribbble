@@ -1,5 +1,5 @@
 //
-//  UIViewController+RESideMenu.h
+// UIViewController+RESideMenu.h
 // RESideMenu
 //
 // Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
@@ -24,10 +24,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RESideMenu.h"
+
+@class RESideMenu;
 
 @interface UIViewController (RESideMenu)
 
-@property(nonatomic,readonly,retain) RESideMenu *sideMenu;
+@property (strong, readonly, nonatomic) RESideMenu *sideMenuViewController;
+
+- (void)re_displayController:(UIViewController *)controller frame:(CGRect)frame;
+- (void)re_hideController:(UIViewController *)controller;
 
 @end

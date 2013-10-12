@@ -8,16 +8,11 @@
 
 #import "jxdribbble_AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
+#import "jxdribbble_NavigationViewController.h"
+#import "jxdribbble_MenuViewController.h"
 
-
-#define IS_WIDESCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
 @implementation jxdribbble_AppDelegate
-{
-    NSMutableArray *_addedItems;
-    NSMutableArray *_menuItems;
-
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -25,11 +20,12 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    
+
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
 
     //Customizing the Color of Back button
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:(150.0/255.0) green:(150.0/255.0) blue:(150.0/255.0) alpha:1.0]];
+    //[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:(150.0/255.0) green:(150.0/255.0) blue:(150.0/255.0) alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8];
@@ -41,70 +37,16 @@
                                                            shadow, NSShadowAttributeName,
                                                            [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0],
                                                            NSFontAttributeName, nil]];
+    if (!self.everyoneViewController)
+    {
+        self.everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
+    }
 
-
-    _addedItems = [NSMutableArray array];
-    _menuItems = [NSMutableArray array];
+    jxdribbble_NavigationViewController *navigationController = [[jxdribbble_NavigationViewController alloc] initWithRootViewController:self.everyoneViewController];
+    jxdribbble_MenuViewController *menuViewController = [[jxdribbble_MenuViewController alloc] init];
     
-    // Simple menus
-    //
-    RESideMenuItem *everyoneItem = [[RESideMenuItem alloc] initWithTitle:@"Everyone" action:^(RESideMenu *menu, RESideMenuItem *item) {
-        
-        if (!self.everyoneViewController)
-        {
-            self.everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
-        }
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.everyoneViewController];
-        [menu displayContentController:navigationController];
-    }];
-    
-    RESideMenuItem *debutsItem = [[RESideMenuItem alloc] initWithTitle:@"Debuts" action:^(RESideMenu *menu, RESideMenuItem *item) {
-        if (!self.debutsViewController)
-        {
-            self.debutsViewController = [[jxdribbble_DebutsViewController alloc] init];
-        }
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.debutsViewController];
-        [menu displayContentController:navigationController];
-    }];
-    
-    RESideMenuItem *popularItem = [[RESideMenuItem alloc] initWithTitle:@"Popular" action:^(RESideMenu *menu, RESideMenuItem *item) {
-        if (!self.popularViewController)
-        {
-            self.popularViewController = [[jxdribbble_PopularViewController alloc] init];
-        }
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.popularViewController];
-        [menu displayContentController:navigationController];
-    }];
-    
-    RESideMenuItem *followingItem = [[RESideMenuItem alloc] initWithTitle:@"Following" action:^(RESideMenu *menu, RESideMenuItem *item) {
-        if (!self.followingViewController)
-        {
-            self.followingViewController = [[jxdribbble_FollowingViewController alloc] init];
-        }
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.followingViewController];
-        [menu displayContentController:navigationController];
-    }];
-    
-    
-    RESideMenuItem *settingsItem = [[RESideMenuItem alloc] initWithTitle:@"Settings" action:^(RESideMenu *menu, RESideMenuItem *item) {
-        if (!self.settingsViewController)
-        {
-            self.settingsViewController = [[jxdribbble_SettingsViewController alloc] init];
-        }
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.settingsViewController];
-        [menu displayContentController:navigationController];
-    }];
-    
-    _sideMenu = [[RESideMenu alloc] initWithItems:@[everyoneItem, debutsItem, popularItem, followingItem,settingsItem]];
-    
-    _sideMenu.verticalPortraitOffset = IS_WIDESCREEN ? 110 : 76;
-    _sideMenu.verticalLandscapeOffset = 16;
-    _sideMenu.openStatusBarStyle = UIStatusBarStyleLightContent;
-    
-    // Call the home action rather than duplicating the initialisation
-    everyoneItem.action(_sideMenu, everyoneItem);
-    
-    self.window.rootViewController = _sideMenu;
+    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController menuViewController:menuViewController];
+    self.window.rootViewController = sideMenuViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

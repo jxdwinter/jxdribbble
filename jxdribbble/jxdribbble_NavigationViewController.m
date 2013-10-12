@@ -1,18 +1,18 @@
 //
-//  jxdribbble_DebutsViewController.m
+//  jxdribbble_NavigationViewController.m
 //  jxdribbble
 //
-//  Created by Jiang Xiaodong on 13-10-10.
+//  Created by Jiang Xiaodong on 13-10-12.
 //  Copyright (c) 2013年 Jiang Xiaodong. All rights reserved.
 //
 
-#import "jxdribbble_DebutsViewController.h"
+#import "jxdribbble_NavigationViewController.h"
 
-@interface jxdribbble_DebutsViewController ()
+@interface jxdribbble_NavigationViewController ()
 
 @end
 
-@implementation jxdribbble_DebutsViewController
+@implementation jxdribbble_NavigationViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,9 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
 
-    self.title = @"Debuts";
-  
+- (void)showMenu
+{
+    [self.sideMenuViewController presentMenuViewController];
 }
 
 - (void)didReceiveMemoryWarning

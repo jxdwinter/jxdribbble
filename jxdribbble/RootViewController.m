@@ -28,28 +28,22 @@
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton addTarget:(jxdribbble_NavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    
-    /*
-    UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
-    [self.view addGestureRecognizer:gestureRecognizer];
-    */
     
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    
 }
 
 
 - (void)setupBorder
 {
     
-    UIImageView *leftLine = [[UIImageView alloc] initWithFrame:CGRectMake(0.5, 0.0, 0.5, [UIScreen mainScreen].bounds.size.height)];
-    UIImageView *bottomLine = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, [UIScreen mainScreen].bounds.size.height - 1, 320.0, 0.5)];
-    UIImageView *rightLine = [[UIImageView alloc] initWithFrame:CGRectMake(320.0 - 1, 0.0, 0.5, [UIScreen mainScreen].bounds.size.height)];
-    UIImageView *topLine = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.5, 320.0, 0.5)];
+    UIImageView *leftLine = [[UIImageView alloc] initWithFrame:CGRectMake(1.5, 0.0, 0.5, [UIScreen mainScreen].bounds.size.height)];
+    UIImageView *bottomLine = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, [UIScreen mainScreen].bounds.size.height - 1.5 - 44.0 - 20.0, 320.0, 0.5)];
+    UIImageView *rightLine = [[UIImageView alloc] initWithFrame:CGRectMake(320.0 - 1.5, 0.0, 0.5, [UIScreen mainScreen].bounds.size.height)];
+    UIImageView *topLine = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 1.5, 320.0, 0.5)];
     
     leftLine.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
     bottomLine.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
@@ -63,30 +57,13 @@
     
 }
 
-#ifdef __IPHONE_7_0
+
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
-#endif
 
-- (void)swipeHandler:(UIPanGestureRecognizer *)sender
-{
-    /**
-     *  comment this line, there's a bug when slide right quickly
-     */
-    //[[self sideMenu] showFromPanGesture:sender];
-}
-
-#pragma mark -
-#pragma mark Button actions
-
-- (void)showMenu
-{
-    [[self sideMenu] show];
-}
-
-
+/*
 #pragma mark
 #pragma Navigation hide Scroll
 
@@ -135,7 +112,7 @@
     
     lastOffsetY = scrollView.contentOffset.y;
 }
-
+*/
 
 
 @end
