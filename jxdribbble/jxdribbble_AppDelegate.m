@@ -23,6 +23,7 @@
 
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
 
+
     //Customizing the Color of Back button
     //[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:(150.0/255.0) green:(150.0/255.0) blue:(150.0/255.0) alpha:1.0]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];

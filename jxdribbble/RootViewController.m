@@ -17,8 +17,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self setupBorder];
 
     if(self.scrollForHideNavigation){
         float topInset = self.navigationController.navigationBar.frame.size.height;
@@ -34,27 +32,6 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
-}
-
-
-- (void)setupBorder
-{
-    
-    UIImageView *leftLine = [[UIImageView alloc] initWithFrame:CGRectMake(1.5, 0.0, 0.5, [UIScreen mainScreen].bounds.size.height)];
-    UIImageView *bottomLine = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, [UIScreen mainScreen].bounds.size.height - 1.5 - 44.0 - 20.0, 320.0, 0.5)];
-    UIImageView *rightLine = [[UIImageView alloc] initWithFrame:CGRectMake(320.0 - 1.5, 0.0, 0.5, [UIScreen mainScreen].bounds.size.height)];
-    UIImageView *topLine = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 1.5, 320.0, 0.5)];
-    
-    leftLine.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
-    bottomLine.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
-    rightLine.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
-    topLine.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
-    
-    [self.view addSubview:leftLine];
-    [self.view addSubview:bottomLine];
-    [self.view addSubview:rightLine];
-    [self.view addSubview:topLine];
-    
 }
 
 
