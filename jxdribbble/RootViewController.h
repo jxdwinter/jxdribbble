@@ -10,12 +10,15 @@
 #import "RESideMenu.h"
 #import "jxdribbble_NavigationViewController.h"
 
-@interface RootViewController : UIViewController<UIScrollViewDelegate>
+@interface RootViewController : UIViewController//<UIScrollViewDelegate>
+
+/*
 {
     CGFloat lastOffsetY;
     BOOL isDecelerating;
 }
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollForHideNavigation;
+*/
 
 @end

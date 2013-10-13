@@ -18,11 +18,13 @@
 {
     [super viewDidLoad];
 
+    /*
     if(self.scrollForHideNavigation){
         float topInset = self.navigationController.navigationBar.frame.size.height;
         
         self.scrollForHideNavigation.contentInset = UIEdgeInsetsMake(topInset, 0, 0, 0);
     }
+    */
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];

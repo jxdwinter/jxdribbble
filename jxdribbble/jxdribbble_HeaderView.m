@@ -36,16 +36,16 @@
         [avatarImageView setImageWithURL:[NSURL URLWithString:shot.player.avatar_url] placeholderImage:nil];
         [self addSubview:avatarImageView];
         
-        UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 7.0, 100.0, 30.0)];
+        UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 7.0, 150.0, 30.0)];
         usernameLabel.text = shot.player.username;
-        usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
+        usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
         usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         [self addSubview:usernameLabel];
         
-        UILabel *created_atLabel = [[UILabel alloc] initWithFrame:CGRectMake(150.0, 7.0, 157.0, 30.0)];
+        UILabel *created_atLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 7.0, 107.0, 30.0)];
         created_atLabel.text = [shot.created_at substringToIndex:19];
         created_atLabel.textAlignment = NSTextAlignmentRight;
-        created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
+        created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
         created_atLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         [self addSubview:created_atLabel];
         
