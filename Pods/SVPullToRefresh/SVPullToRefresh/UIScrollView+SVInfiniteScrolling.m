@@ -192,6 +192,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 }
 
 - (void)scrollViewDidScroll:(CGPoint)contentOffset {
+    /*
     if(self.state != SVInfiniteScrollingStateLoading && self.enabled) {
         CGFloat scrollViewContentHeight = self.scrollView.contentSize.height;
         CGFloat scrollOffsetThreshold = scrollViewContentHeight-self.scrollView.bounds.size.height;
@@ -199,6 +200,22 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         if(!self.scrollView.isDragging && self.state == SVInfiniteScrollingStateTriggered)
             self.state = SVInfiniteScrollingStateLoading;
         else if(contentOffset.y > scrollOffsetThreshold && self.state == SVInfiniteScrollingStateStopped && self.scrollView.isDragging)
+            self.state = SVInfiniteScrollingStateTriggered;
+        else if(contentOffset.y < scrollOffsetThreshold  && self.state != SVInfiniteScrollingStateStopped)
+            self.state = SVInfiniteScrollingStateStopped;
+    }
+    */
+    
+    if(self.state != SVInfiniteScrollingStateLoading && self.enabled) {
+        // To avoid triggering by the bounding motion from PullToRefresh
+        if(contentOffset.y <= 0) return;
+        
+        CGFloat scrollViewContentHeight = self.scrollView.contentSize.height;
+        CGFloat scrollOffsetThreshold = scrollViewContentHeight-self.scrollView.bounds.size.height;
+        
+        if(!self.scrollView.isDragging && self.state == SVInfiniteScrollingStateTriggered && !self.scrollView.isDragging)
+            self.state = SVInfiniteScrollingStateLoading;
+        else if(contentOffset.y > scrollOffsetThreshold && self.state == SVInfiniteScrollingStateStopped && self.scrollView.isDecelerating)
             self.state = SVInfiniteScrollingStateTriggered;
         else if(contentOffset.y < scrollOffsetThreshold  && self.state != SVInfiniteScrollingStateStopped)
             self.state = SVInfiniteScrollingStateStopped;
