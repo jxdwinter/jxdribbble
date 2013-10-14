@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) jxdribbble_EveryoneViewController  *everyoneViewController;
+@property (strong, nonatomic) RESideMenu *sideMenuViewController;
 
 
 @end

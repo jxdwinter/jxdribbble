@@ -19,6 +19,8 @@
 		724FFC1318079C6500854BF5 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC1118079C6500854BF5 /* Default~iphone.png */; };
 		724FFC181807F90A00854BF5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC171807F90A00854BF5 /* logo.png */; };
 		72596EDE1806CA2C00E23181 /* nav_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 72596EDD1806CA2C00E23181 /* nav_menu.png */; };
+		7260D119180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D118180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m */; };
+		7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */; };
 		72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FB18064D4200A3BDA8 /* Foundation.framework */; };
 		72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */; };
 		72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FF18064D4200A3BDA8 /* UIKit.framework */; };
@@ -78,6 +80,10 @@
 		724FFC1118079C6500854BF5 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		724FFC171807F90A00854BF5 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		72596EDD1806CA2C00E23181 /* nav_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_menu.png; sourceTree = "<group>"; };
+		7260D117180B9E2B00CB2A3E /* jxdribbble_DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_DetailViewController.h; sourceTree = "<group>"; };
+		7260D118180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_DetailViewController.m; sourceTree = "<group>"; };
+		7260D11C180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerViewController.h; sourceTree = "<group>"; };
+		7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerViewController.m; sourceTree = "<group>"; };
 		72B800F818064D4200A3BDA8 /* jxdribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jxdribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B800FB18064D4200A3BDA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -173,6 +179,8 @@
 		72419ED918091E4A004AC323 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7260D11B180BAC3700CB2A3E /* Player */,
+				7260D11A180BA1E500CB2A3E /* Detail */,
 				72B8014318065AA800A3BDA8 /* Everyone */,
 				72B8014218065A6700A3BDA8 /* Debuts */,
 				72B8014418065AF200A3BDA8 /* Popular */,
@@ -180,6 +188,41 @@
 				72B8014618065B2C00A3BDA8 /* Settings */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7260D116180B9DFF00CB2A3E /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				72B8010A18064D4200A3BDA8 /* jxdribbble_AppDelegate.h */,
+				72B8010B18064D4200A3BDA8 /* jxdribbble_AppDelegate.m */,
+				72419EC81808E27E004AC323 /* jxdribbble_NavigationViewController.h */,
+				72419EC91808E27E004AC323 /* jxdribbble_NavigationViewController.m */,
+				72B8014718065BEA00A3BDA8 /* RootViewController.h */,
+				72B8014818065BEA00A3BDA8 /* RootViewController.m */,
+				72419ECB1808E3E0004AC323 /* jxdribbble_MenuViewController.h */,
+				72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */,
+				72BA040B180833DC00BE15B1 /* CheckNetwork.h */,
+				72BA040C180833DC00BE15B1 /* CheckNetwork.m */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
+		7260D11A180BA1E500CB2A3E /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7260D117180B9E2B00CB2A3E /* jxdribbble_DetailViewController.h */,
+				7260D118180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		7260D11B180BAC3700CB2A3E /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				7260D11C180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.h */,
+				7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 		72B800EF18064D4200A3BDA8 = {
@@ -220,19 +263,10 @@
 		72B8010118064D4200A3BDA8 /* jxdribbble */ = {
 			isa = PBXGroup;
 			children = (
+				7260D116180B9DFF00CB2A3E /* Others */,
 				72419ED918091E4A004AC323 /* Controllers */,
 				72419ED518091E02004AC323 /* Views */,
 				72419ED11809111F004AC323 /* Model */,
-				72B8010A18064D4200A3BDA8 /* jxdribbble_AppDelegate.h */,
-				72B8010B18064D4200A3BDA8 /* jxdribbble_AppDelegate.m */,
-				72419EC81808E27E004AC323 /* jxdribbble_NavigationViewController.h */,
-				72419EC91808E27E004AC323 /* jxdribbble_NavigationViewController.m */,
-				72B8014718065BEA00A3BDA8 /* RootViewController.h */,
-				72B8014818065BEA00A3BDA8 /* RootViewController.m */,
-				72419ECB1808E3E0004AC323 /* jxdribbble_MenuViewController.h */,
-				72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */,
-				72BA040B180833DC00BE15B1 /* CheckNetwork.h */,
-				72BA040C180833DC00BE15B1 /* CheckNetwork.m */,
 				72B8010D18064D4200A3BDA8 /* Images.xcassets */,
 				72B8010218064D4200A3BDA8 /* Supporting Files */,
 			);
@@ -512,8 +546,10 @@
 				72419EDC18093386004AC323 /* jxdribbble_TableViewCell.m in Sources */,
 				72B8014918065BEA00A3BDA8 /* RootViewController.m in Sources */,
 				72419ECD1808E3E0004AC323 /* jxdribbble_MenuViewController.m in Sources */,
+				7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */,
 				72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */,
 				72419ED818091E3D004AC323 /* jxdribbble_HeaderView.m in Sources */,
+				7260D119180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

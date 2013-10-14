@@ -36,6 +36,12 @@
 
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    appDelegate.sideMenuViewController.panGestureEnabled = YES;
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {

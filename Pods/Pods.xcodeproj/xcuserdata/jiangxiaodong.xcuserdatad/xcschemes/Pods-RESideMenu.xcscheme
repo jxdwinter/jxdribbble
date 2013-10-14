@@ -8,52 +8,52 @@
       <BuildActionEntries>
          <BuildActionEntry
             buildForRunning = "YES"
-            buildForTesting = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES"
             buildForProfiling = "YES"
-            buildForArchiving = "YES">
+            buildForTesting = "YES">
             <BuildableReference
+               BlueprintIdentifier = "255239DE20F34DE38C3ED6DD"
+               ReferencedContainer = "container:Pods.xcodeproj"
                BlueprintName = "Pods-RESideMenu"
-               BuildableIdentifier = "primary"
                BuildableName = "libPods-RESideMenu.a"
-               BlueprintIdentifier = "36E87CB0CD2F44E2869A6A9E"
-               ReferencedContainer = "container:Pods.xcodeproj">
+               BuildableIdentifier = "primary">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      buildConfiguration = "Debug">
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB">
       <Testables>
       </Testables>
    </TestAction>
    <LaunchAction
-      allowLocationSimulation = "YES"
+      buildConfiguration = "Debug"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      allowLocationSimulation = "YES"
       ignoresPersistentStateOnLaunch = "NO"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      debugDocumentVersioning = "YES"
-      useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
-      launchStyle = "0">
+      debugDocumentVersioning = "YES">
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      savedToolIdentifier = ""
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      debugDocumentVersioning = "YES"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release">
+      savedToolIdentifier = ""
+      debugDocumentVersioning = "YES">
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      revealArchiveInOrganizer = "YES"
-      buildConfiguration = "Release">
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

@@ -46,8 +46,8 @@
     jxdribbble_NavigationViewController *navigationController = [[jxdribbble_NavigationViewController alloc] initWithRootViewController:self.everyoneViewController];
     jxdribbble_MenuViewController *menuViewController = [[jxdribbble_MenuViewController alloc] init];
     
-    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController menuViewController:menuViewController];
-    self.window.rootViewController = sideMenuViewController;
+    self.sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController menuViewController:menuViewController];
+    self.window.rootViewController = self.sideMenuViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

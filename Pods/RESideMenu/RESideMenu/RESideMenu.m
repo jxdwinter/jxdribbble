@@ -57,7 +57,7 @@
 
 - (void)commonInit
 {
-    self.wantsFullScreenLayout = YES;
+    //self.wantsFullScreenLayout = YES;
     _animationDuration = 0.35f;
     _panGestureEnabled = YES;
     _scaleContentView = YES;

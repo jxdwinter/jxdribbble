@@ -10,6 +10,8 @@
 #import "jxdribbble_shots.h"
 #import "jxdribbble_HeaderView.h"
 #import "jxdribbble_TableViewCell.h"
+#import "jxdribbble_DetailViewController.h"
+#import "jxdribbble_PlayerViewController.h"
 
 @interface jxdribbble_EveryoneViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -34,7 +36,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Everyone";
+    self.title = @"EVERYONE";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height - 44.0 - 20.0) style:UITableViewStylePlain];
@@ -145,6 +147,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@",[(jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section] title]);
+    
+    jxdribbble_DetailViewController *detail = [[jxdribbble_DetailViewController alloc] init];
+    detail.shot = (jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section];
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 
@@ -153,6 +159,10 @@
 - (void)headerViewTouched : (jxdribbble_HeaderView *)sender
 {
     NSLog(@"%@",sender.shot.player.username);
+    
+    jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
+    playerViewController.player = sender.shot.player;
+    [self.navigationController pushViewController:playerViewController animated:YES];
 }
 
 #pragma mark - getdata

@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.title = @"Following";
+    self.title = @"FOLLOWING";
 
 }
 
