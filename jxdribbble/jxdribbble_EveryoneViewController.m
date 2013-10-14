@@ -48,9 +48,10 @@
         [weakSelf loadMore];
     }];
     //self.scrollForHideNavigation = self.tableView;
-    self.tableView.scrollsToTop = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.scrollsToTop = YES;
+    self.tableView.scrollEnabled = YES;
     [self.tableView setBackgroundView:nil];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -96,7 +97,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 265.0;
+    return 255.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,7 +108,6 @@
     jxdribbble_shots *shot =  [self.dataSource objectAtIndex:section];
     //NSString *url = shot.image_url;
     jxdribbble_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.shot = shot;
     if ( cell == nil )
     {
         cell = [[jxdribbble_TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];

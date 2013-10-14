@@ -16,7 +16,7 @@
     if (self) {
         // Initialization code
         
-        self.frame = CGRectMake(0.0, 0.0, 320.0, 265.0);
+        self.frame = CGRectMake(0.0, 0.0, 320.0, 255.0);
 
         
         self.shot_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 225.0)];
@@ -86,7 +86,7 @@
         self.commentsLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.commentsLabel];
         
-        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 259.5, 300.0, 0.5)];
+        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 254.5, 300.0, 0.5)];
         line.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         [self addSubview:line];
         
