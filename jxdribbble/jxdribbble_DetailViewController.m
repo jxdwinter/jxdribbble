@@ -10,6 +10,7 @@
 #import "jxdribbble_comments.h"
 #import "jxdribbble_CommentCell.h"
 #import "NSString+HTML.h"
+#import "jxdribbble_PlayerViewController.h"
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -49,6 +50,7 @@
 
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
+    
     __weak jxdribbble_DetailViewController *weakSelf = self;
     // setup infinite scrolling
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -64,6 +66,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
+    
+    
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
     
@@ -78,15 +82,22 @@
     
     UIControl *headerView = [[UIControl alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 300.0)];
     
-    UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 7.0, 35.0, 35.0)];
+    //UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 7.0, 35.0, 35.0)];
+    UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 35.0, 35.0)];
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 17.5;
     [avatarImageView setImageWithURL:[NSURL URLWithString:self.shot.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
     
     
+    UIButton *userButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [userButton setFrame:CGRectMake(10.0, 7.0, 35.0, 35.0)];
+    [userButton addTarget:self action:@selector(userInfo) forControlEvents:UIControlEventTouchUpInside];
+    [userButton addSubview:avatarImageView];
+    
+    
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 5.0, 250.0, 20.0)];
     titleLabel.text = self.shot.title;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
     titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
     
     UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 30.0, 150.0, 15.0)];
@@ -98,32 +109,32 @@
     created_atLabel.text = [self.shot.created_at substringToIndex:19];
     created_atLabel.textAlignment = NSTextAlignmentRight;
     created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-    created_atLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
     [imageView setImageWithURL:[NSURL URLWithString:self.shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholde"]];
     
     UILabel *viewsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 280.0, 90.0, 15.0)];
-    viewsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
-    viewsLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    viewsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+    viewsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     viewsLabel.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 280.0, 90.0, 15.0)];
-    likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
-    likesLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    UILabel *likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(110.0, 280.0, 90.0, 15.0)];
+    likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+    likesLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     likesLabel.textAlignment = NSTextAlignmentCenter;
     
     
     UILabel *commentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 280.0, 100.0, 15.0)];
-    commentsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
-    commentsLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    commentsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+    commentsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     commentsLabel.textAlignment = NSTextAlignmentRight;
     
-    likesLabel.text = [NSString stringWithFormat:@"❤️ %@",self.shot.likes_count];
-    viewsLabel.text = [NSString stringWithFormat:@"👀 %@",self.shot.views_count];
-    commentsLabel.text = [NSString stringWithFormat:@"💬 %@",self.shot.comments_count];
+    likesLabel.text = [NSString stringWithFormat:@"likes %@",self.shot.likes_count];
+    viewsLabel.text = [NSString stringWithFormat:@"views %@",self.shot.views_count];
+    commentsLabel.text = [NSString stringWithFormat:@"comments %@",self.shot.comments_count];
     
-    [headerView addSubview:avatarImageView];
+    [headerView addSubview:userButton];
     [headerView addSubview:titleLabel];
     [headerView addSubview:usernameLabel];
     [headerView addSubview:created_atLabel];
@@ -134,12 +145,20 @@
     [headerView addSubview:commentsLabel];
     
     return headerView;
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)userInfo
+{
+    jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
+    playerViewController.player = self.shot.player;
+    [self.navigationController pushViewController:playerViewController animated:YES];
 }
 
 - (void)backToPreViewController
@@ -178,19 +197,34 @@
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
     cell.usernameLabel.text = comment.player.name;
     cell.bodyLabel.text = [comment.body stringByConvertingHTMLToPlainText];
+    
+    cell.likesLabel.frame = CGRectMake(50.0, size.height + 50.0, 100.0, 10);
     if ( [comment.likes_count integerValue] > 0)
     {
-        cell.likesLabel.text = [NSString stringWithFormat:@"❤️%@",comment.likes_count];
+        cell.likesLabel.text = [NSString stringWithFormat:@"likes:%@",comment.likes_count];
     }
     
-    cell.created_atLabel.frame = CGRectMake(10.0, size.height + 50.0, 290.0, 10);
-    cell.created_atLabel.text =  [comment.created_at substringToIndex:19];;
+    cell.created_atLabel.frame = CGRectMake(160.0, size.height + 50.0, 150.0, 10);
+    cell.created_atLabel.text =  [comment.created_at substringToIndex:16];;
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
     
 }
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
+    playerViewController.player = [(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] player];
+    [self.navigationController pushViewController:playerViewController animated:YES];
+    
+}
+
 
 #pragma mark - getdata
 

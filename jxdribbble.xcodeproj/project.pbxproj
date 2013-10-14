@@ -51,7 +51,7 @@
 		72B8F933180BBC7A00F556AC /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8F932180BBC7A00F556AC /* Reveal.framework */; };
 		72B8F936180BC2BC00F556AC /* jxdribbble_comments.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F935180BC2BC00F556AC /* jxdribbble_comments.m */; };
 		72B8F939180BC77100F556AC /* jxdribbble_CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F938180BC77100F556AC /* jxdribbble_CommentCell.m */; };
-		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BA040C180833DC00BE15B1 /* CheckNetwork.m */; };
 /* End PBXBuildFile section */

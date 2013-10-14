@@ -39,7 +39,7 @@
         
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 5.0, 250.0, 20.0)];
         titleLabel.text = shot.title;
-        titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+        titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
         titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         [self addSubview:titleLabel];
         
@@ -50,10 +50,10 @@
         [self addSubview:usernameLabel];
         
         UILabel *created_atLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 25.0, 107.0, 14.0)];
-        created_atLabel.text = [shot.created_at substringToIndex:19];
+        created_atLabel.text = [shot.created_at substringToIndex:16];
         created_atLabel.textAlignment = NSTextAlignmentRight;
         created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-        created_atLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
         [self addSubview:created_atLabel];
         
     }

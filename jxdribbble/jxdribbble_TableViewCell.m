@@ -23,26 +23,26 @@
         [self addSubview:self.shot_imageView];
 
         self.viewsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 230.0, 90.0, 15.0)];
-        self.viewsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
-        self.viewsLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        self.viewsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+        self.viewsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
         self.viewsLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:self.viewsLabel];
         
-        self.likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 230.0, 90.0, 15.0)];
-        self.likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
-        self.likesLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        self.likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(110.0, 230.0, 90.0, 15.0)];
+        self.likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+        self.likesLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
         self.likesLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.likesLabel];
         
         self.commentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 230.0, 100.0, 15.0)];
-        self.commentsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
-        self.commentsLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        self.commentsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+        self.commentsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
         self.commentsLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.commentsLabel];
         
         UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 254.5, 300.0, 0.5)];
-        line.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
-        [self addSubview:line];
+        line.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        //[self addSubview:line];
         
     }
     

@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) NSUInteger     pageIndex;
 
+@property (strong, nonatomic) UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation jxdribbble_EveryoneViewController
@@ -38,6 +40,13 @@
     
     self.title = @"EVERYONE";
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_spinner setCenter:CGPointMake(300.0 , 20.0)];
+    [self.view addSubview:_spinner];
+    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
+    [self navigationItem].rightBarButtonItem = barButton;
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height - 44.0 - 20.0) style:UITableViewStylePlain];
     __weak jxdribbble_EveryoneViewController *weakSelf = self;
@@ -118,9 +127,9 @@
     [cell.shot_imageView setImageWithURL:[NSURL URLWithString:shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
      
 
-    cell.likesLabel.text = [NSString stringWithFormat:@"❤️ %@",shot.likes_count];
-    cell.viewsLabel.text = [NSString stringWithFormat:@"👀 %@",shot.views_count];
-    cell.commentsLabel.text = [NSString stringWithFormat:@"💬 %@",shot.comments_count];
+    cell.likesLabel.text = [NSString stringWithFormat:@"likes %@",shot.likes_count];
+    cell.viewsLabel.text = [NSString stringWithFormat:@"views %@",shot.views_count];
+    cell.commentsLabel.text = [NSString stringWithFormat:@"comments %@",shot.comments_count];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -173,6 +182,7 @@
     {
 
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [_spinner startAnimating];
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/shots/everyone?page=%@",[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
         
@@ -217,6 +227,7 @@
             [self.tableView reloadData];
 
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [_spinner stopAnimating];
             
         } failure:nil];
         
