@@ -146,8 +146,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@",[(jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section] title]);
+    
     jxdribbble_DetailViewController *detail = [[jxdribbble_DetailViewController alloc] init];
+    detail.shot = (jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section];
     [self.navigationController pushViewController:detail animated:YES];
+    
 }
 
 

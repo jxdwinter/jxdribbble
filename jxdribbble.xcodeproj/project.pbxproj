@@ -47,7 +47,12 @@
 		72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015118065DB300A3BDA8 /* jxdribbble_PopularViewController.m */; };
 		72B8015518065DC900A3BDA8 /* jxdribbble_FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */; };
 		72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */; };
-		72BA040A18082DC100BE15B1 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72BA040918082DC100BE15B1 /* Reveal.framework */; };
+		72B8F931180BB62A00F556AC /* headimg_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8F930180BB62A00F556AC /* headimg_bg.png */; };
+		72B8F933180BBC7A00F556AC /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8F932180BBC7A00F556AC /* Reveal.framework */; };
+		72B8F936180BC2BC00F556AC /* jxdribbble_comments.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F935180BC2BC00F556AC /* jxdribbble_comments.m */; };
+		72B8F939180BC77100F556AC /* jxdribbble_CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F938180BC77100F556AC /* jxdribbble_CommentCell.m */; };
+		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BA040C180833DC00BE15B1 /* CheckNetwork.m */; };
 /* End PBXBuildFile section */
 
@@ -120,7 +125,16 @@
 		72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_FollowingViewController.m; sourceTree = "<group>"; };
 		72B80156180666AD00A3BDA8 /* jxdribbble_SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_SettingsViewController.h; sourceTree = "<group>"; };
 		72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_SettingsViewController.m; sourceTree = "<group>"; };
-		72BA040918082DC100BE15B1 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		72B8F930180BB62A00F556AC /* headimg_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headimg_bg.png; sourceTree = "<group>"; };
+		72B8F932180BBC7A00F556AC /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		72B8F934180BC2BC00F556AC /* jxdribbble_comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_comments.h; sourceTree = "<group>"; };
+		72B8F935180BC2BC00F556AC /* jxdribbble_comments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_comments.m; sourceTree = "<group>"; };
+		72B8F937180BC77100F556AC /* jxdribbble_CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_CommentCell.h; sourceTree = "<group>"; };
+		72B8F938180BC77100F556AC /* jxdribbble_CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_CommentCell.m; sourceTree = "<group>"; };
+		72B8F93A180BE38700F556AC /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		72B8F93B180BE38700F556AC /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		72B8F93D180BE3B700F556AC /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		72BA040B180833DC00BE15B1 /* CheckNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetwork.h; sourceTree = "<group>"; };
 		72BA040C180833DC00BE15B1 /* CheckNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetwork.m; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72BA040A18082DC100BE15B1 /* Reveal.framework in Frameworks */,
+				72B8F933180BBC7A00F556AC /* Reveal.framework in Frameworks */,
 				72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */,
 				72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */,
 				72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */,
@@ -161,6 +175,8 @@
 				72419ECF1809111A004AC323 /* jxdribbble_player.m */,
 				72419ED21809158A004AC323 /* jxdribbble_shots.h */,
 				72419ED31809158A004AC323 /* jxdribbble_shots.m */,
+				72B8F934180BC2BC00F556AC /* jxdribbble_comments.h */,
+				72B8F935180BC2BC00F556AC /* jxdribbble_comments.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -172,6 +188,8 @@
 				72419ED718091E3D004AC323 /* jxdribbble_HeaderView.m */,
 				72419EDA18093386004AC323 /* jxdribbble_TableViewCell.h */,
 				72419EDB18093386004AC323 /* jxdribbble_TableViewCell.m */,
+				72B8F937180BC77100F556AC /* jxdribbble_CommentCell.h */,
+				72B8F938180BC77100F556AC /* jxdribbble_CommentCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -203,6 +221,10 @@
 				72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */,
 				72BA040B180833DC00BE15B1 /* CheckNetwork.h */,
 				72BA040C180833DC00BE15B1 /* CheckNetwork.m */,
+				72B8F93A180BE38700F556AC /* NSString+HTML.h */,
+				72B8F93B180BE38700F556AC /* NSString+HTML.m */,
+				72B8F93D180BE3B700F556AC /* GTMNSString+HTML.h */,
+				72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -248,7 +270,7 @@
 		72B800FA18064D4200A3BDA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				72BA040918082DC100BE15B1 /* Reveal.framework */,
+				72B8F932180BBC7A00F556AC /* Reveal.framework */,
 				72B80140180653C900A3BDA8 /* CFNetwork.framework */,
 				72B8013C1806525000A3BDA8 /* Crashlytics.framework */,
 				72B800FB18064D4200A3BDA8 /* Foundation.framework */,
@@ -367,6 +389,7 @@
 		72B8015F1806870B00A3BDA8 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				72B8F930180BB62A00F556AC /* headimg_bg.png */,
 				72482C96180981E40005EDF4 /* placeholder.png */,
 				724FFC171807F90A00854BF5 /* logo.png */,
 				72596EDD1806CA2C00E23181 /* nav_menu.png */,
@@ -466,6 +489,7 @@
 				72B8010E18064D4200A3BDA8 /* Images.xcassets in Resources */,
 				72B8013418064F6D00A3BDA8 /* Icon-Small@2x.png in Resources */,
 				72B8013618064F6D00A3BDA8 /* Icon-Spotlight-40.png in Resources */,
+				72B8F931180BB62A00F556AC /* headimg_bg.png in Resources */,
 				72B8013318064F6D00A3BDA8 /* Icon-60@2x.png in Resources */,
 				72B8013818064F6D00A3BDA8 /* Icon-Small.png in Resources */,
 				724FFC1318079C6500854BF5 /* Default~iphone.png in Resources */,
@@ -534,6 +558,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				72419ECA1808E27E004AC323 /* jxdribbble_NavigationViewController.m in Sources */,
+				72B8F936180BC2BC00F556AC /* jxdribbble_comments.m in Sources */,
+				72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */,
 				72419ED41809158A004AC323 /* jxdribbble_shots.m in Sources */,
 				72B8014F18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m in Sources */,
 				72419ED01809111A004AC323 /* jxdribbble_player.m in Sources */,
@@ -547,9 +573,11 @@
 				72B8014918065BEA00A3BDA8 /* RootViewController.m in Sources */,
 				72419ECD1808E3E0004AC323 /* jxdribbble_MenuViewController.m in Sources */,
 				7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */,
+				72B8F939180BC77100F556AC /* jxdribbble_CommentCell.m in Sources */,
 				72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */,
 				72419ED818091E3D004AC323 /* jxdribbble_HeaderView.m in Sources */,
 				7260D119180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m in Sources */,
+				72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

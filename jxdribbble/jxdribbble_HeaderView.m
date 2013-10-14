@@ -34,7 +34,7 @@
         avatarImageView.layer.masksToBounds = YES;
         avatarImageView.layer.cornerRadius = 15.0;
         
-        [avatarImageView setImageWithURL:[NSURL URLWithString:shot.player.avatar_url] placeholderImage:nil];
+        [avatarImageView setImageWithURL:[NSURL URLWithString:shot.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
         [self addSubview:avatarImageView];
         
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 5.0, 250.0, 20.0)];
@@ -44,7 +44,7 @@
         [self addSubview:titleLabel];
         
         UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 25.0, 150.0, 14.0)];
-        usernameLabel.text = [NSString stringWithFormat:@"by %@", shot.player.username];
+        usernameLabel.text = [NSString stringWithFormat:@"by %@", shot.player.name];
         usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
         usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         [self addSubview:usernameLabel];

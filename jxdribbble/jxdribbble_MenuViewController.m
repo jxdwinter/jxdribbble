@@ -37,7 +37,6 @@
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = NO;
-        tableView.backgroundColor = [UIColor clearColor];
         
         tableView.backgroundView = nil;
         tableView.backgroundColor = [UIColor clearColor];

@@ -35,7 +35,7 @@
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(backToPreViewController)];
-    self.title = self.player.username;
+    self.title = self.player.name;
     
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
