@@ -108,7 +108,7 @@
     viewsLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
     viewsLabel.textAlignment = NSTextAlignmentLeft;
     
-    UILabel *likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(100.0, 280.0, 90.0, 15.0)];
+    UILabel *likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 280.0, 90.0, 15.0)];
     likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
     likesLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
     likesLabel.textAlignment = NSTextAlignmentCenter;
@@ -119,9 +119,9 @@
     commentsLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
     commentsLabel.textAlignment = NSTextAlignmentRight;
     
-    likesLabel.text = [NSString stringWithFormat:@"likes:%@",self.shot.likes_count];
-    viewsLabel.text = [NSString stringWithFormat:@"views:%@",self.shot.views_count];
-    commentsLabel.text = [NSString stringWithFormat:@"comments:%@",self.shot.comments_count];
+    likesLabel.text = [NSString stringWithFormat:@"❤️ %@",self.shot.likes_count];
+    viewsLabel.text = [NSString stringWithFormat:@"👀 %@",self.shot.views_count];
+    commentsLabel.text = [NSString stringWithFormat:@"💬 %@",self.shot.comments_count];
     
     [headerView addSubview:avatarImageView];
     [headerView addSubview:titleLabel];
@@ -156,14 +156,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size =  [[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(250.0,1000) lineBreakMode:UILineBreakModeWordWrap];
-    if ( size.height < 80.0)
-    {
-        return 80.0;
-    }
-    else return size.height + 25.0;
-    
-    return 0.0;
+    CGSize size =  [[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText] sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(250.0,1000) lineBreakMode:UILineBreakModeWordWrap];
+    return size.height + 70.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -177,12 +171,8 @@
     
     jxdribbble_comments *comment = [self.dataSource objectAtIndex:indexPath.row];
     
-    CGSize size =  [comment.body sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(250.0,1000) lineBreakMode:UILineBreakModeWordWrap];
-    if ( size.height < 80.0)
-    {
-        cell.frame = CGRectMake(0.0, 0.0, 320.0, 80.0);
-    }
-    else cell.frame = CGRectMake(0.0, 0.0, 320.0, size.height + 25.0);
+    CGSize size =  [[comment.body stringByConvertingHTMLToPlainText] sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(250.0,1000) lineBreakMode:UILineBreakModeWordWrap];
+    cell.frame = CGRectMake(0.0, 0.0, 320.0, size.height + 70.0);
     
     cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height);
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
@@ -190,8 +180,12 @@
     cell.bodyLabel.text = [comment.body stringByConvertingHTMLToPlainText];
     if ( [comment.likes_count integerValue] > 0)
     {
-        cell.likesLabel.text = [NSString stringWithFormat:@"likes:%@",comment.likes_count];
+        cell.likesLabel.text = [NSString stringWithFormat:@"❤️%@",comment.likes_count];
     }
+    
+    cell.created_atLabel.frame = CGRectMake(10.0, size.height + 50.0, 290.0, 10);
+    cell.created_atLabel.text =  [comment.created_at substringToIndex:19];;
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

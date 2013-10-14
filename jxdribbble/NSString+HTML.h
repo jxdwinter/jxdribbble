@@ -58,7 +58,7 @@
 //  - HTTP & HTTPS schemes only
 //  - Only works in iOS 4+ as we use NSRegularExpression (returns self if not supported so be careful with NSMutableStrings)
 //  - Expression: (?<!=")\b((http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)
-//  - Adapted from http://regexlib.com/REDetails.aspx?regexp_id=96
+//  - Adapted from 
 - (NSString *)stringByLinkifyingURLs;
 
 // DEPRECIATED - Please use NSString stringByConvertingHTMLToPlainText

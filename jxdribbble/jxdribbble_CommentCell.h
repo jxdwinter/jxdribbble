@@ -15,5 +15,6 @@
 @property (nonatomic, strong) UILabel *usernameLabel ;
 @property (nonatomic, strong) UILabel *bodyLabel ;
 @property (nonatomic, strong) UILabel *likesLabel ;
+@property (nonatomic, strong) UILabel *created_atLabel ;
 
 @end
