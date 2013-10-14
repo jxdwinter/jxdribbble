@@ -106,7 +106,7 @@
     usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
     
     UILabel *created_atLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 30.0, 107.0, 15.0)];
-    created_atLabel.text = [self.shot.created_at substringToIndex:19];
+    created_atLabel.text = [self.shot.created_at substringToIndex:16];
     created_atLabel.textAlignment = NSTextAlignmentRight;
     created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
     created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
@@ -276,13 +276,16 @@
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             
-        } failure:nil];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+            NSLog(@"%@",error);
+            self.pageIndex--;
+        }];
         
         [operation start];
     }
     else
     {
-        
+        self.pageIndex--;
     }
     
 }

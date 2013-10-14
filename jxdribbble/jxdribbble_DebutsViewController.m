@@ -228,13 +228,16 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [_spinner stopAnimating];
             
-        } failure:nil];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+            NSLog(@"%@",error);
+            self.pageIndex--;
+        }];
         
         [operation start];
     }
     else
     {
-        
+        self.pageIndex--;
     }
     
 }
