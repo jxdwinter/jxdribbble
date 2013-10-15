@@ -276,7 +276,10 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    UIStatusBarStyle statusBarStyle = UIStatusBarStyleDefault;
+    
+    UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
+    
+    /*
     IF_IOS7_OR_GREATER(
        statusBarStyle = self.visible ? self.menuViewController.preferredStatusBarStyle : self.contentViewController.preferredStatusBarStyle;
        if (self.contentViewController.view.frame.origin.y > 10) {
@@ -285,7 +288,12 @@
            statusBarStyle = self.contentViewController.preferredStatusBarStyle;
        }
     );
+    */
+    
+    statusBarStyle = self.visible ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+    
     return statusBarStyle;
+    
 }
 
 #pragma mark -
