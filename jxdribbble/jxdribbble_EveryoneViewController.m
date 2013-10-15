@@ -60,10 +60,7 @@
     self.refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 25.0)];
     [self.refreshButton setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
     [self.refreshButton addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    
+
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
     __weak jxdribbble_EveryoneViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -92,7 +89,7 @@
 
 - (void) navigationBarDoubleTap : (id) sender
 {
-    [self.tableView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+    [self.tableView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
