@@ -58,6 +58,7 @@
 		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BA040C180833DC00BE15B1 /* CheckNetwork.m */; };
+		72F8DC11180D755D007187AA /* jxdribbble_WhoYouAreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F8DC10180D755D007187AA /* jxdribbble_WhoYouAreViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,8 @@
 		72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		72BA040B180833DC00BE15B1 /* CheckNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetwork.h; sourceTree = "<group>"; };
 		72BA040C180833DC00BE15B1 /* CheckNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetwork.m; sourceTree = "<group>"; };
+		72F8DC0F180D755D007187AA /* jxdribbble_WhoYouAreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_WhoYouAreViewController.h; sourceTree = "<group>"; };
+		72F8DC10180D755D007187AA /* jxdribbble_WhoYouAreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_WhoYouAreViewController.m; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -387,6 +390,8 @@
 			children = (
 				72B80156180666AD00A3BDA8 /* jxdribbble_SettingsViewController.h */,
 				72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */,
+				72F8DC0F180D755D007187AA /* jxdribbble_WhoYouAreViewController.h */,
+				72F8DC10180D755D007187AA /* jxdribbble_WhoYouAreViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -592,6 +597,7 @@
 				72419ED818091E3D004AC323 /* jxdribbble_HeaderView.m in Sources */,
 				7260D119180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m in Sources */,
 				72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */,
+				72F8DC11180D755D007187AA /* jxdribbble_WhoYouAreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

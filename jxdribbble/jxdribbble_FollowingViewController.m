@@ -8,6 +8,7 @@
 
 #import "jxdribbble_FollowingViewController.h"
 #import "jxdribbble_NavigationViewController.h"
+#import "jxdribbble_WhoYouAreViewController.h"
 
 @interface jxdribbble_FollowingViewController ()
 
@@ -37,6 +38,19 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if ( ![userDefaults stringForKey:@"username"] )
+    {
+
+    }
+    
+    //[userDefaults setValue:@"" forKey:@"user_ID"];
+    //[userDefaults synchronize];
 }
 
 - (void)didReceiveMemoryWarning

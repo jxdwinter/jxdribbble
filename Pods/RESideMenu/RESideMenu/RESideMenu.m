@@ -57,7 +57,10 @@
 
 - (void)commonInit
 {
-    //self.wantsFullScreenLayout = YES;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    self.wantsFullScreenLayout = YES;
+#pragma clang diagnostic pop
     _animationDuration = 0.35f;
     _panGestureEnabled = YES;
     _scaleContentView = YES;
@@ -249,6 +252,8 @@
             frame.origin.x = point.x + self.originalPoint.x;
             self.contentViewController.view.frame = frame;
         }
+        
+        [self updateStatusBar];
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -271,12 +276,15 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
-    
+    UIStatusBarStyle statusBarStyle = UIStatusBarStyleDefault;
     IF_IOS7_OR_GREATER(
-        statusBarStyle = self.visible ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+       statusBarStyle = self.visible ? self.menuViewController.preferredStatusBarStyle : self.contentViewController.preferredStatusBarStyle;
+       if (self.contentViewController.view.frame.origin.y > 10) {
+           statusBarStyle = self.menuViewController.preferredStatusBarStyle;
+       } else {
+           statusBarStyle = self.contentViewController.preferredStatusBarStyle;
+       }
     );
-     
     return statusBarStyle;
 }
 
