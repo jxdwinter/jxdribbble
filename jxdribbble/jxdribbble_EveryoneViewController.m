@@ -12,6 +12,7 @@
 #import "jxdribbble_TableViewCell.h"
 #import "jxdribbble_DetailViewController.h"
 #import "jxdribbble_PlayerViewController.h"
+#import "jxdribbble_NavigationViewController.h"
 
 @interface jxdribbble_EveryoneViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, assign) NSUInteger     pageIndex;
 
 @property (strong, nonatomic) UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) UIButton *refreshButton;
 
 @end
 
@@ -39,35 +41,40 @@
     [super viewDidLoad];
     
     self.title = @"EVERYONE";
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    UITapGestureRecognizer* tapRecon = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationBarDoubleTap:)];
+    tapRecon.numberOfTapsRequired = 2;
+    [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
+
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+    [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
+    [menuButton addTarget:(jxdribbble_NavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [_spinner setCenter:CGPointMake(300.0 , 20.0)];
-    [self.view addSubview:_spinner];
-    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
-    [self navigationItem].rightBarButtonItem = barButton;
+
+    self.refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 25.0)];
+    [self.refreshButton setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
+    [self.refreshButton addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height - 44.0 - 20.0) style:UITableViewStylePlain];
+    
+    
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
     __weak jxdribbble_EveryoneViewController *weakSelf = self;
-    // setup pull-to-refresh
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refresh];
-    }];
-    // setup infinite scrolling
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
-    //self.scrollForHideNavigation = self.tableView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.scrollsToTop = YES;
-    self.tableView.scrollEnabled = YES;
     [self.tableView setBackgroundView:nil];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
 
@@ -75,16 +82,17 @@
 
 }
 
-- (BOOL) scrollViewShouldScrollToTop:(UIScrollView*) scrollView
+
+- (void) viewWillAppear:(BOOL)animated
 {
-    if (scrollView == self.tableView)
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
+    [super viewWillAppear:YES];
+    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    appDelegate.sideMenuViewController.panGestureEnabled = YES;
+}
+
+- (void) navigationBarDoubleTap : (id) sender
+{
+    [self.tableView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -182,7 +190,12 @@
     {
 
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
+        UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
+        [self navigationItem].rightBarButtonItem = barButton;
         [_spinner startAnimating];
+        
+        self.refreshButton.hidden = YES;
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/shots/everyone?page=%@",[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
         
@@ -227,7 +240,11 @@
             [self.tableView reloadData];
 
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
             [_spinner stopAnimating];
+            
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.refreshButton];
+            self.refreshButton.hidden = NO;
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             NSLog(@"%@",error);
@@ -247,15 +264,8 @@
 
 - (void)refresh
 {
-    __weak jxdribbble_EveryoneViewController *weakSelf = self;
-    
-    int64_t delayInSeconds = 1.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.pageIndex = 1;
-        [self getData];
-        [weakSelf.tableView.pullToRefreshView stopAnimating];
-    });
+    self.pageIndex = 1;
+    [self getData];
 }
 
 #pragma mark - loadMore

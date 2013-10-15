@@ -7,6 +7,7 @@
 //
 
 #import "jxdribbble_FollowingViewController.h"
+#import "jxdribbble_NavigationViewController.h"
 
 @interface jxdribbble_FollowingViewController ()
 
@@ -26,9 +27,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"FOLLOWING";
-
+    
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+    [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
+    [menuButton addTarget:(jxdribbble_NavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
 }
 
 - (void)didReceiveMemoryWarning

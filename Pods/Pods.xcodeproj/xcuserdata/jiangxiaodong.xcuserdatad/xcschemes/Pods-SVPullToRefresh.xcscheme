@@ -7,47 +7,47 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForRunning = "YES"
-            buildForArchiving = "YES"
             buildForAnalyzing = "YES"
+            buildForTesting = "YES"
             buildForProfiling = "YES"
-            buildForTesting = "YES">
+            buildForRunning = "YES"
+            buildForArchiving = "YES">
             <BuildableReference
-               BlueprintIdentifier = "FE134C4D83D249A6BFBBA6B4"
-               ReferencedContainer = "container:Pods.xcodeproj"
                BlueprintName = "Pods-SVPullToRefresh"
+               BlueprintIdentifier = "00C8DA7C7CB34227B1A31407"
                BuildableName = "libPods-SVPullToRefresh.a"
+               ReferencedContainer = "container:Pods.xcodeproj"
                BuildableIdentifier = "primary">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
-      shouldUseLaunchSchemeArgsEnv = "YES"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      buildConfiguration = "Debug">
       <Testables>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
-      launchStyle = "0"
-      useCustomWorkingDirectory = "NO"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       allowLocationSimulation = "YES"
-      ignoresPersistentStateOnLaunch = "NO"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      debugDocumentVersioning = "YES">
+      debugDocumentVersioning = "YES"
+      buildConfiguration = "Debug"
+      ignoresPersistentStateOnLaunch = "NO"
+      useCustomWorkingDirectory = "NO"
+      launchStyle = "0">
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES"
+      buildConfiguration = "Release"
       savedToolIdentifier = ""
-      debugDocumentVersioning = "YES">
+      useCustomWorkingDirectory = "NO">
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -6,8 +6,7 @@
 //  Copyright (c) 2013年 Jiang Xiaodong. All rights reserved.
 //
 
-#import "RootViewController.h"
 
-@interface jxdribbble_DebutsViewController : RootViewController
+@interface jxdribbble_DebutsViewController : UIViewController
 
 @end

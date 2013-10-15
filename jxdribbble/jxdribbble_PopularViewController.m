@@ -12,6 +12,7 @@
 #import "jxdribbble_TableViewCell.h"
 #import "jxdribbble_DetailViewController.h"
 #import "jxdribbble_PlayerViewController.h"
+#import "jxdribbble_NavigationViewController.h"
 
 @interface jxdribbble_PopularViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, assign) NSUInteger     pageIndex;
 
 @property (strong, nonatomic) UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) UIButton *refreshButton;
 
 @end
 
@@ -37,21 +39,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"POPULAR";
+    
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+    [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
+    [menuButton addTarget:(jxdribbble_NavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [_spinner setCenter:CGPointMake(300.0 , 20.0)];
-    [self.view addSubview:_spinner];
-    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
-    [self navigationItem].rightBarButtonItem = barButton;
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height - 44.0 - 20.0) style:UITableViewStylePlain];
+    self.refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 25.0)];
+    [self.refreshButton setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
+    [self.refreshButton addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
     __weak jxdribbble_PopularViewController *weakSelf = self;
     // setup pull-to-refresh
+    /*
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];
-    }];
+    }];*/
     // setup infinite scrolling
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
@@ -71,6 +82,13 @@
     
     [self getData];
 
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    appDelegate.sideMenuViewController.panGestureEnabled = YES;
 }
 
 - (BOOL) scrollViewShouldScrollToTop:(UIScrollView*) scrollView
@@ -182,7 +200,12 @@
     {
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
+        UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
+        [self navigationItem].rightBarButtonItem = barButton;
         [_spinner startAnimating];
+        
+        self.refreshButton.hidden = YES;
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/shots/popular?page=%@",[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
         
@@ -227,7 +250,11 @@
             [self.tableView reloadData];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [_spinner stopAnimating];
+            
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.refreshButton];
+            self.refreshButton.hidden = NO;
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             NSLog(@"%@",error);
@@ -247,15 +274,8 @@
 
 - (void)refresh
 {
-    __weak jxdribbble_PopularViewController *weakSelf = self;
-    
-    int64_t delayInSeconds = 1.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.pageIndex = 1;
-        [self getData];
-        [weakSelf.tableView.pullToRefreshView stopAnimating];
-    });
+    self.pageIndex = 1;
+    [self getData];
 }
 
 #pragma mark - loadMore

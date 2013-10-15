@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-RESideMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0A333A7E59954239A30059A0</key>
+		<key>00C8DA7C7CB34227B1A31407</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>255239DE20F34DE38C3ED6DD</key>
+		<key>0F3BAE9496D1441DA78168C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3F5522A0487B46AB8C93A9FE</key>
+		<key>42288F92395D4C3DA8FA319D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>713D42F6524A4F488DCAB525</key>
+		<key>54C8B14F68FA4A43B3700AF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F9054788C104358AA230AA7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FE134C4D83D249A6BFBBA6B4</key>
+		<key>5F467383E59E4F46BF2E517F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

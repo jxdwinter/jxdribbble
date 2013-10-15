@@ -11,6 +11,7 @@
 #import "jxdribbble_CommentCell.h"
 #import "NSString+HTML.h"
 #import "jxdribbble_PlayerViewController.h"
+#import "jxdribbble_NavigationViewController.h"
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -175,8 +176,21 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size =  [[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText] sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(250.0,1000) lineBreakMode:UILineBreakModeWordWrap];
-    return size.height + 70.0;
+    NSAttributedString *attributedText =
+    [[NSAttributedString alloc]
+     initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
+     attributes:@
+     {
+        NSFontAttributeName: [UIFont systemFontOfSize:12]
+     }];
+    
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    CGSize  size = rect.size;
+    CGFloat height = ceilf(size.height);
+    
+    return height + 70.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -189,8 +203,20 @@
     }
     
     jxdribbble_comments *comment = [self.dataSource objectAtIndex:indexPath.row];
+
+    NSAttributedString *attributedText =
+    [[NSAttributedString alloc]
+     initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
+     attributes:@
+     {
+        NSFontAttributeName: [UIFont systemFontOfSize:12]
+     }];
     
-    CGSize size =  [[comment.body stringByConvertingHTMLToPlainText] sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(250.0,1000) lineBreakMode:UILineBreakModeWordWrap];
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    CGSize  size = rect.size;
+    
     cell.frame = CGRectMake(0.0, 0.0, 320.0, size.height + 70.0);
     
     cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height);

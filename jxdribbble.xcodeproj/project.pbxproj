@@ -21,6 +21,8 @@
 		72596EDE1806CA2C00E23181 /* nav_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 72596EDD1806CA2C00E23181 /* nav_menu.png */; };
 		7260D119180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D118180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m */; };
 		7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */; };
+		72954E8E180CF01200A92FC8 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72954E8D180CF01200A92FC8 /* Reveal.framework */; };
+		72954E92180D0D7E00A92FC8 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 72954E91180D0D7E00A92FC8 /* refresh.png */; };
 		72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FB18064D4200A3BDA8 /* Foundation.framework */; };
 		72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */; };
 		72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FF18064D4200A3BDA8 /* UIKit.framework */; };
@@ -41,14 +43,12 @@
 		72B8013818064F6D00A3BDA8 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8013218064F6D00A3BDA8 /* Icon-Small.png */; };
 		72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8013C1806525000A3BDA8 /* Crashlytics.framework */; };
 		72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B80140180653C900A3BDA8 /* CFNetwork.framework */; };
-		72B8014918065BEA00A3BDA8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8014818065BEA00A3BDA8 /* RootViewController.m */; };
 		72B8014C18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8014B18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m */; };
 		72B8014F18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8014E18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m */; };
 		72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015118065DB300A3BDA8 /* jxdribbble_PopularViewController.m */; };
 		72B8015518065DC900A3BDA8 /* jxdribbble_FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8015418065DC900A3BDA8 /* jxdribbble_FollowingViewController.m */; };
 		72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */; };
 		72B8F931180BB62A00F556AC /* headimg_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B8F930180BB62A00F556AC /* headimg_bg.png */; };
-		72B8F933180BBC7A00F556AC /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B8F932180BBC7A00F556AC /* Reveal.framework */; };
 		72B8F936180BC2BC00F556AC /* jxdribbble_comments.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F935180BC2BC00F556AC /* jxdribbble_comments.m */; };
 		72B8F939180BC77100F556AC /* jxdribbble_CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F938180BC77100F556AC /* jxdribbble_CommentCell.m */; };
 		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
@@ -89,6 +89,8 @@
 		7260D118180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_DetailViewController.m; sourceTree = "<group>"; };
 		7260D11C180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerViewController.h; sourceTree = "<group>"; };
 		7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerViewController.m; sourceTree = "<group>"; };
+		72954E8D180CF01200A92FC8 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		72954E91180D0D7E00A92FC8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		72B800F818064D4200A3BDA8 /* jxdribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jxdribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B800FB18064D4200A3BDA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,8 +115,6 @@
 		72B8013218064F6D00A3BDA8 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		72B8013C1806525000A3BDA8 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		72B80140180653C900A3BDA8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		72B8014718065BEA00A3BDA8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		72B8014818065BEA00A3BDA8 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		72B8014A18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_EveryoneViewController.h; sourceTree = "<group>"; };
 		72B8014B18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_EveryoneViewController.m; sourceTree = "<group>"; };
 		72B8014D18065D9300A3BDA8 /* jxdribbble_DebutsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_DebutsViewController.h; sourceTree = "<group>"; };
@@ -126,7 +126,6 @@
 		72B80156180666AD00A3BDA8 /* jxdribbble_SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_SettingsViewController.h; sourceTree = "<group>"; };
 		72B80157180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_SettingsViewController.m; sourceTree = "<group>"; };
 		72B8F930180BB62A00F556AC /* headimg_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headimg_bg.png; sourceTree = "<group>"; };
-		72B8F932180BBC7A00F556AC /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		72B8F934180BC2BC00F556AC /* jxdribbble_comments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_comments.h; sourceTree = "<group>"; };
 		72B8F935180BC2BC00F556AC /* jxdribbble_comments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_comments.m; sourceTree = "<group>"; };
 		72B8F937180BC77100F556AC /* jxdribbble_CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_CommentCell.h; sourceTree = "<group>"; };
@@ -145,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72B8F933180BBC7A00F556AC /* Reveal.framework in Frameworks */,
+				72954E8E180CF01200A92FC8 /* Reveal.framework in Frameworks */,
 				72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */,
 				72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */,
 				72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */,
@@ -197,8 +196,8 @@
 		72419ED918091E4A004AC323 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7260D11B180BAC3700CB2A3E /* Player */,
 				7260D11A180BA1E500CB2A3E /* Detail */,
+				7260D11B180BAC3700CB2A3E /* Player */,
 				72B8014318065AA800A3BDA8 /* Everyone */,
 				72B8014218065A6700A3BDA8 /* Debuts */,
 				72B8014418065AF200A3BDA8 /* Popular */,
@@ -215,8 +214,6 @@
 				72B8010B18064D4200A3BDA8 /* jxdribbble_AppDelegate.m */,
 				72419EC81808E27E004AC323 /* jxdribbble_NavigationViewController.h */,
 				72419EC91808E27E004AC323 /* jxdribbble_NavigationViewController.m */,
-				72B8014718065BEA00A3BDA8 /* RootViewController.h */,
-				72B8014818065BEA00A3BDA8 /* RootViewController.m */,
 				72419ECB1808E3E0004AC323 /* jxdribbble_MenuViewController.h */,
 				72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */,
 				72BA040B180833DC00BE15B1 /* CheckNetwork.h */,
@@ -270,7 +267,7 @@
 		72B800FA18064D4200A3BDA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				72B8F932180BBC7A00F556AC /* Reveal.framework */,
+				72954E8D180CF01200A92FC8 /* Reveal.framework */,
 				72B80140180653C900A3BDA8 /* CFNetwork.framework */,
 				72B8013C1806525000A3BDA8 /* Crashlytics.framework */,
 				72B800FB18064D4200A3BDA8 /* Foundation.framework */,
@@ -393,6 +390,7 @@
 				72482C96180981E40005EDF4 /* placeholder.png */,
 				724FFC171807F90A00854BF5 /* logo.png */,
 				72596EDD1806CA2C00E23181 /* nav_menu.png */,
+				72954E91180D0D7E00A92FC8 /* refresh.png */,
 			);
 			name = image;
 			sourceTree = "<group>";
@@ -483,6 +481,7 @@
 				72B8010618064D4200A3BDA8 /* InfoPlist.strings in Resources */,
 				72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */,
 				72482C97180981E40005EDF4 /* placeholder.png in Resources */,
+				72954E92180D0D7E00A92FC8 /* refresh.png in Resources */,
 				72596EDE1806CA2C00E23181 /* nav_menu.png in Resources */,
 				72B8013518064F6D00A3BDA8 /* Icon-60.png in Resources */,
 				724FFC1218079C6500854BF5 /* Default@2x.png in Resources */,
@@ -570,7 +569,6 @@
 				72B80158180666AD00A3BDA8 /* jxdribbble_SettingsViewController.m in Sources */,
 				72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */,
 				72419EDC18093386004AC323 /* jxdribbble_TableViewCell.m in Sources */,
-				72B8014918065BEA00A3BDA8 /* RootViewController.m in Sources */,
 				72419ECD1808E3E0004AC323 /* jxdribbble_MenuViewController.m in Sources */,
 				7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */,
 				72B8F939180BC77100F556AC /* jxdribbble_CommentCell.m in Sources */,
