@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) NSUInteger     pageIndex;
 
+@property (strong, nonatomic) UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation jxdribbble_DetailViewController
@@ -39,16 +41,20 @@
 
     jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = NO;
-
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"BACK"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(backToPreViewController)];
+    
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
     self.title = @"DETAIL";
     
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
+    
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_spinner setCenter:CGPointMake(300.0 , 20.0)];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
     
@@ -115,35 +121,12 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
     [imageView setImageWithURL:[NSURL URLWithString:self.shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholde"]];
     
-    UILabel *viewsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 280.0, 90.0, 15.0)];
-    viewsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-    viewsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-    viewsLabel.textAlignment = NSTextAlignmentLeft;
-    
-    UILabel *likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(110.0, 280.0, 90.0, 15.0)];
-    likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-    likesLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-    likesLabel.textAlignment = NSTextAlignmentCenter;
-    
-    
-    UILabel *commentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 280.0, 100.0, 15.0)];
-    commentsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-    commentsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-    commentsLabel.textAlignment = NSTextAlignmentRight;
-    
-    likesLabel.text = [NSString stringWithFormat:@"likes %@",self.shot.likes_count];
-    viewsLabel.text = [NSString stringWithFormat:@"views %@",self.shot.views_count];
-    commentsLabel.text = [NSString stringWithFormat:@"comments %@",self.shot.comments_count];
-    
     [headerView addSubview:userButton];
     [headerView addSubview:titleLabel];
     [headerView addSubview:usernameLabel];
     [headerView addSubview:created_atLabel];
     
     [headerView addSubview:imageView];
-    [headerView addSubview:viewsLabel];
-    [headerView addSubview:likesLabel];
-    [headerView addSubview:commentsLabel];
     
     return headerView;
     
@@ -261,6 +244,10 @@
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
+        UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
+        [self navigationItem].rightBarButtonItem = barButton;
+        [_spinner startAnimating];
+        
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/shots/%@/comments?page=%@&per_page=20",self.shot.id,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
 
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -301,9 +288,12 @@
             [self.tableView reloadData];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [_spinner stopAnimating];
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             NSLog(@"%@",error);
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [_spinner stopAnimating];
             self.pageIndex--;
         }];
         

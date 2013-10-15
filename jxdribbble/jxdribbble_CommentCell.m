@@ -20,7 +20,7 @@
         self.avatarImageView.layer.cornerRadius = 15.0;
         [self addSubview:self.avatarImageView];
         
-        self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 15.0, 150.0, 15.0)];
+        self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 12.0, 150.0, 18.0)];
         self.usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
         self.usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         [self addSubview:self.usernameLabel];
@@ -33,12 +33,13 @@
         self.bodyLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:self.bodyLabel];
         
-        
+        /*
         self.likesLabel = [[UILabel alloc] init];
         self.likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
         self.likesLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
         self.likesLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:self.likesLabel];
+        */
         
         self.created_atLabel = [[UILabel alloc] init];
         self.created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];

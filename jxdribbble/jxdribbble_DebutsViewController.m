@@ -95,7 +95,7 @@
 
 - (void) navigationBarDoubleTap : (id) sender
 {
-    [self.tableView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+    [self.tableView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,9 +138,9 @@
     [cell.shot_imageView setImageWithURL:[NSURL URLWithString:shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     
-    cell.likesLabel.text = [NSString stringWithFormat:@"likes %@",shot.likes_count];
-    cell.viewsLabel.text = [NSString stringWithFormat:@"views %@",shot.views_count];
-    cell.commentsLabel.text = [NSString stringWithFormat:@"comments %@",shot.comments_count];
+    cell.likesLabel.text = [NSString stringWithFormat:@"%@",shot.likes_count];
+    cell.viewsLabel.text = [NSString stringWithFormat:@"%@",shot.views_count];
+    cell.commentsLabel.text = [NSString stringWithFormat:@"%@",shot.comments_count];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
