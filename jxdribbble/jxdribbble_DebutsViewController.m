@@ -251,6 +251,10 @@
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             NSLog(@"%@",error);
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [_spinner stopAnimating];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.refreshButton];
+            self.refreshButton.hidden = NO;
             self.pageIndex--;
         }];
         
