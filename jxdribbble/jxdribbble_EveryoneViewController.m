@@ -266,14 +266,14 @@
             [_spinner stopAnimating];
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.refreshButton];
             self.refreshButton.hidden = NO;
-            self.pageIndex--;
+            if(self.pageIndex > 1)self.pageIndex--;
         }];
         
         [operation start];
     }
     else
     {
-        self.pageIndex--;
+        if(self.pageIndex > 1)self.pageIndex--;
     }
     
 }

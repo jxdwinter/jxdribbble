@@ -343,14 +343,14 @@
             NSLog(@"%@",error);
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [_spinner stopAnimating];
-            self.pageIndex--;
+            if(self.pageIndex > 1)self.pageIndex--;
         }];
         
         [operation start];
     }
     else
     {
-        self.pageIndex--;
+        if(self.pageIndex > 1)self.pageIndex--;
     }
     
 }
