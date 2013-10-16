@@ -86,6 +86,7 @@
     
     jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = YES;
+    
 }
 
 - (void) navigationBarDoubleTap : (id) sender
