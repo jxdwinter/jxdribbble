@@ -11,6 +11,7 @@
 #import "jxdribbble_PlayerHeaderView.h"
 #import "jxdribbble_DetailViewController.h"
 #import "jxdribbble_PlayerLikesViewController.h"
+#import "jxdribbble_PlayerListViewController.h"
 
 @interface jxdribbble_PlayerViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 
@@ -245,14 +246,20 @@
 
 - (void) drafteesButtonClicked
 {
-    NSLog(@"%s",__func__);
+    jxdribbble_PlayerListViewController *list = [[jxdribbble_PlayerListViewController alloc] init];
+    list.player = self.player;
+    list.viewControllerType = 3;
+    [self.navigationController pushViewController:list animated:YES];
 }
 
 #pragma mark - following
 
 - (void) followingButtonClicked
 {
-    NSLog(@"%s",__func__);
+    jxdribbble_PlayerListViewController *list = [[jxdribbble_PlayerListViewController alloc] init];
+    list.player = self.player;
+    list.viewControllerType = 1;
+    [self.navigationController pushViewController:list animated:YES];
 }
 
 
@@ -260,7 +267,10 @@
 
 - (void) followerButtonClicked
 {
-    NSLog(@"%s",__func__);
+    jxdribbble_PlayerListViewController *list = [[jxdribbble_PlayerListViewController alloc] init];
+    list.player = self.player;
+    list.viewControllerType = 2;
+    [self.navigationController pushViewController:list animated:YES];
 }
 
 #pragma mark - likes

@@ -38,9 +38,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-    appDelegate.sideMenuViewController.panGestureEnabled = NO;
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
@@ -82,6 +79,23 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    UITapGestureRecognizer* tapRecon = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationBarDoubleTap:)];
+    tapRecon.numberOfTapsRequired = 2;
+    [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
+    
+    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    appDelegate.sideMenuViewController.panGestureEnabled = NO;
+}
+
+
+- (void) navigationBarDoubleTap : (id) sender
+{
+    [self.tableView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];
+}
 
 
 - (UIControl *)setUpHeaderView

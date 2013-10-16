@@ -34,6 +34,8 @@
 		72A53079180E365B0054C073 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A53078180E365B0054C073 /* calendar.png */; };
 		72A5307B180E433F0054C073 /* dribbble.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5307A180E433F0054C073 /* dribbble.png */; };
 		72A5307E180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5307D180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m */; };
+		72A53081180E77CF0054C073 /* jxdribbble_PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A53080180E77CF0054C073 /* jxdribbble_PlayerListViewController.m */; };
+		72A53084180E81550054C073 /* jxdribbble_PlayerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A53083180E81550054C073 /* jxdribbble_PlayerListCell.m */; };
 		72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FB18064D4200A3BDA8 /* Foundation.framework */; };
 		72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */; };
 		72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FF18064D4200A3BDA8 /* UIKit.framework */; };
@@ -116,6 +118,10 @@
 		72A5307A180E433F0054C073 /* dribbble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dribbble.png; sourceTree = "<group>"; };
 		72A5307C180E745F0054C073 /* jxdribbble_PlayerLikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerLikesViewController.h; sourceTree = "<group>"; };
 		72A5307D180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerLikesViewController.m; sourceTree = "<group>"; };
+		72A5307F180E77CF0054C073 /* jxdribbble_PlayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerListViewController.h; sourceTree = "<group>"; };
+		72A53080180E77CF0054C073 /* jxdribbble_PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerListViewController.m; sourceTree = "<group>"; };
+		72A53082180E81550054C073 /* jxdribbble_PlayerListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerListCell.h; sourceTree = "<group>"; };
+		72A53083180E81550054C073 /* jxdribbble_PlayerListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerListCell.m; sourceTree = "<group>"; };
 		72B800F818064D4200A3BDA8 /* jxdribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jxdribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B800FB18064D4200A3BDA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -218,6 +224,8 @@
 				72B8F938180BC77100F556AC /* jxdribbble_CommentCell.m */,
 				72A5306F180E1DA10054C073 /* jxdribbble_PlayerHeaderView.h */,
 				72A53070180E1DA10054C073 /* jxdribbble_PlayerHeaderView.m */,
+				72A53082180E81550054C073 /* jxdribbble_PlayerListCell.h */,
+				72A53083180E81550054C073 /* jxdribbble_PlayerListCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -271,6 +279,8 @@
 				7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */,
 				72A5307C180E745F0054C073 /* jxdribbble_PlayerLikesViewController.h */,
 				72A5307D180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m */,
+				72A5307F180E77CF0054C073 /* jxdribbble_PlayerListViewController.h */,
+				72A53080180E77CF0054C073 /* jxdribbble_PlayerListViewController.m */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -614,6 +624,7 @@
 				72B8014F18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m in Sources */,
 				72419ED01809111A004AC323 /* jxdribbble_player.m in Sources */,
 				72B8010C18064D4200A3BDA8 /* jxdribbble_AppDelegate.m in Sources */,
+				72A53081180E77CF0054C073 /* jxdribbble_PlayerListViewController.m in Sources */,
 				72B8014C18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m in Sources */,
 				72B8015518065DC900A3BDA8 /* jxdribbble_FollowingViewController.m in Sources */,
 				72B8010818064D4200A3BDA8 /* main.m in Sources */,
@@ -621,6 +632,7 @@
 				72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */,
 				72A5307E180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m in Sources */,
 				72419EDC18093386004AC323 /* jxdribbble_TableViewCell.m in Sources */,
+				72A53084180E81550054C073 /* jxdribbble_PlayerListCell.m in Sources */,
 				72419ECD1808E3E0004AC323 /* jxdribbble_MenuViewController.m in Sources */,
 				72A53071180E1DA10054C073 /* jxdribbble_PlayerHeaderView.m in Sources */,
 				7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */,
