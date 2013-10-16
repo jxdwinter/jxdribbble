@@ -1,18 +1,20 @@
 //
-//  jxdribbble_PlayerViewController.m
+//  jxdribbble_PlayerLikesViewController.m
 //  jxdribbble
 //
-//  Created by Jiang Xiaodong on 13-10-14.
+//  Created by Jiang Xiaodong on 13-10-16.
 //  Copyright (c) 2013年 Jiang Xiaodong. All rights reserved.
 //
 
-#import "jxdribbble_PlayerViewController.h"
-#import "jxdribbble_TableViewCell.h"
-#import "jxdribbble_PlayerHeaderView.h"
-#import "jxdribbble_DetailViewController.h"
 #import "jxdribbble_PlayerLikesViewController.h"
+#import "jxdribbble_shots.h"
+#import "jxdribbble_HeaderView.h"
+#import "jxdribbble_TableViewCell.h"
+#import "jxdribbble_DetailViewController.h"
+#import "jxdribbble_PlayerViewController.h"
+#import "jxdribbble_NavigationViewController.h"
 
-@interface jxdribbble_PlayerViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
+@interface jxdribbble_PlayerLikesViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -23,7 +25,7 @@
 
 @end
 
-@implementation jxdribbble_PlayerViewController
+@implementation jxdribbble_PlayerLikesViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,26 +40,26 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
-    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    self.title = self.player.name;
+    self.title = @"LIKES";
+    
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+    [menuButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [menuButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_spinner setCenter:CGPointMake(300.0 , 20.0)];
     
     self.refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 25.0)];
     [self.refreshButton setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
     [self.refreshButton addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
     
-    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [_spinner setCenter:CGPointMake(300.0 , 20.0)];
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
-    __weak jxdribbble_PlayerViewController *weakSelf = self;
+    __weak jxdribbble_PlayerLikesViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
@@ -66,36 +68,6 @@
     [self.tableView setBackgroundView:nil];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    jxdribbble_PlayerHeaderView *headerView = [[jxdribbble_PlayerHeaderView alloc] initWithPlayerInfo:self.player];
-    headerView.userInteractionEnabled = YES;
-    for (UIView *view in [headerView subviews])
-    {
-        if ( [view isKindOfClass:[UIButton class]])
-        {
-            
-            switch (view.tag)
-            {
-                case 9999://avater
-                    [((UIButton *)view ) addTarget:self action:@selector(avatarButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-                    break;
-                case 8888://draftees
-                    [((UIButton *)view ) addTarget:self action:@selector(drafteesButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-                    break;
-                case 7777://following
-                    [((UIButton *)view ) addTarget:self action:@selector(followingButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-                    break;
-                case 6666://follower
-                    [((UIButton *)view ) addTarget:self action:@selector(followerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-                    break;
-                case 5555://likes
-                    [((UIButton *)view ) addTarget:self action:@selector(likesButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    self.tableView.tableHeaderView = headerView;
     [self.view addSubview:self.tableView];
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
@@ -148,7 +120,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 265.0;
+    return 255.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -176,103 +148,43 @@
     
 }
 
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    jxdribbble_shots *shot = [self.dataSource objectAtIndex:section];
+    jxdribbble_HeaderView *headerView = [[jxdribbble_HeaderView alloc] initWithPlayerInfo:shot];
+    [headerView addTarget:self action:@selector(headerViewTouched :) forControlEvents:UIControlEventTouchUpInside];
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 44.0;
+}
+
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NSLog(@"%@",[(jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section] title]);
     
     jxdribbble_DetailViewController *detail = [[jxdribbble_DetailViewController alloc] init];
     detail.shot = (jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section];
     [self.navigationController pushViewController:detail animated:YES];
-     
+}
+
+
+#pragma mark - HeaderViewTouched
+
+- (void)headerViewTouched : (jxdribbble_HeaderView *)sender
+{
+    NSLog(@"%@",sender.shot.player.username);
     
+    jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
+    playerViewController.player = sender.shot.player;
+    [self.navigationController pushViewController:playerViewController animated:YES];
 }
-
-#pragma mark - avatarButtonClicked
-
-- (void) avatarButtonClicked
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"More Info About %@",self.player.username]
-                                                             delegate:self
-                                                    cancelButtonTitle:@"cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Twitter",@"Website", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    [actionSheet showInView:self.view];
-}
-
-#pragma mark -  actionsheetdelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0)
-    {
-        if (self.player.twitter_screen_name != (NSString *) [NSNull null] )
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/%@",self.player.twitter_screen_name]]];
-        }
-        else
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                                message:[NSString stringWithFormat:@"%@ is not a twitter fun :(",self.player.username]
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil, nil];
-            [alertView show];
-        }
-    }
-    else if ( buttonIndex == 1 )
-    {
-        if (self.player.website_url != (NSString *) [NSNull null] )
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.player.website_url]];
-        }
-        else
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                                message:[NSString stringWithFormat:@"%@ doesn't leave a webiste :(",self.player.username]
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil, nil];
-            [alertView show];
-        }
-    }
-}
-
-#pragma mark - draftees
-
-- (void) drafteesButtonClicked
-{
-    NSLog(@"%s",__func__);
-}
-
-#pragma mark - following
-
-- (void) followingButtonClicked
-{
-    NSLog(@"%s",__func__);
-}
-
-
-#pragma mark - follower
-
-- (void) followerButtonClicked
-{
-    NSLog(@"%s",__func__);
-}
-
-#pragma mark - likes
-
-- (void) likesButtonClicked
-{
-    jxdribbble_PlayerLikesViewController *likes = [[jxdribbble_PlayerLikesViewController alloc] init];
-    likes.player = self.player;
-    [self.navigationController pushViewController:likes animated:YES];
-}
-
-
 
 #pragma mark - getdata
 
@@ -288,9 +200,8 @@
         [_spinner startAnimating];
         
         self.refreshButton.hidden = YES;
-        NSString *urlStr = [NSString stringWithFormat:@"http://api.dribbble.com/players/%@/shots?page=%@",self.player.username,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]];
-        NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        NSLog(@"url=%@",url);
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@/likes?page=%@",self.player.username,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -373,7 +284,8 @@
 
 - (void)loadMore
 {
-    __weak jxdribbble_PlayerViewController *weakSelf = self;
+    __weak jxdribbble_PlayerLikesViewController *weakSelf = self;
+    
     int64_t delayInSeconds = 1.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -382,6 +294,7 @@
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }
+
 
 
 @end

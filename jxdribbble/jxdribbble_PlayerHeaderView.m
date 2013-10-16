@@ -62,7 +62,7 @@
         UILabel *locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(130.0, 40.0, 170.0, 15.0)];
         locationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
         locationLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-        locationLabel.text = playInfo.location;
+        if (playInfo.location != (NSString *) [NSNull null] ) locationLabel.text = playInfo.location;
         [self addSubview:locationLabel];
         
         UIImageView *twitterImageView = [[UIImageView alloc] initWithFrame:CGRectMake(110.0, 62.0, 13.0, 13.0)];
@@ -120,7 +120,7 @@
         drafteesNumberLabel.textAlignment = NSTextAlignmentCenter;
         [drafteesView addSubview:drafteesLabel];
         [drafteesView addSubview:drafteesNumberLabel];
-        
+        [drafteesView setUserInteractionEnabled:NO];
         UIButton *drafteesButton = [UIButton buttonWithType:UIButtonTypeCustom];
         drafteesButton.tag = 8888;
         drafteesButton.frame = CGRectMake(225.0, 130.0, 75.0, 50.0);
@@ -142,7 +142,7 @@
         followingNumberLabel.textAlignment = NSTextAlignmentCenter;
         [followingView addSubview:followingLabel];
         [followingView addSubview:followingNumberLabel];
-        
+        [followingView setUserInteractionEnabled:NO];
         UIButton *followingButton = [UIButton buttonWithType:UIButtonTypeCustom];
         followingButton.tag = 7777;
         followingButton.frame = CGRectMake(75.0, 130.0, 75.0, 50.0);
@@ -163,7 +163,7 @@
         followerNumberLabel.textAlignment = NSTextAlignmentCenter;
         [followerView addSubview:followerLabel];
         [followerView addSubview:followerNumberLabel];
-        
+        [followerView setUserInteractionEnabled:NO];
         UIButton *followerButton = [UIButton buttonWithType:UIButtonTypeCustom];
         followerButton.tag = 6666;
         followerButton.frame = CGRectMake(150.0, 130.0, 75.0, 50.0);
@@ -184,14 +184,13 @@
         likesNumberLabel.textAlignment = NSTextAlignmentCenter;
         [likesView addSubview:likesLabel];
         [likesView addSubview:likesNumberLabel];
-        
+        [likesView setUserInteractionEnabled:NO];
         UIButton *likesButton = [UIButton buttonWithType:UIButtonTypeCustom];
         likesButton.tag = 5555;
         likesButton.frame = CGRectMake(0.0, 130.0, 75.0, 50.0);
         [likesButton addSubview:likesView];
         [self addSubview:likesButton];
-        
-        
+
     }
     
     return self;
