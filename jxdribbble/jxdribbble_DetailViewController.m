@@ -188,7 +188,7 @@
     NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
     NSArray *activityItems = @[textToShare, self.shareImage, urlToShare];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
-    activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact];
+    //activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact];
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
