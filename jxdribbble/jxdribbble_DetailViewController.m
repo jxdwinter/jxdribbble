@@ -13,13 +13,14 @@
 #import "jxdribbble_PlayerViewController.h"
 #import "jxdribbble_NavigationViewController.h"
 
-@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) NSUInteger     pageIndex;
 
 @property (strong, nonatomic) UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) UIImage *shareImage;
 
 @end
 
@@ -132,7 +133,12 @@
     created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
-    //[imageView setImageWithURL:[NSURL URLWithString:self.shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholde"]];
+    imageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]
+                                     initWithTarget:self action:@selector(handlePinch:)];
+    pgr.numberOfTapsRequired = 1;
+    pgr.delegate = self;
+    [imageView addGestureRecognizer:pgr];
     
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityIndicatorView.center = imageView.center;
@@ -145,6 +151,7 @@
                                             [activityIndicatorView stopAnimating];
                                             [activityIndicatorView removeFromSuperview];
                                             weakImageView.image = image;
+                                            self.shareImage = image;
                                         }
                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                             [activityIndicatorView stopAnimating];
@@ -161,6 +168,16 @@
     
     return headerView;
     
+}
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer
+{
+    NSString *textToShare = [NSString stringWithFormat:@"%@ by @\%@ from @jxdribbble",self.shot.title,self.shot.player.username];
+    NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
+    NSArray *activityItems = @[textToShare, self.shareImage, urlToShare];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact];
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
