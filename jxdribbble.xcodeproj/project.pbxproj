@@ -14,7 +14,6 @@
 		72419ED41809158A004AC323 /* jxdribbble_shots.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ED31809158A004AC323 /* jxdribbble_shots.m */; };
 		72419ED818091E3D004AC323 /* jxdribbble_HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ED718091E3D004AC323 /* jxdribbble_HeaderView.m */; };
 		72419EDC18093386004AC323 /* jxdribbble_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419EDB18093386004AC323 /* jxdribbble_TableViewCell.m */; };
-		72482C97180981E40005EDF4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 72482C96180981E40005EDF4 /* placeholder.png */; };
 		724FFC1218079C6500854BF5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC1018079C6500854BF5 /* Default@2x.png */; };
 		724FFC1318079C6500854BF5 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC1118079C6500854BF5 /* Default~iphone.png */; };
 		724FFC181807F90A00854BF5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 724FFC171807F90A00854BF5 /* logo.png */; };
@@ -36,6 +35,7 @@
 		72A5307E180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5307D180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m */; };
 		72A53081180E77CF0054C073 /* jxdribbble_PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A53080180E77CF0054C073 /* jxdribbble_PlayerListViewController.m */; };
 		72A53084180E81550054C073 /* jxdribbble_PlayerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A53083180E81550054C073 /* jxdribbble_PlayerListCell.m */; };
+		72A53086180E94C60054C073 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A53085180E94C60054C073 /* placeholder.png */; };
 		72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FB18064D4200A3BDA8 /* Foundation.framework */; };
 		72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */; };
 		72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B800FF18064D4200A3BDA8 /* UIKit.framework */; };
@@ -94,7 +94,6 @@
 		72419ED718091E3D004AC323 /* jxdribbble_HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_HeaderView.m; sourceTree = "<group>"; };
 		72419EDA18093386004AC323 /* jxdribbble_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_TableViewCell.h; sourceTree = "<group>"; };
 		72419EDB18093386004AC323 /* jxdribbble_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_TableViewCell.m; sourceTree = "<group>"; };
-		72482C96180981E40005EDF4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		724FFC1018079C6500854BF5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		724FFC1118079C6500854BF5 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		724FFC171807F90A00854BF5 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -122,6 +121,7 @@
 		72A53080180E77CF0054C073 /* jxdribbble_PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerListViewController.m; sourceTree = "<group>"; };
 		72A53082180E81550054C073 /* jxdribbble_PlayerListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerListCell.h; sourceTree = "<group>"; };
 		72A53083180E81550054C073 /* jxdribbble_PlayerListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerListCell.m; sourceTree = "<group>"; };
+		72A53085180E94C60054C073 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		72B800F818064D4200A3BDA8 /* jxdribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jxdribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B800FB18064D4200A3BDA8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -440,9 +440,9 @@
 				72954E9C180D359100A92FC8 /* eye.png */,
 				72954E9D180D359100A92FC8 /* heart.png */,
 				72B8F930180BB62A00F556AC /* headimg_bg.png */,
-				72482C96180981E40005EDF4 /* placeholder.png */,
 				724FFC171807F90A00854BF5 /* logo.png */,
 				72596EDD1806CA2C00E23181 /* nav_menu.png */,
+				72A53085180E94C60054C073 /* placeholder.png */,
 			);
 			name = image;
 			sourceTree = "<group>";
@@ -535,7 +535,6 @@
 				72B8010618064D4200A3BDA8 /* InfoPlist.strings in Resources */,
 				72B8013718064F6D00A3BDA8 /* Icon-Spotlight-40@2x.png in Resources */,
 				72A5307B180E433F0054C073 /* dribbble.png in Resources */,
-				72482C97180981E40005EDF4 /* placeholder.png in Resources */,
 				72596EDE1806CA2C00E23181 /* nav_menu.png in Resources */,
 				72B8013518064F6D00A3BDA8 /* Icon-60.png in Resources */,
 				724FFC1218079C6500854BF5 /* Default@2x.png in Resources */,
@@ -543,6 +542,7 @@
 				72B8013418064F6D00A3BDA8 /* Icon-Small@2x.png in Resources */,
 				72954EA0180D359100A92FC8 /* heart.png in Resources */,
 				72B8013618064F6D00A3BDA8 /* Icon-Spotlight-40.png in Resources */,
+				72A53086180E94C60054C073 /* placeholder.png in Resources */,
 				72A53073180E2DB80054C073 /* location.png in Resources */,
 				72954EA2180D35B100A92FC8 /* back.png in Resources */,
 				72B8F931180BB62A00F556AC /* headimg_bg.png in Resources */,

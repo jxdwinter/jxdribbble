@@ -109,7 +109,6 @@
     avatarImageView.layer.cornerRadius = 17.5;
     [avatarImageView setImageWithURL:[NSURL URLWithString:self.shot.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
     
-    
     UIButton *userButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [userButton setFrame:CGRectMake(10.0, 7.0, 35.0, 35.0)];
     [userButton addTarget:self action:@selector(userInfo) forControlEvents:UIControlEventTouchUpInside];
@@ -133,7 +132,25 @@
     created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
-    [imageView setImageWithURL:[NSURL URLWithString:self.shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholde"]];
+    //[imageView setImageWithURL:[NSURL URLWithString:self.shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholde"]];
+    
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicatorView.center = imageView.center;
+    [activityIndicatorView startAnimating];
+    [imageView addSubview:activityIndicatorView];
+    __weak typeof(imageView) weakImageView = imageView;
+    [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.shot.image_url]]
+                               placeholderImage:[UIImage imageNamed:@"placeholder"]
+                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                            [activityIndicatorView stopAnimating];
+                                            [activityIndicatorView removeFromSuperview];
+                                            weakImageView.image = image;
+                                        }
+                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                            [activityIndicatorView stopAnimating];
+                                            [activityIndicatorView removeFromSuperview];
+                                            [weakImageView setImage:[UIImage imageNamed:@"placeholder"]];
+                                        }];
     
     [headerView addSubview:userButton];
     [headerView addSubview:titleLabel];
@@ -218,6 +235,7 @@
     
     cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height);
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
+    
     cell.usernameLabel.text = comment.player.name;
     cell.bodyLabel.text = [comment.body stringByConvertingHTMLToPlainText];
     
