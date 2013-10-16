@@ -12,6 +12,7 @@
 #import "NSString+HTML.h"
 #import "jxdribbble_PlayerViewController.h"
 #import "jxdribbble_NavigationViewController.h"
+#import "jxdribbble_ReboundsViewController.h"
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate>
 
@@ -19,8 +20,8 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) NSUInteger     pageIndex;
 
-@property (strong, nonatomic) UIActivityIndicatorView *spinner;
 @property (strong, nonatomic) UIImage *shareImage;
+@property (strong, nonatomic) UIButton *reboundsButton;
 
 @end
 
@@ -50,10 +51,15 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
+    if ([self.shot.rebounds_count integerValue] > 0 )
+    {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: [NSString stringWithFormat:@"%@ rebounds",self.shot.rebounds_count]
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(rebounds)];
+    }
     
-    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [_spinner setCenter:CGPointMake(300.0 , 20.0)];
-    
+
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
     
     __weak jxdribbble_DetailViewController *weakSelf = self;
@@ -98,6 +104,12 @@
     [self.tableView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];
 }
 
+- (void)rebounds
+{
+    jxdribbble_ReboundsViewController *rebounds = [[jxdribbble_ReboundsViewController alloc] init];
+    rebounds.shot = self.shot;
+    [self.navigationController pushViewController:rebounds animated:YES];
+}
 
 - (UIControl *)setUpHeaderView
 {
@@ -292,11 +304,7 @@
     {
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        
-        UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
-        [self navigationItem].rightBarButtonItem = barButton;
-        [_spinner startAnimating];
-        
+
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/shots/%@/comments?page=%@&per_page=20",self.shot.id,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
 
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -337,12 +345,10 @@
             [self.tableView reloadData];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            [_spinner stopAnimating];
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             NSLog(@"%@",error);
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            [_spinner stopAnimating];
             if(self.pageIndex > 1)self.pageIndex--;
         }];
         
