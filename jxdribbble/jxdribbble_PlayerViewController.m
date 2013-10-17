@@ -197,14 +197,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSLog(@"%@",[(jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section] title]);
-    
     jxdribbble_DetailViewController *detail = [[jxdribbble_DetailViewController alloc] init];
     detail.shot = (jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section];
     [self.navigationController pushViewController:detail animated:YES];
-     
-    
 }
 
 #pragma mark - avatarButtonClicked
@@ -316,12 +311,10 @@
         self.refreshButton.hidden = YES;
         NSString *urlStr = [NSString stringWithFormat:@"http://api.dribbble.com/players/%@/shots?page=%@",self.player.username,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]];
         NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        NSLog(@"url=%@",url);
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;
-            //NSLog(@"App.net Global Stream: %@", jsonDic);
             NSArray *shots = [jsonDic objectForKey:@"shots"];
             NSMutableArray *dataArray = [[NSMutableArray alloc] initWithCapacity:50];
             for (NSDictionary * shotDic in shots)

@@ -10,11 +10,13 @@
 #import "jxdribbble_NavigationViewController.h"
 #import "jxdribbble_player.h"
 #import "jxdribbble_PlayerViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (strong, nonatomic) UIButton *logoutButton;
+@property (strong, nonatomic) UITableViewCell *theCell;
 
 @end
 
@@ -146,9 +148,9 @@
                 cell.textLabel.text = @"Are you a player?";
             }
         }
-        
+        self.theCell = cell;
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
     
     else if ( section == 1 )
@@ -156,19 +158,23 @@
         if ( row == 0 )
         {
             cell.textLabel.text = @"Tell friends this App";
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
         else if ( row == 1)
         {
             cell.textLabel.text = @"Rate this App";
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
         else if ( row == 2 )
         {
             cell.textLabel.text = @"Contact jxdribbble";
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
         else if ( row == 3 )
         {
             NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
             cell.textLabel.text = [NSString stringWithFormat:@"Version : %@",version];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
@@ -177,7 +183,7 @@
     
     
     cell.textLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
     
 }
@@ -205,13 +211,45 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"A Dribbble Player?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
                 [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
                 UITextField * textField = [alertView textFieldAtIndex:0];
+                textField.placeholder = @"Enter your player name";
                 textField.keyboardType = UIKeyboardAppearanceDefault;
                 [alertView show];
             }
         }
     }
+    else if ( section == 1 )
+    {
+        if ( row == 2 )
+        {
+            MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+            controller.mailComposeDelegate = self;
+            [controller setSubject:@""];
+            [controller setToRecipients:[NSArray arrayWithObject:@"jxdribbble@gmail.com"]];
+            [controller setMessageBody:@"Hello there." isHTML:NO];
+            [self presentViewController:controller animated:YES completion:^{
+                
+            }];
+        }
+    }
 }
 
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent)
+    {
+        NSLog(@"It's away!");
+    }
+    else if (result == MFMailComposeResultCancelled)
+    {
+        
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -259,6 +297,9 @@
 {
     if ([CheckNetwork isExistenceNetwork])
     {
+        
+        self.theCell.userInteractionEnabled = NO;
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@",username]];
         
@@ -273,8 +314,10 @@
                 [self.navigationController pushViewController:playerViewController animated:YES];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            self.theCell.userInteractionEnabled = YES;
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            self.theCell.userInteractionEnabled = YES;
         }];
         
         [operation start];

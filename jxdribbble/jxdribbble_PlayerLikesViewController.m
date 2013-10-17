@@ -183,8 +183,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@",[(jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section] title]);
-    
     jxdribbble_DetailViewController *detail = [[jxdribbble_DetailViewController alloc] init];
     detail.shot = (jxdribbble_shots *)[self.dataSource objectAtIndex:indexPath.section];
     [self.navigationController pushViewController:detail animated:YES];
@@ -195,8 +193,6 @@
 
 - (void)headerViewTouched : (jxdribbble_HeaderView *)sender
 {
-    NSLog(@"%@",sender.shot.player.username);
-    
     jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
     playerViewController.player = sender.shot.player;
     [self.navigationController pushViewController:playerViewController animated:YES];
@@ -222,7 +218,6 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;
-            //NSLog(@"App.net Global Stream: %@", jsonDic);
             NSArray *shots = [jsonDic objectForKey:@"shots"];
             NSMutableArray *dataArray = [[NSMutableArray alloc] initWithCapacity:50];
             for (NSDictionary * shotDic in shots)

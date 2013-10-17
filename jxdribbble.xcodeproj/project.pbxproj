@@ -69,6 +69,7 @@
 		72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BA040C180833DC00BE15B1 /* CheckNetwork.m */; };
 		72D74E71180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D74E70180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m */; };
 		72D74E89180FD429007A1259 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 72D74E88180FD429007A1259 /* logout.png */; };
+		72D74E8B180FEF43007A1259 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D74E8A180FEF43007A1259 /* MessageUI.framework */; };
 		72F581EB180EC6BC002904E0 /* jxdribbble_ReboundsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F581EA180EC6BC002904E0 /* jxdribbble_ReboundsViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,7 @@
 		72D74E6F180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_FindAPlayerViewController.h; sourceTree = "<group>"; };
 		72D74E70180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_FindAPlayerViewController.m; sourceTree = "<group>"; };
 		72D74E88180FD429007A1259 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
+		72D74E8A180FEF43007A1259 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		72F581E9180EC6BC002904E0 /* jxdribbble_ReboundsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_ReboundsViewController.h; sourceTree = "<group>"; };
 		72F581EA180EC6BC002904E0 /* jxdribbble_ReboundsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_ReboundsViewController.m; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D74E8B180FEF43007A1259 /* MessageUI.framework in Frameworks */,
 				72954E8E180CF01200A92FC8 /* Reveal.framework in Frameworks */,
 				72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */,
 				72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */,
@@ -238,13 +241,13 @@
 		72419ED918091E4A004AC323 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				72D74E6D180F72D9007A1259 /* FindAPlayer */,
 				7260D11A180BA1E500CB2A3E /* Detail */,
 				7260D11B180BAC3700CB2A3E /* Player */,
 				72B8014318065AA800A3BDA8 /* Everyone */,
 				72B8014218065A6700A3BDA8 /* Debuts */,
 				72B8014418065AF200A3BDA8 /* Popular */,
 				72B8014518065B0100A3BDA8 /* Following */,
+				72D74E6D180F72D9007A1259 /* FindAPlayer */,
 				72B8014618065B2C00A3BDA8 /* Settings */,
 			);
 			name = Controllers;
@@ -316,6 +319,7 @@
 		72B800FA18064D4200A3BDA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72D74E8A180FEF43007A1259 /* MessageUI.framework */,
 				72954E8D180CF01200A92FC8 /* Reveal.framework */,
 				72B80140180653C900A3BDA8 /* CFNetwork.framework */,
 				72B8013C1806525000A3BDA8 /* Crashlytics.framework */,

@@ -186,9 +186,7 @@
         {
             url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@/draftees?page=%@",self.player.username,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
         }
-        
-        NSLog(@"%@",url);
-        
+
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;

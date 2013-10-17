@@ -14,7 +14,7 @@
 +(BOOL)isExistenceNetwork
 {
 	BOOL isExistenceNetwork;
-	Reachability *r = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+	Reachability *r = [Reachability reachabilityWithHostname:@"www.dribbble.com"];
     
     switch ([r currentReachabilityStatus])
     {

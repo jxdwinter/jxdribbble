@@ -313,7 +313,6 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;
-            //NSLog(@"App.net Global Stream: %@", jsonDic);
             NSArray *comments = [jsonDic objectForKey:@"comments"];
             NSMutableArray *dataArray = [[NSMutableArray alloc] initWithCapacity:50];
             for (NSDictionary * commentsDic in comments)
