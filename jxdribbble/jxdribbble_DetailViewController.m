@@ -82,8 +82,11 @@
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
     
-    [self getData];
-    
+    if ([self.shot.comments_count integerValue] > 0 )
+    {
+        [self getData];
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

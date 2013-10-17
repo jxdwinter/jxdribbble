@@ -12,6 +12,7 @@
 #import "jxdribbble_PopularViewController.h"
 #import "jxdribbble_FollowingViewController.h"
 #import "jxdribbble_SettingsViewController.h"
+#import "jxdribbble_FindAPlayerViewController.h"
 
 
 @interface jxdribbble_MenuViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) jxdribbble_PopularViewController  *popularViewController;
 @property (strong, nonatomic) jxdribbble_FollowingViewController *followingViewController;
 @property (strong, nonatomic) jxdribbble_SettingsViewController *settingsViewController;
+@property (strong, nonatomic) jxdribbble_FindAPlayerViewController *findAPlayerViewController;
 
 @end
 
@@ -32,7 +34,7 @@
     [super viewDidLoad];
     [self preferredStatusBarStyle];
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 5) / 2.0f, self.view.frame.size.width, 54 * 5) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 6) / 2.0f, self.view.frame.size.width, 54 * 6) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -58,7 +60,6 @@
     
     switch (indexPath.row) {
         case 0:
-
             if ( !appDelegate.everyoneViewController )
             {
                 appDelegate.everyoneViewController =[[jxdribbble_EveryoneViewController alloc] init];
@@ -93,6 +94,14 @@
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 4:
+            if (!self.findAPlayerViewController)
+            {
+                self.findAPlayerViewController = [[jxdribbble_FindAPlayerViewController alloc] init];
+            }
+            navigationController.viewControllers = @[self.findAPlayerViewController];
+            [self.sideMenuViewController hideMenuViewController];
+            break;
+        case 5:
             if (!self.settingsViewController)
             {
                 self.settingsViewController = [[jxdribbble_SettingsViewController alloc] init];
@@ -120,7 +129,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,7 +147,7 @@
         cell.selectedBackgroundView = [[UIView alloc] init];
     }
     
-    NSArray *titles = @[@"            Everyone", @"            Debuts", @"            Popular", @"            Following", @"            Settings"];
+    NSArray *titles = @[@"            Everyone", @"            Debuts", @"            Popular", @"            Following", @"            Find player",@"            Settings"];
     //NSArray *images = @[@"IconHome", @"IconCalendar", @"IconProfile", @"IconSettings", @"IconEmpty"];
     cell.textLabel.text = titles[indexPath.row];
     //cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
