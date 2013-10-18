@@ -174,15 +174,29 @@
                                             [weakImageView setImage:[UIImage imageNamed:@"placeholder"]];
                                         }];
     
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(290.0, 280.0, 20.0, 20.0)];
+    [shareButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    
     [headerView addSubview:userButton];
     [headerView addSubview:titleLabel];
     [headerView addSubview:usernameLabel];
     [headerView addSubview:created_atLabel];
-    
     [headerView addSubview:imageView];
+    [headerView addSubview:shareButton];
     
     return headerView;
     
+}
+
+- (void)share
+{
+    NSString *textToShare = [NSString stringWithFormat:@"%@ by @\%@ from @jxdribbble",self.shot.title,self.shot.player.username];
+    NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
+    NSArray *activityItems = @[textToShare, self.shareImage, urlToShare];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePrint,UIActivityTypeCopyToPasteboard];
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 - (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer
@@ -191,6 +205,7 @@
     NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
     NSArray *activityItems = @[textToShare, self.shareImage, urlToShare];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePrint,UIActivityTypeCopyToPasteboard];
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
