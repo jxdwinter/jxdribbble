@@ -41,7 +41,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.title = @"LIKES";
+    self.title = @"Likes";
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];

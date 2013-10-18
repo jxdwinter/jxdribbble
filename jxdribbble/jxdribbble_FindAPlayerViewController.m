@@ -33,7 +33,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.title = @"FIND A PLAYER";
+    self.title = @"Find A Player";
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];

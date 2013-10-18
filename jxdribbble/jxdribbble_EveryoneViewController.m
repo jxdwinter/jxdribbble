@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"EVERYONE";
+    self.title = @"Everyone";
 
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];

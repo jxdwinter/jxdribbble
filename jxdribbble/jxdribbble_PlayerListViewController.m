@@ -44,15 +44,15 @@
     
     if ( self.viewControllerType == 1 )
     {
-        self.title = @"FOLLOWING";
+        self.title = @"Following";
     }
     else if ( self.viewControllerType == 2 )
     {
-        self.title = @"FOLLOWERS";
+        self.title = @"Followers";
     }
     else if ( self.viewControllerType == 3 )
     {
-        self.title = @"DRAFTEES";
+        self.title = @"Draftees";
     }
     
     

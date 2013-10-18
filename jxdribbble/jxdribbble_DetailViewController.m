@@ -46,7 +46,7 @@
     [backButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    self.title = @"DETAIL";
+    self.title = @"Detail";
     
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -191,7 +191,6 @@
     NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
     NSArray *activityItems = @[textToShare, self.shareImage, urlToShare];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
-    //activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact];
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 

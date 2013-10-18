@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"REBOUNDS";
+    self.title = @"Rebounds";
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
