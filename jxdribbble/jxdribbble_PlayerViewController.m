@@ -45,7 +45,7 @@
     [backButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    self.title = self.player.name;
+    self.title = self.player.username;
     
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];

@@ -12,7 +12,7 @@
 #import "jxdribbble_PlayerViewController.h"
 #import <MessageUI/MessageUI.h>
 
-@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate>
+@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (strong, nonatomic) UIButton *logoutButton;
@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.title = @"SETTINGS";
+    self.title = @"ABOUT";
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
@@ -219,19 +219,52 @@
     }
     else if ( section == 1 )
     {
-        if ( row == 2 )
+        if ( row == 0 )
         {
-            MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-            controller.mailComposeDelegate = self;
-            [controller setSubject:@""];
-            [controller setToRecipients:[NSArray arrayWithObject:@"jxdribbble@gmail.com"]];
-            [controller setMessageBody:@"Hello there." isHTML:NO];
-            [self presentViewController:controller animated:YES completion:^{
-                
-            }];
+            NSString *textToShare = [NSString stringWithFormat:@"Check out this awesome dribbble client @jxdribbble"];
+            NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@""]];
+            NSArray *activityItems = @[textToShare, urlToShare];
+            UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+            activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard,UIActivityTypePostToFlickr,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll];
+            [self presentViewController:activityViewController animated:YES completion:nil];
+        }
+        
+        else if ( row == 2 )
+        {
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                     delegate:self
+                                                            cancelButtonTitle:@"cancel"
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:@"Twitter me",@"Email me", nil];
+            actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+            [actionSheet showInView:self.view];
+            
         }
     }
 }
+
+
+#pragma mark -  actionsheetdelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/jxdribbble"]]];
+    }
+    else if ( buttonIndex == 1 )
+    {
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setSubject:@""];
+        [controller setToRecipients:[NSArray arrayWithObject:@"jxdribbble@gmail.com"]];
+        [controller setMessageBody:@"Hello there." isHTML:NO];
+        [self presentViewController:controller animated:YES completion:^{
+            
+        }];
+    }
+}
+
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller
           didFinishWithResult:(MFMailComposeResult)result
@@ -239,7 +272,7 @@
 {
     if (result == MFMailComposeResultSent)
     {
-        NSLog(@"It's away!");
+        
     }
     else if (result == MFMailComposeResultCancelled)
     {
