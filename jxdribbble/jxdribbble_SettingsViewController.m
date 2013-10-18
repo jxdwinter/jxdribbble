@@ -221,12 +221,18 @@
     {
         if ( row == 0 )
         {
+#warning -----
             NSString *textToShare = [NSString stringWithFormat:@"Check out this awesome dribbble client @jxdribbble"];
             NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@""]];
             NSArray *activityItems = @[textToShare, urlToShare];
             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
             activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard,UIActivityTypePostToFlickr,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll];
             [self presentViewController:activityViewController animated:YES completion:nil];
+        }
+        
+        else if ( row == 1 )
+        {
+#warning -----
         }
         
         else if ( row == 2 )

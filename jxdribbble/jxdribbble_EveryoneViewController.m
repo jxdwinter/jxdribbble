@@ -130,22 +130,18 @@
         cell = [[jxdribbble_TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
-    //[cell.shot_imageView setImageWithURL:[NSURL URLWithString:shot.image_url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicatorView.center = cell.shot_imageView.center;
-    [activityIndicatorView startAnimating];
-    [cell.shot_imageView addSubview:activityIndicatorView];
+    [cell.activityIndicatorView startAnimating];
     __weak typeof(cell) weakCell = cell;
     [cell.shot_imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:shot.image_url]]
                                 placeholderImage:[UIImage imageNamed:@"placeholder"]
                                          success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                             [activityIndicatorView stopAnimating];
-                                             [activityIndicatorView removeFromSuperview];
+                                             [weakCell.activityIndicatorView stopAnimating];
+                                             //[weakCell.activityIndicatorView removeFromSuperview];
                                              weakCell.shot_imageView.image = image;
                                          }
                                          failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                             [activityIndicatorView stopAnimating];
-                                             [activityIndicatorView removeFromSuperview];
+                                             [weakCell.activityIndicatorView stopAnimating];
+                                             //[weakCell.activityIndicatorView removeFromSuperview];
                                              [weakCell.shot_imageView setImage:[UIImage imageNamed:@"placeholder"]];
                                          }];
 

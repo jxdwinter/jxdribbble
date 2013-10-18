@@ -16,8 +16,7 @@
 @property (nonatomic, strong) UILabel *viewsLabel;
 @property (nonatomic, strong) UILabel *likesLabel;
 @property (nonatomic, strong) UILabel *commentsLabel;
-/*
-@property (nonatomic, strong) jxdribbble_shots *shot;
-@property (nonatomic, strong) UIActivityIndicatorView *spinner;
-*/
+
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+
 @end

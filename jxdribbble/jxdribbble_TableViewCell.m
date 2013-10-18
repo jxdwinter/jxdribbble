@@ -39,7 +39,6 @@
         self.likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(165.0, 230.0, 45.0, 15.0)];
         self.likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
         self.likesLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-        //self.likesLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.likesLabel];
         
         
@@ -50,12 +49,11 @@
         self.commentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(285.0, 230.0, 35.0, 15.0)];
         self.commentsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
         self.commentsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-        //self.commentsLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.commentsLabel];
         
-        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 254.5, 300.0, 0.5)];
-        line.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-        //[self addSubview:line];
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicatorView.center = CGPointMake(self.shot_imageView.center.x - 10.0, self.shot_imageView.center.y);
+        [self.shot_imageView addSubview:self.activityIndicatorView];
         
     }
     
