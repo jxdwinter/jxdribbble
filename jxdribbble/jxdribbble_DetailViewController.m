@@ -117,7 +117,7 @@
 - (UIControl *)setUpHeaderView
 {
     
-    UIControl *headerView = [[UIControl alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 300.0)];
+    UIControl *headerView = [[UIControl alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 320.0)];
     
     //UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 7.0, 35.0, 35.0)];
     UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 35.0, 35.0)];
@@ -174,7 +174,7 @@
                                             [weakImageView setImage:[UIImage imageNamed:@"placeholder"]];
                                         }];
     
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(290.0, 280.0, 20.0, 20.0)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(278.0, 280.0, 30.0, 30.0)];
     [shareButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     
@@ -193,7 +193,13 @@
 {
     NSString *textToShare = [NSString stringWithFormat:@"%@ by @\%@ from @jxdribbble",self.shot.title,self.shot.player.username];
     NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
-    NSArray *activityItems = @[textToShare, self.shareImage, urlToShare];
+    NSArray *activityItems;
+    if (self.shareImage)
+    {
+        activityItems = @[textToShare, self.shareImage, urlToShare];
+    }
+    else activityItems = @[textToShare, urlToShare];
+    
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
     activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePrint,UIActivityTypeCopyToPasteboard];
     [self presentViewController:activityViewController animated:YES completion:nil];
@@ -203,7 +209,13 @@
 {
     NSString *textToShare = [NSString stringWithFormat:@"%@ by @\%@ from @jxdribbble",self.shot.title,self.shot.player.username];
     NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
-    NSArray *activityItems = @[textToShare, self.shareImage, urlToShare];
+    NSArray *activityItems;
+    if (self.shareImage)
+    {
+        activityItems = @[textToShare, self.shareImage, urlToShare];
+    }
+    else activityItems = @[textToShare, urlToShare];
+    
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
     activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePrint,UIActivityTypeCopyToPasteboard];
     [self presentViewController:activityViewController animated:YES completion:nil];
