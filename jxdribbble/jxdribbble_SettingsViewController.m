@@ -221,8 +221,7 @@
     {
         if ( row == 0 )
         {
-#warning -----
-            NSString *textToShare = [NSString stringWithFormat:@"Check out this awesome dribbble client @jxdribbble"];
+            NSString *textToShare = [NSString stringWithFormat:@"Check out this awesome dribbble client %@",@"https://itunes.apple.com/us/app/jxdribbble/id729549824?ls=1&mt=8"];
             NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@""]];
             NSArray *activityItems = @[textToShare, urlToShare];
             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
@@ -232,7 +231,8 @@
         
         else if ( row == 1 )
         {
-#warning -----
+            NSString *urlStr = @"https://itunes.apple.com/us/app/jxdribbble/id729549824?ls=1&mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
         }
         
         else if ( row == 2 )

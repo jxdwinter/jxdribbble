@@ -163,6 +163,8 @@
     }];
     self.visible = YES;
     [self updateStatusBar];
+    
+    [self.view.window endEditing:YES];
 }
 
 - (void)hideMenuViewController
