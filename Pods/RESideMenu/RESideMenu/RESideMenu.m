@@ -103,6 +103,8 @@
     [self.view addSubview:self.backgroundImageView];
     [self re_displayController:self.menuViewController frame:self.view.frame];
     [self re_displayController:self.contentViewController frame:self.view.frame];
+    self.menuViewController.view.alpha = 0;
+    self.backgroundImageView.transform = CGAffineTransformMakeScale(1.7f, 1.7f);
     
     [self addMenuViewControllerMotionEffects];
     
@@ -114,21 +116,25 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.contentViewController beginAppearanceTransition:YES animated:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self.contentViewController endAppearanceTransition];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self.contentViewController beginAppearanceTransition:NO animated:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     [self.contentViewController endAppearanceTransition];
 }
 
@@ -136,7 +142,6 @@
 
 - (void)presentMenuViewController
 {
-
     self.menuViewController.view.transform = CGAffineTransformIdentity;
     self.backgroundImageView.transform = CGAffineTransformIdentity;
     self.backgroundImageView.frame = self.view.bounds;
@@ -149,7 +154,14 @@
 
 - (void)showMenuViewController
 {
+    [self.view.window endEditing:YES];
     [self addContentButton];
+    
+    if ([(UIGestureRecognizer*)self.view.gestureRecognizers.lastObject state] != UIGestureRecognizerStateEnded) {
+        [self.contentViewController beginAppearanceTransition:NO animated:YES];
+        [self.menuViewController beginAppearanceTransition:YES animated:YES];
+    }
+    
     [UIView animateWithDuration:self.animationDuration animations:^{
         if (self.scaleContentView) {
             self.contentViewController.view.transform = CGAffineTransformMakeScale(0.7f, 0.7f);
@@ -160,16 +172,24 @@
         self.backgroundImageView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         [self addContentViewControllerMotionEffects];
+        
+        [self.contentViewController endAppearanceTransition];
+        [self.menuViewController endAppearanceTransition];
+        
     }];
     self.visible = YES;
     [self updateStatusBar];
-    
-    [self.view.window endEditing:YES];
 }
 
 - (void)hideMenuViewController
 {
     [self.contentButton removeFromSuperview];
+    
+    if ([(UIGestureRecognizer*)self.view.gestureRecognizers.lastObject state] != UIGestureRecognizerStateEnded) {
+        [self.menuViewController beginAppearanceTransition:NO animated:YES];
+        [self.contentViewController beginAppearanceTransition:YES animated:YES];
+    }
+    
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:self.animationDuration animations:^{
         self.contentViewController.view.transform = CGAffineTransformIdentity;
@@ -186,6 +206,10 @@
         }
     } completion:^(BOOL finished) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        
+        [self.menuViewController endAppearanceTransition];
+        [self.contentViewController endAppearanceTransition];
+        
     }];
     self.visible = NO;
     [self updateStatusBar];
@@ -254,8 +278,12 @@
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)recognizer
 {
-    if (!self.panGestureEnabled)
+    if (!self.panGestureEnabled) {
+        if ([self.contentViewController conformsToProtocol:@protocol(REGestureRecipient)]) {
+            [((id <REGestureRecipient>)self.contentViewController) panGestureRecognized:recognizer];
+        }
         return;
+    }
     
     CGPoint point = [recognizer translationInView:self.view];
     
@@ -266,9 +294,13 @@
         self.backgroundImageView.frame = self.view.bounds;
         self.menuViewController.view.frame = self.view.bounds;
         [self addContentButton];
+        [self.view.window endEditing:YES];
+        
+        [self.contentViewController beginAppearanceTransition:self.visible animated:YES];
+        [self.menuViewController beginAppearanceTransition:!self.visible animated:YES];
     }
     
-    if (recognizer.state == UIGestureRecognizerStateChanged) {
+    if (recognizer.state == UIGestureRecognizerStateBegan || recognizer.state == UIGestureRecognizerStateChanged) {
         CGFloat delta = self.visible ? (point.x + self.originalPoint.x) / self.originalPoint.x : point.x / self.view.frame.size.width;
         
         CGFloat contentViewScale = self.scaleContentView ? 1 - (0.3f * delta) : 1;
@@ -276,7 +308,6 @@
         CGFloat menuViewScale = 1.5f - (0.5f * delta);
         
         self.menuViewController.view.alpha = delta;
-        self.contentViewController.view.transform = CGAffineTransformMakeScale(contentViewScale, contentViewScale);
         self.backgroundImageView.transform = CGAffineTransformMakeScale(backgroundViewScale, backgroundViewScale);
         self.menuViewController.view.transform = CGAffineTransformMakeScale(menuViewScale, menuViewScale);
         
@@ -285,14 +316,13 @@
         }
         
         if (contentViewScale > 1) {
-            self.contentViewController.view.transform = CGAffineTransformIdentity;
-            CGRect frame = self.contentViewController.view.frame;
-            frame.origin.x = 0;
-            self.contentViewController.view.frame = frame;
+            if (!self.visible) {
+                self.contentViewController.view.transform = CGAffineTransformIdentity;
+            }
+            self.contentViewController.view.frame = self.view.bounds;
         } else {
-            CGRect frame = self.contentViewController.view.frame;
-            frame.origin.x = point.x + self.originalPoint.x;
-            self.contentViewController.view.frame = frame;
+            self.contentViewController.view.transform = CGAffineTransformMakeScale(contentViewScale, contentViewScale);
+            self.contentViewController.view.transform = CGAffineTransformTranslate(self.contentViewController.view.transform, self.visible ? point.x * 0.8 : point.x, 0);
         }
         
         [self updateStatusBar];
