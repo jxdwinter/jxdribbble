@@ -244,7 +244,6 @@
                                                             otherButtonTitles:@"Twitter me",@"Email me", nil];
             actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
             [actionSheet showInView:self.view];
-            
         }
     }
 }
