@@ -39,7 +39,7 @@
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = NO;
-        
+        tableView.scrollsToTop = NO;
         tableView.backgroundView = nil;
         tableView.backgroundColor = [UIColor clearColor];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
