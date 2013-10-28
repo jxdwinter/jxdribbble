@@ -168,8 +168,7 @@
             DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
             if (account)
             {
-#warning 首次授权以后显示用户名有问题
-                if([account.info.userName isEqualToString:@"(null)"])
+                if (!account.info.userName || [account.info.userName isKindOfClass:[NSNull class]])
                 {
                     cell.textLabel.text = [NSString stringWithFormat:@"Dropbox : "];
                 }

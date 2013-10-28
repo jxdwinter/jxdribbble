@@ -197,7 +197,7 @@
     if ( account )
     {
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox" ,nil];
-        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
     else
@@ -207,7 +207,7 @@
 }
 
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
-    [[actionSheet layer] setBackgroundColor:[UIColor redColor].CGColor];
+    //[[actionSheet layer] setBackgroundColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0].CGColor];
 }
 
 #pragma mark -  actionsheetdelegate
