@@ -8,7 +8,6 @@
 
 #import "jxdribbble_AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-#import "jxdribbble_NavigationViewController.h"
 #import "jxdribbble_MenuViewController.h"
 
 
@@ -23,14 +22,11 @@
 
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:0.7]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    //Customizing the Color of Back button
-    //[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:(150.0/255.0) green:(150.0/255.0) blue:(150.0/255.0) alpha:1.0]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8];
     shadow.shadowOffset = CGSizeMake(0, 0);
-    
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor whiteColor],
                                                            NSForegroundColorAttributeName,
@@ -42,10 +38,11 @@
         self.everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
     }
 
-    jxdribbble_NavigationViewController *navigationController = [[jxdribbble_NavigationViewController alloc] initWithRootViewController:self.everyoneViewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.everyoneViewController];
     jxdribbble_MenuViewController *menuViewController = [[jxdribbble_MenuViewController alloc] init];
-    
     self.sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController menuViewController:menuViewController];
+    //self.sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
+    self.sideMenuViewController.delegate = self;
     self.window.rootViewController = self.sideMenuViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -54,6 +51,30 @@
     
     
 }
+
+#pragma mark -
+#pragma mark RESideMenu Delegate
+
+- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
+{
+    //NSLog(@"willShowMenuViewController");
+}
+
+- (void)sideMenu:(RESideMenu *)sideMenu didShowMenuViewController:(UIViewController *)menuViewController
+{
+    //NSLog(@"didShowMenuViewController");
+}
+
+- (void)sideMenu:(RESideMenu *)sideMenu willHideMenuViewController:(UIViewController *)menuViewController
+{
+    //NSLog(@"willHideMenuViewController");
+}
+
+- (void)sideMenu:(RESideMenu *)sideMenu didHideMenuViewController:(UIViewController *)menuViewController
+{
+    //NSLog(@"didHideMenuViewController");
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

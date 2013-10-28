@@ -11,7 +11,7 @@
 #import "jxdribbble_EveryoneViewController.h"
 
 
-@interface jxdribbble_AppDelegate : UIResponder <UIApplicationDelegate>
+@interface jxdribbble_AppDelegate : UIResponder <UIApplicationDelegate,RESideMenuDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) jxdribbble_EveryoneViewController  *everyoneViewController;

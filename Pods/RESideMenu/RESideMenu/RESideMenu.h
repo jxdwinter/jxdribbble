@@ -26,11 +26,7 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+RESideMenu.h"
 
-@protocol REGestureRecipient <NSObject>
-
-- (void)panGestureRecognized:(UIPanGestureRecognizer *)recognizer;
-
-@end
+@protocol RESideMenuDelegate;
 
 @interface RESideMenu : UIViewController
 
@@ -38,6 +34,7 @@
 @property (strong, readwrite, nonatomic) UIImage *backgroundImage;
 @property (assign, readwrite, nonatomic) BOOL panGestureEnabled;
 @property (assign, readwrite, nonatomic) BOOL scaleContentView;
+@property (assign, readwrite, nonatomic) BOOL scaleBackgroundImageView;
 @property (assign, readwrite, nonatomic) CGFloat contentViewScaleValue;
 @property (assign, readwrite, nonatomic) CGFloat contentViewInLandscapeOffsetCenterX;
 @property (assign, readwrite, nonatomic) CGFloat contentViewInPortraitOffsetCenterX;
@@ -50,8 +47,21 @@
 @property (strong, readwrite, nonatomic) UIViewController *contentViewController;
 @property (strong, readwrite, nonatomic) UIViewController *menuViewController;
 
+@property (weak, readwrite, nonatomic) id<RESideMenuDelegate> delegate;
+
 - (id)initWithContentViewController:(UIViewController *)contentViewController menuViewController:(UIViewController *)menuViewController;
 - (void)presentMenuViewController;
 - (void)hideMenuViewController;
+
+@end
+
+@protocol RESideMenuDelegate <NSObject>
+
+@optional
+- (void)sideMenu:(RESideMenu *)sideMenu didRecognizePanGesture:(UIPanGestureRecognizer *)recognizer;
+- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController;
+- (void)sideMenu:(RESideMenu *)sideMenu didShowMenuViewController:(UIViewController *)menuViewController;
+- (void)sideMenu:(RESideMenu *)sideMenu willHideMenuViewController:(UIViewController *)menuViewController;
+- (void)sideMenu:(RESideMenu *)sideMenu didHideMenuViewController:(UIViewController *)menuViewController;
 
 @end

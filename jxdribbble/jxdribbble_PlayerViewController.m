@@ -112,7 +112,7 @@
     tapRecon.numberOfTapsRequired = 2;
     [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
     
-    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = NO;
     
 }

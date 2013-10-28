@@ -7,7 +7,6 @@
 //
 
 #import "jxdribbble_FollowingViewController.h"
-#import "jxdribbble_NavigationViewController.h"
 #import "jxdribbble_shots.h"
 #import "jxdribbble_HeaderView.h"
 #import "jxdribbble_TableViewCell.h"
@@ -43,7 +42,7 @@
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
-    [menuButton addTarget:(jxdribbble_NavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -79,6 +78,11 @@
 }
 
 
+- (void)showMenu
+{
+    [self.sideMenuViewController presentMenuViewController];
+}
+
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -88,7 +92,7 @@
     tapRecon.numberOfTapsRequired = 2;
     [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
     
-    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    jxdribbble_AppDelegate *appDelegate =  (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = YES;
     
 }

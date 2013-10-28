@@ -7,7 +7,6 @@
 //
 
 #import "jxdribbble_FindAPlayerViewController.h"
-#import "jxdribbble_NavigationViewController.h"
 #import "jxdribbble_player.h"
 #import "jxdribbble_PlayerViewController.h"
 
@@ -37,7 +36,7 @@
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
-    [menuButton addTarget:(jxdribbble_NavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
     [self.navigationController.navigationBar setTranslucent:YES];
@@ -68,6 +67,11 @@
     
     [self.usernameTextField becomeFirstResponder];
     
+}
+
+- (void)showMenu
+{
+    [self.sideMenuViewController presentMenuViewController];
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField

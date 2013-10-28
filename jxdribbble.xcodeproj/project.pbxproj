@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		44CB78C8DA0F488DB7076FFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F94FEC927F45BBB40815E8 /* libPods.a */; };
 		720CF8881813F5A000C7651D /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720CF8871813F5A000C7651D /* Reveal.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		72419ECA1808E27E004AC323 /* jxdribbble_NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419EC91808E27E004AC323 /* jxdribbble_NavigationViewController.m */; };
 		72419ECD1808E3E0004AC323 /* jxdribbble_MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */; };
 		72419ED01809111A004AC323 /* jxdribbble_player.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ECF1809111A004AC323 /* jxdribbble_player.m */; };
 		72419ED41809158A004AC323 /* jxdribbble_shots.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ED31809158A004AC323 /* jxdribbble_shots.m */; };
@@ -87,8 +86,6 @@
 /* Begin PBXFileReference section */
 		7139F2FF20114F5CA4EC73A9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		720CF8871813F5A000C7651D /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
-		72419EC81808E27E004AC323 /* jxdribbble_NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_NavigationViewController.h; sourceTree = "<group>"; };
-		72419EC91808E27E004AC323 /* jxdribbble_NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_NavigationViewController.m; sourceTree = "<group>"; };
 		72419ECB1808E3E0004AC323 /* jxdribbble_MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_MenuViewController.h; sourceTree = "<group>"; };
 		72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_MenuViewController.m; sourceTree = "<group>"; };
 		72419ECE1809111A004AC323 /* jxdribbble_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_player.h; sourceTree = "<group>"; };
@@ -260,8 +257,6 @@
 			children = (
 				72B8010A18064D4200A3BDA8 /* jxdribbble_AppDelegate.h */,
 				72B8010B18064D4200A3BDA8 /* jxdribbble_AppDelegate.m */,
-				72419EC81808E27E004AC323 /* jxdribbble_NavigationViewController.h */,
-				72419EC91808E27E004AC323 /* jxdribbble_NavigationViewController.m */,
 				72419ECB1808E3E0004AC323 /* jxdribbble_MenuViewController.h */,
 				72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */,
 				72BA040B180833DC00BE15B1 /* CheckNetwork.h */,
@@ -642,7 +637,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72419ECA1808E27E004AC323 /* jxdribbble_NavigationViewController.m in Sources */,
 				72B8F936180BC2BC00F556AC /* jxdribbble_comments.m in Sources */,
 				72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */,
 				72419ED41809158A004AC323 /* jxdribbble_shots.m in Sources */,

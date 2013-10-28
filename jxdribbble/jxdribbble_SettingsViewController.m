@@ -7,7 +7,6 @@
 //
 
 #import "jxdribbble_SettingsViewController.h"
-#import "jxdribbble_NavigationViewController.h"
 #import "jxdribbble_player.h"
 #import "jxdribbble_PlayerViewController.h"
 #import <MessageUI/MessageUI.h>
@@ -39,7 +38,7 @@
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
     [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
-    [menuButton addTarget:(jxdribbble_NavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
     self.logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 25.0)];
@@ -64,6 +63,11 @@
     
 }
 
+- (void)showMenu
+{
+    [self.sideMenuViewController presentMenuViewController];
+}
+
 - (void)logout
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -78,7 +82,7 @@
 {
     [super viewWillAppear:YES];
 
-    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = YES;
     
     [self.tableView reloadData];

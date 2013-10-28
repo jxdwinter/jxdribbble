@@ -56,7 +56,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UINavigationController *navigationController = (UINavigationController *)self.sideMenuViewController.contentViewController;
-    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     switch (indexPath.row) {
         case 0:
@@ -163,7 +163,7 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 @end

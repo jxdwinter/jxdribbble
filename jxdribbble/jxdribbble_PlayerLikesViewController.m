@@ -12,7 +12,6 @@
 #import "jxdribbble_TableViewCell.h"
 #import "jxdribbble_DetailViewController.h"
 #import "jxdribbble_PlayerViewController.h"
-#import "jxdribbble_NavigationViewController.h"
 
 @interface jxdribbble_PlayerLikesViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -83,7 +82,7 @@
     tapRecon.numberOfTapsRequired = 2;
     [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
     
-    jxdribbble_AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = NO;
     
 }
