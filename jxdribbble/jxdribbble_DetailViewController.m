@@ -12,8 +12,9 @@
 #import "NSString+HTML.h"
 #import "jxdribbble_PlayerViewController.h"
 #import "jxdribbble_ReboundsViewController.h"
+#import <Dropbox/Dropbox.h>
 
-@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate>
+@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -149,7 +150,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
     imageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]
-                                     initWithTarget:self action:@selector(handlePinch:)];
+                                     initWithTarget:self action:@selector(share)];
     pgr.numberOfTapsRequired = 1;
     pgr.delegate = self;
     [imageView addGestureRecognizer:pgr];
@@ -190,22 +191,55 @@
 
 - (void)share
 {
-    NSString *textToShare = [NSString stringWithFormat:@"%@ by @\%@ from @jxdribbble",self.shot.title,self.shot.player.username];
-    NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
-    NSArray *activityItems;
-    if (self.shareImage)
-    {
-        activityItems = @[textToShare, self.shareImage, urlToShare];
-    }
-    else activityItems = @[textToShare, urlToShare];
+
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
-    activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePrint,UIActivityTypeCopyToPasteboard];
-    [self presentViewController:activityViewController animated:YES completion:nil];
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    if ( account )
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox" ,nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        [actionSheet showInView:self.view];
+    }
+    else
+    {
+        [self shareToSocialNetworking];
+    }
 }
 
-- (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
+    [[actionSheet layer] setBackgroundColor:[UIColor redColor].CGColor];
+}
+
+#pragma mark -  actionsheetdelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if ( buttonIndex == 0 )
+    {
+        [self shareToSocialNetworking];
+    }
+    else if ( buttonIndex == 1 )
+    {
+        DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+        if (account)
+        {
+            DBPath *newPath = [[DBPath root] childPath:[NSString stringWithFormat:@"%@_%@.png",[self.shot.title stringByReplacingOccurrencesOfString:@" " withString:@""],[self.shot.player.name stringByReplacingOccurrencesOfString:@" " withString:@""]]];
+            
+            DBFile *file = [[DBFilesystem sharedFilesystem] createFile:newPath error:nil];
+            NSData *imageData = UIImagePNGRepresentation(self.shareImage);
+            if (imageData)
+            {
+                [file writeData:imageData error:nil];
+            }
+        }
+    }
+}
+
+
+
+- (void)shareToSocialNetworking
+{
+    
     NSString *textToShare = [NSString stringWithFormat:@"%@ by @\%@ from @jxdribbble",self.shot.title,self.shot.player.username];
     NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
     NSArray *activityItems;
@@ -218,6 +252,7 @@
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
     activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePrint,UIActivityTypeCopyToPasteboard];
     [self presentViewController:activityViewController animated:YES completion:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning

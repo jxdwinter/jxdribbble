@@ -67,6 +67,11 @@
 		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BA040C180833DC00BE15B1 /* CheckNetwork.m */; };
+		72D6CBA7181E16C300022988 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBA6181E16C300022988 /* Dropbox.framework */; };
+		72D6CBA9181E16FC00022988 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBA8181E16FC00022988 /* Security.framework */; };
+		72D6CBAB181E170A00022988 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBAA181E170A00022988 /* SystemConfiguration.framework */; };
+		72D6CBAD181E171F00022988 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBAC181E171F00022988 /* QuartzCore.framework */; };
+		72D6CBB0181E174800022988 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBAE181E173500022988 /* libc++.dylib */; };
 		72D74E71180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D74E70180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m */; };
 		72D74E89180FD429007A1259 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 72D74E88180FD429007A1259 /* logout.png */; };
 		72D74E8B180FEF43007A1259 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D74E8A180FEF43007A1259 /* MessageUI.framework */; };
@@ -169,6 +174,11 @@
 		72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		72BA040B180833DC00BE15B1 /* CheckNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetwork.h; sourceTree = "<group>"; };
 		72BA040C180833DC00BE15B1 /* CheckNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetwork.m; sourceTree = "<group>"; };
+		72D6CBA6181E16C300022988 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		72D6CBA8181E16FC00022988 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		72D6CBAA181E170A00022988 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		72D6CBAC181E171F00022988 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		72D6CBAE181E173500022988 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		72D74E6F180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_FindAPlayerViewController.h; sourceTree = "<group>"; };
 		72D74E70180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_FindAPlayerViewController.m; sourceTree = "<group>"; };
 		72D74E88180FD429007A1259 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
@@ -183,6 +193,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D6CBB0181E174800022988 /* libc++.dylib in Frameworks */,
+				72D6CBAD181E171F00022988 /* QuartzCore.framework in Frameworks */,
+				72D6CBAB181E170A00022988 /* SystemConfiguration.framework in Frameworks */,
+				72D6CBA9181E16FC00022988 /* Security.framework in Frameworks */,
 				72D74E8B180FEF43007A1259 /* MessageUI.framework in Frameworks */,
 				72B80141180653C900A3BDA8 /* CFNetwork.framework in Frameworks */,
 				72B800FE18064D4200A3BDA8 /* CoreGraphics.framework in Frameworks */,
@@ -190,6 +204,7 @@
 				72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */,
 				72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */,
 				72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */,
+				72D6CBA7181E16C300022988 /* Dropbox.framework in Frameworks */,
 				44CB78C8DA0F488DB7076FFE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +331,10 @@
 		72B800FA18064D4200A3BDA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72D6CBAC181E171F00022988 /* QuartzCore.framework */,
+				72D6CBAA181E170A00022988 /* SystemConfiguration.framework */,
+				72D6CBA8181E16FC00022988 /* Security.framework */,
+				72D6CBA6181E16C300022988 /* Dropbox.framework */,
 				720CF8871813F5A000C7651D /* Reveal.framework */,
 				72D74E8A180FEF43007A1259 /* MessageUI.framework */,
 				72B80140180653C900A3BDA8 /* CFNetwork.framework */,
@@ -324,6 +343,7 @@
 				72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */,
 				72B800FF18064D4200A3BDA8 /* UIKit.framework */,
 				72B8011418064D4200A3BDA8 /* XCTest.framework */,
+				72D6CBAE181E173500022988 /* libc++.dylib */,
 				A2F94FEC927F45BBB40815E8 /* libPods.a */,
 			);
 			name = Frameworks;

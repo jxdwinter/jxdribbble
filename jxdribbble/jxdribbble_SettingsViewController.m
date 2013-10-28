@@ -10,12 +10,14 @@
 #import "jxdribbble_player.h"
 #import "jxdribbble_PlayerViewController.h"
 #import <MessageUI/MessageUI.h>
+#import <Dropbox/Dropbox.h>
 
 @interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (strong, nonatomic) UIButton *logoutButton;
 @property (strong, nonatomic) UITableViewCell *theCell;
+@property (strong, nonatomic) UIActionSheet *unlink;
 
 @end
 
@@ -81,7 +83,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-
+    
     jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = YES;
     
@@ -106,7 +108,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -114,6 +116,10 @@
     if ( section == 0 )
     {
         return 1;
+    }
+    else if ( section == 1)
+    {
+        return 2;
     }
     else return 4;
 }
@@ -151,13 +157,38 @@
             {
                 cell.textLabel.text = @"Are you a player?";
             }
+            self.theCell = cell;
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0];
         }
-        self.theCell = cell;
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0];
+    }
+    else if (section == 1 )
+    {
+        if ( row == 0 )
+        {
+            DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+            if (account)
+            {
+#warning 首次授权以后显示用户名有问题
+                if([account.info.userName isEqualToString:@"(null)"])
+                {
+                    cell.textLabel.text = [NSString stringWithFormat:@"Dropbox : "];
+                }
+                else cell.textLabel.text = [NSString stringWithFormat:@"Dropbox : %@",account.info.userName];
+            }
+            else
+            {
+                cell.textLabel.text = @"Link to Dropbox";
+            }
+        }
+        else if ( row == 1 )
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", @"Evernote"];
+        }
+       
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
-    
-    else if ( section == 1 )
+    else if ( section == 2 )
     {
         if ( row == 0 )
         {
@@ -225,6 +256,23 @@
     {
         if ( row == 0 )
         {
+            DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+            if (account)
+            {
+                self.unlink = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"NO" destructiveButtonTitle:@"Unlink Dropbox" otherButtonTitles:nil, nil];
+                self.unlink.actionSheetStyle = UIActionSheetStyleDefault;
+                [self.unlink showInView:self.view];
+            }
+            else
+            {
+                [[DBAccountManager sharedManager] linkFromController:self];
+            }
+        }
+    }
+    else if ( section == 2 )
+    {
+        if ( row == 0 )
+        {
             NSString *textToShare = [NSString stringWithFormat:@"Check out this awesome dribbble client %@",@"https://itunes.apple.com/us/app/jxdribbble/id729549824?ls=1&mt=8"];
             NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@""]];
             NSArray *activityItems = @[textToShare, urlToShare];
@@ -257,20 +305,32 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
+    if ( actionSheet == self.unlink )
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/jxdribbble"]]];
+        if (buttonIndex == 0)
+        {
+            DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+            [account unlink];
+            [self.tableView reloadData];
+        }
     }
-    else if ( buttonIndex == 1 )
+    else
     {
-        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-        controller.mailComposeDelegate = self;
-        [controller setSubject:@""];
-        [controller setToRecipients:[NSArray arrayWithObject:@"jxdribbble@gmail.com"]];
-        [controller setMessageBody:@"Hello there." isHTML:NO];
-        [self presentViewController:controller animated:YES completion:^{
-            
-        }];
+        if (buttonIndex == 0)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/jxdribbble"]]];
+        }
+        else if ( buttonIndex == 1 )
+        {
+            MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+            controller.mailComposeDelegate = self;
+            [controller setSubject:@""];
+            [controller setToRecipients:[NSArray arrayWithObject:@"jxdribbble@gmail.com"]];
+            [controller setMessageBody:@"Hello there." isHTML:NO];
+            [self presentViewController:controller animated:YES completion:^{
+                
+            }];
+        }
     }
 }
 

@@ -16,11 +16,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Crashlytics startWithAPIKey:@"adb6c6dba2e462026e3494de452a18ec98b17ee6"];
+    
+    DBAccountManager* accountMgr =
+    [[DBAccountManager alloc] initWithAppKey:@"2yqq9welxonx0md" secret:@"h1u6salza4qq34h"];
+    [DBAccountManager setSharedManager:accountMgr];
+    
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    if (account)
+    {
+        self.filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:self.filesystem];
+    }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:0.7]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
@@ -50,6 +61,18 @@
     return YES;
     
     
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation
+{
+    DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
+    if (account)
+    {
+        self.filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:self.filesystem];
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark -
