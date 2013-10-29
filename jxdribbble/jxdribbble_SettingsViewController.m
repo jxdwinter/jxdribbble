@@ -187,20 +187,9 @@
             EvernoteSession *session = [EvernoteSession sharedSession];
             if ( session.isAuthenticated )
             {
-                cell.textLabel.text = [NSString stringWithFormat:@"Evernote : "];
-                
-                EvernoteUserStore *userStore = [EvernoteUserStore userStore];
-                [userStore getUserWithSuccess:^(EDAMUser *user) {
-                    // success
-                    NSLog(@"Authenticated as %@", [user username]);
-                    cell.textLabel.text = [NSString stringWithFormat:@"Evernote : %@", [user username]];
-                    
-                } failure:^(NSError *error) {
-                    // failure
-                    NSLog(@"Error getting user: %@", error);
-                    cell.textLabel.text = [NSString stringWithFormat:@"Evernote : "];
-                } ];
-
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                NSString *username = [userDefaults stringForKey:@"evernote_uesrname"];
+                cell.textLabel.text = [NSString stringWithFormat:@"Evernote : %@",username];
             }
             else cell.textLabel.text = [NSString stringWithFormat:@"%@", @"Link to Evernote"];
         }
@@ -319,6 +308,9 @@
                         [userStore getUserWithSuccess:^(EDAMUser *user) {
                             // success
                             NSLog(@"Authenticated as %@", [user username]);
+                            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                            [userDefaults setValue:[user username] forKey:@"evernote_uesrname"];
+                            [userDefaults synchronize];
                             [self.tableView reloadData];
                         } failure:^(NSError *error) {
                             // failure
