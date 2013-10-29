@@ -17,6 +17,7 @@
 #import "NSData+EvernoteSDK.h"
 #import "NSDate+EDAMAdditions.h"
 #import "EvernoteSDK.h"
+#import "MBProgressHUD.h"
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
 
@@ -317,45 +318,58 @@
 
 - (void)dropbox
 {
-    DBPath *newPath = [[DBPath root] childPath:[NSString stringWithFormat:@"%@_%@.png",[self.shot.title stringByReplacingOccurrencesOfString:@" " withString:@""],[self.shot.player.name stringByReplacingOccurrencesOfString:@" " withString:@""]]];
-    
-    DBFile *file = [[DBFilesystem sharedFilesystem] createFile:newPath error:nil];
-    NSData *imageData = UIImagePNGRepresentation(self.shareImage);
-    [file writeData:imageData error:nil];
+    if ([CheckNetwork isExistenceNetwork])
+    {
+        DBPath *newPath = [[DBPath root] childPath:[NSString stringWithFormat:@"%@_%@.png",[self.shot.title stringByReplacingOccurrencesOfString:@" " withString:@""],[self.shot.player.name stringByReplacingOccurrencesOfString:@" " withString:@""]]];
+         
+        DBFile *file = [[DBFilesystem sharedFilesystem] createFile:newPath error:nil];
+        NSData *imageData = UIImagePNGRepresentation(self.shareImage);
+        [file writeData:imageData error:nil];
+    }
 }
 
 - (void)evernote
 {
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSData *imageData = UIImagePNGRepresentation(self.shareImage);
-    NSData *dataHash = [imageData enmd5];
-    EDAMData *edamData = [[EDAMData alloc] initWithBodyHash:dataHash size:imageData.length body:imageData];
-    EDAMResource* resource = [[EDAMResource alloc] initWithGuid:nil noteGuid:nil data:edamData mime:@"image/png" width:0 height:0 duration:0 active:0 recognition:0 attributes:nil updateSequenceNum:0 alternateData:nil];
-    NSString *noteContent = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                             "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"
-                             "<en-note>"
-                             "<span style=\"font-weight:bold;\">%@</span>"
-                             "<br />"
-                             "<span>by %@ </span>"
-                             "<br />"
-                             "%@"
-                             "</en-note>",self.shot.title,self.shot.player.name,[ENMLUtility mediaTagWithDataHash:dataHash mime:@"image/png"]];
-    NSMutableArray* resources = [NSMutableArray arrayWithArray:@[resource]];
-    EDAMNote *newNote = [[EDAMNote alloc] initWithGuid:nil title:[NSString stringWithFormat:@"%@ by %@",self.shot.title,self.shot.player.name] content:noteContent contentHash:nil contentLength:noteContent.length created:0 updated:0 deleted:0 active:YES updateSequenceNum:0 notebookGuid:nil tagGuids:nil resources:resources attributes:nil tagNames:nil];
-    
-    [[EvernoteNoteStore noteStore] setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        NSLog(@"Total bytes written : %lld , Total bytes expected to be written : %lld",totalBytesWritten,totalBytesExpectedToWrite);
-    }];
-    [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
-        NSLog(@"Note created successfully.");
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    } failure:^(NSError *error) {
-        NSLog(@"Error creating note : %@",error);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    }];
-    
+    if ([CheckNetwork isExistenceNetwork])
+    {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        NSData *imageData = UIImagePNGRepresentation(self.shareImage);
+        NSData *dataHash = [imageData enmd5];
+        EDAMData *edamData = [[EDAMData alloc] initWithBodyHash:dataHash size:imageData.length body:imageData];
+        EDAMResource* resource = [[EDAMResource alloc] initWithGuid:nil noteGuid:nil data:edamData mime:@"image/png" width:0 height:0 duration:0 active:0 recognition:0 attributes:nil updateSequenceNum:0 alternateData:nil];
+        NSString *noteContent = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                                 "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"
+                                 "<en-note>"
+                                 "<span style=\"font-weight:bold;\">%@</span>"
+                                 "<br />"
+                                 "<span>by %@ </span>"
+                                 "<br />"
+                                 "%@"
+                                 "</en-note>",self.shot.title,self.shot.player.name,[ENMLUtility mediaTagWithDataHash:dataHash mime:@"image/png"]];
+        NSMutableArray* resources = [NSMutableArray arrayWithArray:@[resource]];
+        EDAMNote *newNote = [[EDAMNote alloc] initWithGuid:nil title:[NSString stringWithFormat:@"%@ by %@",self.shot.title,self.shot.player.name] content:noteContent contentHash:nil contentLength:noteContent.length created:0 updated:0 deleted:0 active:YES updateSequenceNum:0 notebookGuid:nil tagGuids:nil resources:resources attributes:nil tagNames:nil];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeAnnularDeterminate;
+        
+        [[EvernoteNoteStore noteStore] setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+            NSLog(@"Total bytes written : %lld , Total bytes expected to be written : %lld",totalBytesWritten,totalBytesExpectedToWrite);
+            double p = (double)totalBytesWritten/(double)totalBytesExpectedToWrite;
+            hud.progress = p;
+        }];
+        
+        [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
+            NSLog(@"Note created successfully.");
+            [hud hide:YES];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        } failure:^(NSError *error) {
+            [hud hide:YES];
+            NSLog(@"Error creating note : %@",error);
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        }];
+    }
 }
+
 - (void)shareToSocialNetworking
 {
     
