@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		44CB78C8DA0F488DB7076FFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F94FEC927F45BBB40815E8 /* libPods.a */; };
 		720CF8881813F5A000C7651D /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720CF8871813F5A000C7651D /* Reveal.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		723C7F1D181F6423004B2E2A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 723C7F1C181F6423004B2E2A /* libxml2.dylib */; };
 		72419ECD1808E3E0004AC323 /* jxdribbble_MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */; };
 		72419ED01809111A004AC323 /* jxdribbble_player.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ECF1809111A004AC323 /* jxdribbble_player.m */; };
 		72419ED41809158A004AC323 /* jxdribbble_shots.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ED31809158A004AC323 /* jxdribbble_shots.m */; };
@@ -91,6 +92,7 @@
 /* Begin PBXFileReference section */
 		7139F2FF20114F5CA4EC73A9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		720CF8871813F5A000C7651D /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		723C7F1C181F6423004B2E2A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		72419ECB1808E3E0004AC323 /* jxdribbble_MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_MenuViewController.h; sourceTree = "<group>"; };
 		72419ECC1808E3E0004AC323 /* jxdribbble_MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_MenuViewController.m; sourceTree = "<group>"; };
 		72419ECE1809111A004AC323 /* jxdribbble_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_player.h; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				723C7F1D181F6423004B2E2A /* libxml2.dylib in Frameworks */,
 				72D6CBB0181E174800022988 /* libc++.dylib in Frameworks */,
 				72D6CBAD181E171F00022988 /* QuartzCore.framework in Frameworks */,
 				72D6CBAB181E170A00022988 /* SystemConfiguration.framework in Frameworks */,
@@ -343,6 +346,7 @@
 				72B800FD18064D4200A3BDA8 /* CoreGraphics.framework */,
 				72B800FF18064D4200A3BDA8 /* UIKit.framework */,
 				72B8011418064D4200A3BDA8 /* XCTest.framework */,
+				723C7F1C181F6423004B2E2A /* libxml2.dylib */,
 				72D6CBAE181E173500022988 /* libc++.dylib */,
 				A2F94FEC927F45BBB40815E8 /* libPods.a */,
 			);

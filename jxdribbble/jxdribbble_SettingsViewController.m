@@ -11,13 +11,16 @@
 #import "jxdribbble_PlayerViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <Dropbox/Dropbox.h>
+#import "EvernoteSession.h"
+#import "EvernoteUserStore.h"
 
-@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
+@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (strong, nonatomic) UIButton *logoutButton;
 @property (strong, nonatomic) UITableViewCell *theCell;
-@property (strong, nonatomic) UIActionSheet *unlink;
+@property (strong, nonatomic) UIActionSheet *unlinkDropbox;
+@property (strong, nonatomic) UIActionSheet *unlinkEvernote;
 
 @end
 
@@ -181,7 +184,25 @@
         }
         else if ( row == 1 )
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", @"Evernote"];
+            EvernoteSession *session = [EvernoteSession sharedSession];
+            if ( session.isAuthenticated )
+            {
+                cell.textLabel.text = [NSString stringWithFormat:@"Evernote : "];
+                
+                EvernoteUserStore *userStore = [EvernoteUserStore userStore];
+                [userStore getUserWithSuccess:^(EDAMUser *user) {
+                    // success
+                    NSLog(@"Authenticated as %@", [user username]);
+                    cell.textLabel.text = [NSString stringWithFormat:@"Evernote : %@", [user username]];
+                    
+                } failure:^(NSError *error) {
+                    // failure
+                    NSLog(@"Error getting user: %@", error);
+                    cell.textLabel.text = [NSString stringWithFormat:@"Evernote : "];
+                } ];
+
+            }
+            else cell.textLabel.text = [NSString stringWithFormat:@"%@", @"Link to Evernote"];
         }
        
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
@@ -222,7 +243,6 @@
     
 }
 
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -258,13 +278,54 @@
             DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
             if (account)
             {
-                self.unlink = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"NO" destructiveButtonTitle:@"Unlink Dropbox" otherButtonTitles:nil, nil];
-                self.unlink.actionSheetStyle = UIActionSheetStyleDefault;
-                [self.unlink showInView:self.view];
+                self.unlinkDropbox = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"NO" destructiveButtonTitle:@"Unlink Dropbox" otherButtonTitles:nil, nil];
+                self.unlinkDropbox.actionSheetStyle = UIActionSheetStyleDefault;
+                [self.unlinkDropbox showInView:self.view];
             }
             else
             {
                 [[DBAccountManager sharedManager] linkFromController:self];
+            }
+        }
+        else if ( row == 1 )
+        {
+            EvernoteSession *session = [EvernoteSession sharedSession];
+            NSLog(@"Session host: %@", [session host]);
+            NSLog(@"Session key: %@", [session consumerKey]);
+            NSLog(@"Session secret: %@", [session consumerSecret]);
+            
+            /**
+             *  如果已经授权
+             */
+            if ( session.isAuthenticated )
+            {
+                self.unlinkEvernote = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"NO" destructiveButtonTitle:@"Unlink Evernote" otherButtonTitles:nil, nil];
+                self.unlinkEvernote.actionSheetStyle = UIActionSheetStyleDefault;
+                [self.unlinkEvernote showInView:self.view];
+            }
+            else
+            {
+                [session authenticateWithViewController:self completionHandler:^(NSError *error) {
+                    if (error || !session.isAuthenticated){
+                        if (error) {
+                            NSLog(@"Error authenticating with Evernote Cloud API: %@", error);
+                        }
+                        if (!session.isAuthenticated) {
+                            NSLog(@"Session not authenticated");
+                        }
+                    } else {
+                        // We're authenticated!
+                        EvernoteUserStore *userStore = [EvernoteUserStore userStore];
+                        [userStore getUserWithSuccess:^(EDAMUser *user) {
+                            // success
+                            NSLog(@"Authenticated as %@", [user username]);
+                            [self.tableView reloadData];
+                        } failure:^(NSError *error) {
+                            // failure
+                            NSLog(@"Error getting user: %@", error);
+                        } ];
+                    }
+                }];
             }
         }
     }
@@ -304,12 +365,20 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ( actionSheet == self.unlink )
+    if ( actionSheet == self.unlinkDropbox )
     {
         if (buttonIndex == 0)
         {
             DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
             [account unlink];
+            [self.tableView reloadData];
+        }
+    }
+    else if ( actionSheet == self.unlinkEvernote )
+    {
+        if (buttonIndex == 0)
+        {
+            [[EvernoteSession sharedSession] logout];
             [self.tableView reloadData];
         }
     }
@@ -329,6 +398,16 @@
             [self presentViewController:controller animated:YES completion:^{
                 
             }];
+        }
+    }
+}
+
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet
+{
+    for (UIView *subview in actionSheet.subviews) {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)subview;
+            button.titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         }
     }
 }

@@ -248,6 +248,18 @@
     }
 }
 
+
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet
+{
+    for (UIView *subview in actionSheet.subviews) {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)subview;
+            button.titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        }
+    }
+}
+
+
 #pragma mark - draftees
 
 - (void) drafteesButtonClicked

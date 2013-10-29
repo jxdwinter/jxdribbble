@@ -9,12 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Evernote-SDK-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-RESideMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-Reachability.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SSKeychain.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0E6F0ACB276143A590C82431</key>
+		<key>07A01CE736894427840217EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>238DB645A7404C709EA86382</key>
+		<key>3C327F5811A842E98D3C6197</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>441CB7DEAA694415B1854FDA</key>
+		<key>48A5160583C5422E87BA51FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D1BB2CB1B4841759F662A49</key>
+		<key>57FCC883A2DF4288B0592EFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D58DB3223218478C98D52B16</key>
+		<key>84AA3DB004FB4FB7A2E27702</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B08C4B6FED174C7AB6249322</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FDE91AFD42214A21878A1CB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

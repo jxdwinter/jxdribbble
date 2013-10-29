@@ -13,6 +13,10 @@
 #import "jxdribbble_PlayerViewController.h"
 #import "jxdribbble_ReboundsViewController.h"
 #import <Dropbox/Dropbox.h>
+#import "ENMLUtility.h"
+#import "NSData+EvernoteSDK.h"
+#import "NSDate+EDAMAdditions.h"
+#import "EvernoteSDK.h"
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
 
@@ -194,49 +198,164 @@
 
     
     DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-    if ( account )
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    
+    /**
+     *  如果都授权
+     */
+    if ( account && session.isAuthenticated)
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox" ,nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",@"Save to Evernote",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
-    else
+    /**
+     *  如果dropbox授权,evernote没有授权
+     */
+    else if (account && !session.isAuthenticated)
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+        [actionSheet showInView:self.view];
+    }
+    /**
+     *  如果dropbox没授权,evernote授权
+     */
+    else if (!account && session.isAuthenticated)
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Evernote",nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+        [actionSheet showInView:self.view];
+    }
+    /**
+     *  如果都没授权
+     */
+    else if (!account && !session.isAuthenticated)
     {
         [self shareToSocialNetworking];
     }
+  
 }
 
-- (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
-    //[[actionSheet layer] setBackgroundColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0].CGColor];
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet
+{
+    for (UIView *subview in actionSheet.subviews) {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)subview;
+            button.titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        }
+    }
 }
 
 #pragma mark -  actionsheetdelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ( buttonIndex == 0 )
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    
+    /**
+     *  如果都授权
+     */
+    if ( account && session.isAuthenticated)
     {
-        [self shareToSocialNetworking];
-    }
-    else if ( buttonIndex == 1 )
-    {
-        DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-        if (account)
+        
+        if ( buttonIndex == 0 )
         {
-            DBPath *newPath = [[DBPath root] childPath:[NSString stringWithFormat:@"%@_%@.png",[self.shot.title stringByReplacingOccurrencesOfString:@" " withString:@""],[self.shot.player.name stringByReplacingOccurrencesOfString:@" " withString:@""]]];
-            
-            DBFile *file = [[DBFilesystem sharedFilesystem] createFile:newPath error:nil];
-            NSData *imageData = UIImagePNGRepresentation(self.shareImage);
-            if (imageData)
+            [self shareToSocialNetworking];
+        }
+        else if ( buttonIndex == 1 )
+        {
+            if (self.shareImage)
             {
-                [file writeData:imageData error:nil];
+                [self dropbox];
+            }
+        }
+        else if ( buttonIndex == 2 )
+        {
+            if (self.shareImage)
+            {
+                [self evernote];
+            }
+        }
+    }
+    /**
+     *  如果dropbox授权,evernote没有授权
+     */
+    else if (account && !session.isAuthenticated)
+    {
+        if ( buttonIndex == 0 )
+        {
+            [self shareToSocialNetworking];
+        }
+        else if ( buttonIndex == 1 )
+        {
+            if (self.shareImage)
+            {
+                [self dropbox];
+            }
+        }
+    }
+    /**
+     *  如果dropbox没授权,evernote授权
+     */
+    else if (!account && session.isAuthenticated)
+    {
+        if ( buttonIndex == 0 )
+        {
+            [self shareToSocialNetworking];
+        }
+        else if ( buttonIndex == 1 )
+        {
+            if (self.shareImage)
+            {
+                [self evernote];
             }
         }
     }
 }
 
+- (void)dropbox
+{
+    DBPath *newPath = [[DBPath root] childPath:[NSString stringWithFormat:@"%@_%@.png",[self.shot.title stringByReplacingOccurrencesOfString:@" " withString:@""],[self.shot.player.name stringByReplacingOccurrencesOfString:@" " withString:@""]]];
+    
+    DBFile *file = [[DBFilesystem sharedFilesystem] createFile:newPath error:nil];
+    NSData *imageData = UIImagePNGRepresentation(self.shareImage);
+    [file writeData:imageData error:nil];
+}
 
-
+- (void)evernote
+{
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSData *imageData = UIImagePNGRepresentation(self.shareImage);
+    NSData *dataHash = [imageData enmd5];
+    EDAMData *edamData = [[EDAMData alloc] initWithBodyHash:dataHash size:imageData.length body:imageData];
+    EDAMResource* resource = [[EDAMResource alloc] initWithGuid:nil noteGuid:nil data:edamData mime:@"image/png" width:0 height:0 duration:0 active:0 recognition:0 attributes:nil updateSequenceNum:0 alternateData:nil];
+    NSString *noteContent = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                             "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"
+                             "<en-note>"
+                             "<span style=\"font-weight:bold;\">%@</span>"
+                             "<br />"
+                             "<span>by %@ </span>"
+                             "<br />"
+                             "%@"
+                             "</en-note>",self.shot.title,self.shot.player.name,[ENMLUtility mediaTagWithDataHash:dataHash mime:@"image/png"]];
+    NSMutableArray* resources = [NSMutableArray arrayWithArray:@[resource]];
+    EDAMNote *newNote = [[EDAMNote alloc] initWithGuid:nil title:[NSString stringWithFormat:@"%@ by %@",self.shot.title,self.shot.player.name] content:noteContent contentHash:nil contentLength:noteContent.length created:0 updated:0 deleted:0 active:YES updateSequenceNum:0 notebookGuid:nil tagGuids:nil resources:resources attributes:nil tagNames:nil];
+    
+    [[EvernoteNoteStore noteStore] setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        NSLog(@"Total bytes written : %lld , Total bytes expected to be written : %lld",totalBytesWritten,totalBytesExpectedToWrite);
+    }];
+    [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
+        NSLog(@"Note created successfully.");
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(NSError *error) {
+        NSLog(@"Error creating note : %@",error);
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
 - (void)shareToSocialNetworking
 {
     
@@ -437,7 +556,5 @@
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }
-
-
 
 @end

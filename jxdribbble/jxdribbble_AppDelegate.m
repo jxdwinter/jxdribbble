@@ -9,7 +9,7 @@
 #import "jxdribbble_AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
 #import "jxdribbble_MenuViewController.h"
-
+#import "EvernoteSDK.h"
 
 @implementation jxdribbble_AppDelegate
 
@@ -27,6 +27,18 @@
         self.filesystem = [[DBFilesystem alloc] initWithAccount:account];
         [DBFilesystem setSharedFilesystem:self.filesystem];
     }
+    
+    NSString *EVERNOTE_HOST = BootstrapServerBaseURLStringSandbox;
+    
+    // Fill in the consumer key and secret with the values that you received from Evernote
+    // To get an API key, visit http://dev.evernote.com/documentation/cloud/
+    NSString *CONSUMER_KEY = @"jxdwinter";
+    NSString *CONSUMER_SECRET = @"4126f1fcbcecce39";
+    
+    // set up Evernote session singleton
+    [EvernoteSession setSharedSessionHost:EVERNOTE_HOST
+                              consumerKey:CONSUMER_KEY
+                           consumerSecret:CONSUMER_SECRET];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -65,14 +77,37 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation
 {
-    DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
-    if (account)
+    NSString *urlStr = [NSString stringWithFormat:@"%@",url];
+    NSString *prefix = [urlStr substringToIndex:3];
+    
+    /**
+     *  Dropbox
+     */
+    if ([prefix isEqualToString:@"db-"])
     {
-        self.filesystem = [[DBFilesystem alloc] initWithAccount:account];
-        [DBFilesystem setSharedFilesystem:self.filesystem];
-        return YES;
+        DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
+        if (account)
+        {
+            self.filesystem = [[DBFilesystem alloc] initWithAccount:account];
+            [DBFilesystem setSharedFilesystem:self.filesystem];
+            return YES;
+        }
+        return NO;
     }
+    /**
+     *  Evernote
+     */
+    else if ([prefix isEqualToString:@"en-"])
+    {
+        BOOL canHandle = NO;
+        if ([[NSString stringWithFormat:@"en-%@", [[EvernoteSession sharedSession] consumerKey]] isEqualToString:[url scheme]] == YES) {
+            canHandle = [[EvernoteSession sharedSession] canHandleOpenURL:url];
+        }
+        return canHandle;
+    }
+    
     return NO;
+    
 }
 
 #pragma mark -
@@ -119,6 +154,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [[EvernoteSession sharedSession] handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
