@@ -86,6 +86,12 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = YES;
@@ -99,7 +105,9 @@
         self.logoutButton.hidden = NO;
     }
     else self.logoutButton.hidden = YES;
+    
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -189,6 +197,21 @@
             {
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 NSString *username = [userDefaults stringForKey:@"evernote_uesrname"];
+                if (!username || [username isKindOfClass:[NSNull class]])
+                {
+                    EvernoteUserStore *userStore = [EvernoteUserStore userStore];
+                    [userStore getUserWithSuccess:^(EDAMUser *user) {
+                        // success
+                        NSLog(@"Authenticated as %@", [user username]);
+                        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                        [userDefaults setValue:[user username] forKey:@"evernote_uesrname"];
+                        [userDefaults synchronize];
+                        [self.tableView reloadData];
+                    } failure:^(NSError *error) {
+                        // failure
+                        NSLog(@"Error getting user: %@", error);
+                    } ];
+                }
                 cell.textLabel.text = [NSString stringWithFormat:@"Evernote : %@",username];
             }
             else cell.textLabel.text = [NSString stringWithFormat:@"%@", @"Link to Evernote"];

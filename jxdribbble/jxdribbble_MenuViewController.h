@@ -11,4 +11,6 @@
 
 @interface jxdribbble_MenuViewController : UIViewController
 
+@property (strong, nonatomic) jxdribbble_EveryoneViewController *everyoneViewController;
+
 @end

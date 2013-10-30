@@ -13,7 +13,7 @@
 #import "jxdribbble_FollowingViewController.h"
 #import "jxdribbble_SettingsViewController.h"
 #import "jxdribbble_FindAPlayerViewController.h"
-
+#import "jxdribbble_EveryoneViewController.h"
 
 @interface jxdribbble_MenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -56,16 +56,14 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UINavigationController *navigationController = (UINavigationController *)self.sideMenuViewController.contentViewController;
-    jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
+
     switch (indexPath.row) {
         case 0:
-            if ( !appDelegate.everyoneViewController )
+            if ( !self.everyoneViewController )
             {
-                appDelegate.everyoneViewController =[[jxdribbble_EveryoneViewController alloc] init];
+                self.everyoneViewController =[[jxdribbble_EveryoneViewController alloc] init];
             }
-            navigationController.viewControllers = @[appDelegate.everyoneViewController];
-            
+            navigationController.viewControllers = @[self.everyoneViewController];
             [self.sideMenuViewController hideMenuViewController];
             break;
             
@@ -108,8 +106,6 @@
             }
             navigationController.viewControllers = @[self.settingsViewController];
             [self.sideMenuViewController hideMenuViewController];
-            break;
-        default:
             break;
     }
 }

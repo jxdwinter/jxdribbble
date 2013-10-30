@@ -56,13 +56,15 @@
                                                            shadow, NSShadowAttributeName,
                                                            [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0],
                                                            NSFontAttributeName, nil]];
-    if (!self.everyoneViewController)
-    {
-        self.everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
-    }
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.everyoneViewController];
+    jxdribbble_EveryoneViewController  *everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
+    
+
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:everyoneViewController];
+    
     jxdribbble_MenuViewController *menuViewController = [[jxdribbble_MenuViewController alloc] init];
+    menuViewController.everyoneViewController = everyoneViewController;
+    
     self.sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController menuViewController:menuViewController];
     //self.sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
     self.sideMenuViewController.delegate = self;

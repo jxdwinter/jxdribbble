@@ -82,24 +82,20 @@
     [self.sideMenuViewController presentMenuViewController];
 }
 
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
-    
-    UITapGestureRecognizer* tapRecon = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationBarDoubleTap:)];
-    tapRecon.numberOfTapsRequired = 2;
-    [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
     
     jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = YES;
+    
 }
-
-
-- (void) navigationBarDoubleTap : (id) sender
-{
-    [self.tableView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];
-}
-
 
 - (void)didReceiveMemoryWarning
 {

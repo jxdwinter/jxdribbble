@@ -96,20 +96,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    
-    UITapGestureRecognizer* tapRecon = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationBarDoubleTap:)];
-    tapRecon.numberOfTapsRequired = 2;
-    [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
-    
     jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.sideMenuViewController.panGestureEnabled = NO;
-}
-
-
-- (void) navigationBarDoubleTap : (id) sender
-{
-    [self.tableView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];
 }
 
 - (void)rebounds
@@ -161,7 +149,7 @@
     [imageView addGestureRecognizer:pgr];
     
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicatorView.center = imageView.center;
+    activityIndicatorView.center = CGPointMake(imageView.center.x - 10.0,imageView.center.y - 30.0);
     [activityIndicatorView startAnimating];
     [imageView addSubview:activityIndicatorView];
     __weak typeof(imageView) weakImageView = imageView;
@@ -454,22 +442,18 @@
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
                                                options:NSStringDrawingUsesLineFragmentOrigin
                                                context:nil];
-    CGSize  size = rect.size;
+    CGSize size = rect.size;
     
     cell.frame = CGRectMake(0.0, 0.0, 320.0, size.height + 70.0);
     
     cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height);
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
-    
     cell.usernameLabel.text = comment.player.name;
     cell.bodyLabel.text = [comment.body stringByConvertingHTMLToPlainText];
-    
-    cell.likesLabel.frame = CGRectMake(50.0, size.height + 50.0, 100.0, 10);
-    if ( [comment.likes_count integerValue] > 0)
-    {
-        cell.likesLabel.text = [NSString stringWithFormat:@"likes:%@",comment.likes_count];
-    }
-    
+    [cell.bodyLabel setDetectionBlock:^(STTweetHotWord hotWord, NSString *string, NSString *protocol, NSRange range) {
+        NSArray *hotWords = @[@"Handle", @"Hashtag", @"Link"];
+        NSLog(@"%@",[NSString stringWithFormat:@"%@ [%d,%d]: %@%@", hotWords[hotWord], (int)range.location, (int)range.length, string, (protocol != nil) ? [NSString stringWithFormat:@" *%@*", protocol] : @""]);
+    }];
     cell.created_atLabel.frame = CGRectMake(160.0, size.height + 50.0, 150.0, 10);
     cell.created_atLabel.text =  [comment.created_at substringToIndex:16];;
 
@@ -479,7 +463,6 @@
     
 }
 
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -488,7 +471,7 @@
     jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
     playerViewController.player = [(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] player];
     [self.navigationController pushViewController:playerViewController animated:YES];
-    
+
 }
 
 

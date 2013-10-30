@@ -78,33 +78,22 @@
 }
 
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.sideMenuViewController.panGestureEnabled = YES;
+}
+
+
 - (void)showMenu
 {
     [self.sideMenuViewController presentMenuViewController];
 }
 
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    
-    UITapGestureRecognizer* tapRecon = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationBarDoubleTap:)];
-    tapRecon.numberOfTapsRequired = 2;
-    [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
-    
-    jxdribbble_AppDelegate *appDelegate =  (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
-    appDelegate.sideMenuViewController.panGestureEnabled = YES;
-    
-}
-
-- (void) navigationBarDoubleTap : (id) sender
-{
-    [self.tableView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];
-}
-
-
 - (void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [userDefaults stringForKey:@"username"];
     if ( !username || username.length == 0 )
@@ -124,6 +113,7 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.refreshButton];
         self.refreshButton.hidden = NO;
     }
+    
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
