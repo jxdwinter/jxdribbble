@@ -13,6 +13,7 @@
 #import <Dropbox/Dropbox.h>
 #import "EvernoteSession.h"
 #import "EvernoteUserStore.h"
+#import "jxdribbble_FindAPlayerViewController.h"
 
 @interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
@@ -38,13 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.title = @"ABOUT";
-    
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
-    [menuButton setImage:[UIImage imageNamed:@"nav_menu"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    self.title = @"Others";
     
     self.logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 25.0)];
     [self.logoutButton setImage:[UIImage imageNamed:@"logout"] forState:UIControlStateNormal];
@@ -54,11 +49,7 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 110.0)];
-    headerView.image = [UIImage imageNamed:@"logo"];
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height) style:UITableViewStyleGrouped];
-    self.tableView.tableHeaderView = headerView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setBackgroundView:nil];
@@ -66,11 +57,6 @@
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
-}
-
-- (void)showMenu
-{
-    [self.sideMenuViewController presentMenuViewController];
 }
 
 - (void)logout
@@ -92,9 +78,6 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    jxdribbble_AppDelegate *appDelegate = (jxdribbble_AppDelegate*)[[UIApplication sharedApplication] delegate];
-    appDelegate.sideMenuViewController.panGestureEnabled = YES;
     
     [self.tableView reloadData];
     
@@ -119,7 +102,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -128,7 +111,11 @@
     {
         return 1;
     }
-    else if ( section == 1)
+    else if ( section == 1 )
+    {
+        return 1;
+    }
+    else if ( section == 2)
     {
         return 2;
     }
@@ -172,7 +159,15 @@
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0];
         }
     }
-    else if (section == 1 )
+    else if ( section == 1 )
+    {
+        if ( row == 0 )
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"Find a Player"];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+        }
+    }
+    else if (section == 2 )
     {
         if ( row == 0 )
         {
@@ -220,7 +215,7 @@
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
-    else if ( section == 2 )
+    else if ( section == 3 )
     {
         if ( row == 0 )
         {
@@ -287,6 +282,14 @@
     {
         if ( row == 0 )
         {
+            jxdribbble_FindAPlayerViewController *findAPlayerViewController = [[jxdribbble_FindAPlayerViewController alloc] init];
+            [self.navigationController pushViewController:findAPlayerViewController animated:YES];
+        }
+    }
+    else if ( section == 2 )
+    {
+        if ( row == 0 )
+        {
             DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
             if (account)
             {
@@ -344,7 +347,7 @@
             }
         }
     }
-    else if ( section == 2 )
+    else if ( section == 3 )
     {
         if ( row == 0 )
         {

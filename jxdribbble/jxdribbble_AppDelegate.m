@@ -8,8 +8,13 @@
 
 #import "jxdribbble_AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-#import "jxdribbble_MenuViewController.h"
 #import "EvernoteSDK.h"
+
+#import "jxdribbble_EveryoneViewController.h"
+#import "jxdribbble_DebutsViewController.h"
+#import "jxdribbble_PopularViewController.h"
+#import "jxdribbble_FollowingViewController.h"
+#import "jxdribbble_SettingsViewController.h"
 
 @implementation jxdribbble_AppDelegate
 
@@ -43,7 +48,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:0.9]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
@@ -56,19 +61,59 @@
                                                            shadow, NSShadowAttributeName,
                                                            [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0],
                                                            NSFontAttributeName, nil]];
+    
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
+    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
 
-    jxdribbble_EveryoneViewController  *everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
     
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.view.backgroundColor = [UIColor whiteColor];
+    
+    jxdribbble_EveryoneViewController *everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
+    jxdribbble_DebutsViewController *debutsViewController = [[jxdribbble_DebutsViewController alloc] init];
+    jxdribbble_PopularViewController *popularViewController = [[jxdribbble_PopularViewController alloc] init];
+    jxdribbble_FollowingViewController *followingViewController = [[jxdribbble_FollowingViewController alloc] init];
+    jxdribbble_SettingsViewController *settingsViewController = [[jxdribbble_SettingsViewController alloc] init];
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:everyoneViewController];
+    UINavigationController* everyoneNavController = [[UINavigationController alloc] initWithRootViewController:everyoneViewController];
+    UINavigationController* debutsNavController = [[UINavigationController alloc] initWithRootViewController:debutsViewController];
+    UINavigationController* popularNavController = [[UINavigationController alloc] initWithRootViewController:popularViewController];
+    UINavigationController* followingNavController = [[UINavigationController alloc] initWithRootViewController:followingViewController];
+    UINavigationController* settingsNavController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
     
-    jxdribbble_MenuViewController *menuViewController = [[jxdribbble_MenuViewController alloc] init];
-    menuViewController.everyoneViewController = everyoneViewController;
+    NSArray* controllers = @[everyoneNavController,debutsNavController,popularNavController,followingNavController,settingsNavController];
+    self.tabBarController.viewControllers = controllers;
     
-    self.sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController menuViewController:menuViewController];
-    //self.sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
-    self.sideMenuViewController.delegate = self;
-    self.window.rootViewController = self.sideMenuViewController;
+    UITabBar *tabBar = self.tabBarController.tabBar;
+    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
+    UITabBarItem *tabBarItem4 = [tabBar.items objectAtIndex:3];
+    UITabBarItem *tabBarItem5 = [tabBar.items objectAtIndex:4];
+    
+    
+    tabBarItem1.image = [UIImage imageNamed:@"ico_people"] ;
+    tabBarItem1.selectedImage = [UIImage imageNamed:@"ico_people_pre"];
+    tabBarItem1.title = @"Everyone";
+    
+    tabBarItem2.image = [UIImage imageNamed:@"ico_debuts"];
+    tabBarItem2.selectedImage = [UIImage imageNamed:@"ico_debuts_pre"];
+    tabBarItem2.title = @"Debuts";
+    
+    tabBarItem3.image = [UIImage imageNamed:@"ico_love"];
+    tabBarItem3.selectedImage = [UIImage imageNamed:@"ico_love_pre"];
+    tabBarItem3.title = @"Popular";
+    
+    tabBarItem4.image = [UIImage imageNamed:@"ico_popular"];
+    tabBarItem4.selectedImage = [UIImage imageNamed:@"ico_popular_pre"];
+    tabBarItem4.title = @"Following";
+    
+    tabBarItem5.image = [UIImage imageNamed:@"ico_more"];
+    tabBarItem5.selectedImage = [UIImage imageNamed:@"ico_more_pre"];
+    tabBarItem5.title = @"Others";
+    
+    self.window.rootViewController = self.tabBarController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
@@ -111,30 +156,6 @@
     return NO;
     
 }
-
-#pragma mark -
-#pragma mark RESideMenu Delegate
-
-- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
-{
-    //NSLog(@"willShowMenuViewController");
-}
-
-- (void)sideMenu:(RESideMenu *)sideMenu didShowMenuViewController:(UIViewController *)menuViewController
-{
-    //NSLog(@"didShowMenuViewController");
-}
-
-- (void)sideMenu:(RESideMenu *)sideMenu willHideMenuViewController:(UIViewController *)menuViewController
-{
-    //NSLog(@"willHideMenuViewController");
-}
-
-- (void)sideMenu:(RESideMenu *)sideMenu didHideMenuViewController:(UIViewController *)menuViewController
-{
-    //NSLog(@"didHideMenuViewController");
-}
-
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

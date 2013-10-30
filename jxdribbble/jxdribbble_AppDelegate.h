@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RESideMenu.h"
-#import "jxdribbble_EveryoneViewController.h"
 #import <Dropbox/Dropbox.h>
 
-@interface jxdribbble_AppDelegate : UIResponder <UIApplicationDelegate,RESideMenuDelegate>
+@interface jxdribbble_AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) RESideMenu *sideMenuViewController;
+@property (strong, nonatomic) UITabBarController *tabBarController;
 @property (strong, nonatomic) DBFilesystem *filesystem;
 
 

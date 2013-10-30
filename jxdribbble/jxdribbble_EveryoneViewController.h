@@ -6,7 +6,6 @@
 //  Copyright (c) 2013年 Jiang Xiaodong. All rights reserved.
 //
 
-
 @interface jxdribbble_EveryoneViewController : UIViewController
 
 @end
