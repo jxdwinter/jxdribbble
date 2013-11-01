@@ -10,7 +10,7 @@
 
 @implementation jxdribbble_comments
 
-- (id)initWithCommentInfo : (NSDictionary *)commentInfo
+- (instancetype)initWithCommentInfo : (NSDictionary *)commentInfo
 {
     self = [super init];
     if (self)

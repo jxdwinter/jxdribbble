@@ -66,7 +66,10 @@
     [self.refreshButton setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
     [self.refreshButton addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height - 49.0) style:UITableViewStylePlain];
+    NSLog(@"%@", NSStringFromCGRect([UIScreen mainScreen].bounds));
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStylePlain];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0,49, 0);
     __weak jxdribbble_PlayerListViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
@@ -82,7 +85,6 @@
     
     [self getData];
 }
-
 
 - (void)backToPreViewController
 {

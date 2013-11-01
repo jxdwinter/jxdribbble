@@ -10,7 +10,7 @@
 
 @implementation jxdribbble_player
 
-- (id) initWithPlayerInfo:(NSDictionary *)playInfo
+- (instancetype) initWithPlayerInfo:(NSDictionary *)playInfo
 {
     self = [super init];
     

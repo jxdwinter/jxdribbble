@@ -49,7 +49,8 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height - 49.0) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStyleGrouped];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0,49, 0);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setBackgroundView:nil];
@@ -119,7 +120,7 @@
     {
         return 2;
     }
-    else return 4;
+    else return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -233,6 +234,14 @@
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
         else if ( row == 3 )
+        {
+            cell.textLabel.text = @"Designer: @FloydJin";
+        }
+        else if ( row == 4)
+        {
+            cell.textLabel.text = @"Developer: @jxdwinter";
+        }
+        else if ( row == 5 )
         {
             NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
             cell.textLabel.text = [NSString stringWithFormat:@"Version : %@",version];
@@ -374,6 +383,16 @@
                                                             otherButtonTitles:@"Twitter me",@"Email me", nil];
             actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
             [actionSheet showInView:self.view];
+        }
+        else if ( row == 3)
+        {
+            NSString *urlStr = @"https://twitter.com/FloydJin";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+        }
+        else if ( row == 4 )
+        {
+            NSString *urlStr = @"https://twitter.com/jxdwinter";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
         }
     }
 }

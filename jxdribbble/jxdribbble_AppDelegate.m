@@ -112,6 +112,8 @@
     tabBarItem5.selectedImage = [UIImage imageNamed:@"ico_more_pre"];
     tabBarItem5.title = @"Others";
     
+    self.tabBarController.selectedIndex = 2;
+    
     self.window.rootViewController = self.tabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
