@@ -33,7 +33,7 @@
         [DBFilesystem setSharedFilesystem:self.filesystem];
     }
     
-    NSString *EVERNOTE_HOST = BootstrapServerBaseURLStringSandbox;
+    NSString *EVERNOTE_HOST = @"www.evernote.com";
     
     // Fill in the consumer key and secret with the values that you received from Evernote
     // To get an API key, visit http://dev.evernote.com/documentation/cloud/
@@ -46,6 +46,7 @@
                            consumerSecret:CONSUMER_SECRET];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
     // Override point for customization after application launch.
 
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:0.9]];
