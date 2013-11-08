@@ -206,9 +206,23 @@
 {
     if (buttonIndex == 0)
     {
-        if (self.player.twitter_screen_name != (NSString *) [NSNull null] )
+        if (self.player.twitter_screen_name != (NSString *) [NSNull null] && self.player.twitter_screen_name.length > 0)
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/%@",self.player.twitter_screen_name]]];
+            BOOL canTweetbotOpen = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/%@",self.player.twitter_screen_name]]];
+            BOOL canTwitterrificOpen = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"twitterrific:///profile?screen_name=%@",self.player.twitter_screen_name]]];
+
+            if ( canTweetbotOpen )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/%@",self.player.twitter_screen_name]]];
+            }
+            else if (!canTweetbotOpen && canTwitterrificOpen)
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"twitterrific:///profile?screen_name=%@",self.player.twitter_screen_name]]];
+            }
+            else
+            {
+               [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/%@",self.player.twitter_screen_name]]];
+            }
         }
         else
         {
@@ -222,7 +236,7 @@
     }
     else if ( buttonIndex == 1 )
     {
-        if (self.player.website_url != (NSString *) [NSNull null] )
+        if (self.player.website_url != (NSString *) [NSNull null] && self.player.website_url.length > 0)
         {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.player.website_url]];
         }
