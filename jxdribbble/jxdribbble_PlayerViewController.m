@@ -12,6 +12,7 @@
 #import "jxdribbble_DetailViewController.h"
 #import "jxdribbble_PlayerLikesViewController.h"
 #import "jxdribbble_PlayerListViewController.h"
+#import "jxdribbble_WebViewController.h"
 
 @interface jxdribbble_PlayerViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 
@@ -194,7 +195,7 @@
                                                              delegate:self
                                                     cancelButtonTitle:@"cancel"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Twitter",@"Website", nil];
+                                                    otherButtonTitles:@"Twitter",@"Website",@"Open",@"Open in Safari", nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showInView:self.view];
 }
@@ -235,6 +236,21 @@
             [alertView show];
         }
     }
+    else if ( buttonIndex == 2 )
+    {
+        jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
+        webViewController.urlString = self.player.url;
+        webViewController.titleString = self.player.name;
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }
+    else if ( buttonIndex == 3 )
+    {
+        if (self.player.url != (NSString *) [NSNull null] )
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.player.url]];
+        }
+    }
+    
 }
 
 
