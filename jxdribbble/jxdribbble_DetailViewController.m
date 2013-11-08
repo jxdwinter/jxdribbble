@@ -18,6 +18,7 @@
 #import "NSDate+EDAMAdditions.h"
 #import "EvernoteSDK.h"
 #import "MBProgressHUD.h"
+#import "jxdribbble_WebViewController.h"
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
 
@@ -27,6 +28,11 @@
 
 @property (strong, nonatomic) UIImage *shareImage;
 @property (strong, nonatomic) UIButton *reboundsButton;
+
+@property (strong, nonatomic) UIActionSheet *openLinkActionSheet;
+@property (copy, nonatomic) NSString *link;
+
+@property (strong, nonatomic) UIActionSheet *openWebActionSheet;
 
 @end
 
@@ -148,11 +154,11 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
     imageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]
-                                     initWithTarget:self action:@selector(share)];
-    pgr.numberOfTapsRequired = 1;
-    pgr.delegate = self;
-    [imageView addGestureRecognizer:pgr];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                     initWithTarget:self action:@selector(openWeb)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    tapGestureRecognizer.delegate = self;
+    [imageView addGestureRecognizer:tapGestureRecognizer];
     
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityIndicatorView.center = CGPointMake(imageView.center.x - 10.0,imageView.center.y - 30.0);
@@ -186,6 +192,13 @@
     
     return headerView;
     
+}
+
+- (void)openWeb
+{
+    self.openWebActionSheet = [[UIActionSheet alloc] initWithTitle:self.shot.short_url delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open",@"Open in Safari",nil];
+    self.openWebActionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+    [self.openWebActionSheet showInView:self.view];
 }
 
 - (void)share
@@ -237,6 +250,7 @@
     for (UIView *subview in actionSheet.subviews) {
         if ([subview isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)subview;
+            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
             button.titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         }
     }
@@ -246,69 +260,102 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-    EvernoteSession *session = [EvernoteSession sharedSession];
-    
-    /**
-     *  如果都授权
-     */
-    if ( account && session.isAuthenticated)
+    if (actionSheet == self.openLinkActionSheet)
     {
+        NSLog(@"%@",self.link);
         
         if ( buttonIndex == 0 )
         {
-            [self shareToSocialNetworking];
+            jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
+            webViewController.urlString = self.link;
+            [self.navigationController pushViewController:webViewController animated:YES];
         }
         else if ( buttonIndex == 1 )
         {
-            if (self.shareImage)
-            {
-                [self dropbox];
-            }
-        }
-        else if ( buttonIndex == 2 )
-        {
-            if (self.shareImage)
-            {
-                [self evernote];
-            }
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.link]]];
         }
     }
-    /**
-     *  如果dropbox授权,evernote没有授权
-     */
-    else if (account && !session.isAuthenticated)
+    else if (actionSheet == self.openWebActionSheet)
     {
         if ( buttonIndex == 0 )
         {
-            [self shareToSocialNetworking];
+            jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
+            webViewController.urlString = self.shot.short_url;
+            webViewController.titleString = self.shot.title;
+            [self.navigationController pushViewController:webViewController animated:YES];
         }
         else if ( buttonIndex == 1 )
         {
-            if (self.shareImage)
-            {
-                [self dropbox];
-            }
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
         }
     }
-    /**
-     *  如果dropbox没授权,evernote授权
-     */
-    else if (!account && session.isAuthenticated)
+    else
     {
-        if ( buttonIndex == 0 )
+        DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+        EvernoteSession *session = [EvernoteSession sharedSession];
+        
+        /**
+         *  如果都授权
+         */
+        if ( account && session.isAuthenticated)
         {
-            [self shareToSocialNetworking];
-        }
-        else if ( buttonIndex == 1 )
-        {
-            if (self.shareImage)
+            
+            if ( buttonIndex == 0 )
             {
-                [self evernote];
+                [self shareToSocialNetworking];
+            }
+            else if ( buttonIndex == 1 )
+            {
+                if (self.shareImage)
+                {
+                    [self dropbox];
+                }
+            }
+            else if ( buttonIndex == 2 )
+            {
+                if (self.shareImage)
+                {
+                    [self evernote];
+                }
+            }
+        }
+        /**
+         *  如果dropbox授权,evernote没有授权
+         */
+        else if (account && !session.isAuthenticated)
+        {
+            if ( buttonIndex == 0 )
+            {
+                [self shareToSocialNetworking];
+            }
+            else if ( buttonIndex == 1 )
+            {
+                if (self.shareImage)
+                {
+                    [self dropbox];
+                }
+            }
+        }
+        /**
+         *  如果dropbox没授权,evernote授权
+         */
+        else if (!account && session.isAuthenticated)
+        {
+            if ( buttonIndex == 0 )
+            {
+                [self shareToSocialNetworking];
+            }
+            else if ( buttonIndex == 1 )
+            {
+                if (self.shareImage)
+                {
+                    [self evernote];
+                }
             }
         }
     }
 }
+
 
 - (void)dropbox
 {
@@ -414,7 +461,7 @@
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
      attributes:@
      {
-        NSFontAttributeName: [UIFont systemFontOfSize:12]
+        NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]
      }];
     
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
@@ -423,7 +470,7 @@
     CGSize  size = rect.size;
     CGFloat height = ceilf(size.height);
     
-    return height + 70.0;
+    return height + 75.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -442,7 +489,7 @@
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
      attributes:@
      {
-        NSFontAttributeName: [UIFont systemFontOfSize:12]
+        NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]
      }];
     
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
@@ -454,11 +501,36 @@
     
     cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height);
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
+    cell.avatarImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.delegate = self;
+    [cell.avatarImageView addGestureRecognizer:tapGesture];
     cell.usernameLabel.text = comment.player.name;
     cell.bodyLabel.text = [comment.body stringByConvertingHTMLToPlainText];
     [cell.bodyLabel setDetectionBlock:^(STTweetHotWord hotWord, NSString *string, NSString *protocol, NSRange range) {
+       
+        
         NSArray *hotWords = @[@"Handle", @"Hashtag", @"Link"];
-        NSLog(@"%@",[NSString stringWithFormat:@"%@ [%d,%d]: %@%@", hotWords[hotWord], (int)range.location, (int)range.length, string, (protocol != nil) ? [NSString stringWithFormat:@" *%@*", protocol] : @""]);
+        NSLog(@"%@",[NSString stringWithFormat:@"%@ [%d,%d]: %@%@",
+                     hotWords[hotWord],
+                     (int)range.location,
+                     (int)range.length,
+                     string,
+                     (protocol != nil) ? [NSString stringWithFormat:@" *%@*",protocol] : @""]
+              );
+        
+        if ([hotWords[hotWord] length] > 0)
+        {
+            if ([hotWords[hotWord] isEqualToString:@"Link"])
+            {
+                self.link = string;
+                self.openLinkActionSheet = [[UIActionSheet alloc] initWithTitle:string delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open",@"Open in Safari",nil];
+                self.openLinkActionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+                [self.openLinkActionSheet showInView:self.view];
+            }
+        }
+        
     }];
     cell.created_atLabel.frame = CGRectMake(160.0, size.height + 50.0, 150.0, 10);
     cell.created_atLabel.text =  [comment.created_at substringToIndex:16];;
@@ -469,8 +541,23 @@
     
 }
 
-#pragma mark - Table view delegate
+/**
+ *  tap the avatar imageview in cell
+ *
+ *  @param tapGestureRecognizer
+ */
+- (void) tapGesture: (UITapGestureRecognizer *) tapGestureRecognizer
+{
+    jxdribbble_CommentCell *cell = (jxdribbble_CommentCell*)[[[tapGestureRecognizer.view superview] superview] superview];
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    NSLog(@"%d",indexPath.row);
+    jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
+    playerViewController.player = [(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] player];
+    [self.navigationController pushViewController:playerViewController animated:YES];
+}
 
+#pragma mark - Table view delegate
+/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -479,7 +566,7 @@
     [self.navigationController pushViewController:playerViewController animated:YES];
 
 }
-
+*/
 
 #pragma mark - getdata
 

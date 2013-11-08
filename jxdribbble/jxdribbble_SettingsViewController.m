@@ -157,7 +157,7 @@
                 cell.textLabel.text = @"Are you a player?";
             }
             self.theCell = cell;
-            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
         }
     }
     else if ( section == 1 )
@@ -444,6 +444,7 @@
     for (UIView *subview in actionSheet.subviews) {
         if ([subview isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)subview;
+            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
             button.titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
         }
     }
