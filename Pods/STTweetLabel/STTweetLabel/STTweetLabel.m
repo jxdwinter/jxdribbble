@@ -106,8 +106,7 @@
     _attributesHandle = @{NSForegroundColorAttributeName: [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
     _attributesHashtag = @{NSForegroundColorAttributeName: [UIColor redColor], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
     _attributesLink = @{NSForegroundColorAttributeName: [[UIColor alloc] initWithRed:129.0/255.0 green:171.0/255.0 blue:193.0/255.0 alpha:1.0], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
-
-    self.validProtocols = @[@"http", @"https",@"Http",@"Https",@"www.",@"HTTP",@"HTTPS"];
+    self.validProtocols = @[@"http", @"https",@"Http",@"Https",@"HTTP",@"HTTPS"];
     
 }
 

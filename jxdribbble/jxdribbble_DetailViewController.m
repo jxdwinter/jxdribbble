@@ -550,7 +550,6 @@
 {
     jxdribbble_CommentCell *cell = (jxdribbble_CommentCell*)[[[tapGestureRecognizer.view superview] superview] superview];
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
-    NSLog(@"%d",indexPath.row);
     jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
     playerViewController.player = [(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] player];
     [self.navigationController pushViewController:playerViewController animated:YES];

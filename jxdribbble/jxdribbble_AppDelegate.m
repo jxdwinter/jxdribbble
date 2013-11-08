@@ -49,8 +49,7 @@
 
     // Override point for customization after application launch.
 
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:0.9]];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     NSShadow *shadow = [[NSShadow alloc] init];
@@ -60,7 +59,7 @@
                                                            [UIColor whiteColor],
                                                            NSForegroundColorAttributeName,
                                                            shadow, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0],
+                                                           [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0],
                                                            NSFontAttributeName, nil]];
     
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
@@ -69,6 +68,8 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.view.backgroundColor = [UIColor whiteColor];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     jxdribbble_EveryoneViewController *everyoneViewController = [[jxdribbble_EveryoneViewController alloc] init];
     jxdribbble_DebutsViewController *debutsViewController = [[jxdribbble_DebutsViewController alloc] init];
