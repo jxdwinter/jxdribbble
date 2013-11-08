@@ -386,13 +386,29 @@
         }
         else if ( row == 3)
         {
-            NSString *urlStr = @"https://twitter.com/FloydJin";
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+            BOOL isTweetbotInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/FloydJin"]]];
+            if ( isTweetbotInstalled )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/FloydJin"]]];
+            }
+            else
+            {
+                NSString *urlStr = @"https://twitter.com/FloydJin";
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+            }
         }
         else if ( row == 4 )
         {
-            NSString *urlStr = @"https://twitter.com/jxdwinter";
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+            BOOL isTweetbotInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/jxdwinter"]]];
+            if ( isTweetbotInstalled )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/jxdwinter"]]];
+            }
+            else
+            {
+                NSString *urlStr = @"https://twitter.com/jxdwinter";
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+            }
         }
     }
 }
@@ -423,7 +439,15 @@
     {
         if (buttonIndex == 0)
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/jxdribbble"]]];
+            BOOL isTweetbotInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///post?text=@jxdribbble"]]];
+            if ( isTweetbotInstalled )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///post?text=@jxdribbble"]]];
+            }
+            else
+            {
+               [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/jxdribbble"]]];
+            }
         }
         else if ( buttonIndex == 1 )
         {

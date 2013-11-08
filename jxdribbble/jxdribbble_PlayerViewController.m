@@ -208,16 +208,10 @@
     {
         if (self.player.twitter_screen_name != (NSString *) [NSNull null] && self.player.twitter_screen_name.length > 0)
         {
-            BOOL canTweetbotOpen = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/%@",self.player.twitter_screen_name]]];
-            BOOL canTwitterrificOpen = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"twitterrific:///profile?screen_name=%@",self.player.twitter_screen_name]]];
-
-            if ( canTweetbotOpen )
+            BOOL isTweetbotInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/%@",self.player.twitter_screen_name]]];
+            if ( isTweetbotInstalled )
             {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/%@",self.player.twitter_screen_name]]];
-            }
-            else if (!canTweetbotOpen && canTwitterrificOpen)
-            {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"twitterrific:///profile?screen_name=%@",self.player.twitter_screen_name]]];
             }
             else
             {
