@@ -573,7 +573,6 @@
 {
     if ([CheckNetwork isExistenceNetwork])
     {
-        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/shots/%@/comments?page=%@&per_page=20",self.shot.id,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
@@ -640,8 +639,8 @@
     int64_t delayInSeconds = 1.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.pageIndex++;
-        [self getData];
+        weakSelf.pageIndex++;
+        [weakSelf getData];
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }

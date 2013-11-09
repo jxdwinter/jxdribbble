@@ -286,8 +286,8 @@
     int64_t delayInSeconds = 1.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.pageIndex++;
-        [self getData];
+        weakSelf.pageIndex++;
+        [weakSelf getData];
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }
