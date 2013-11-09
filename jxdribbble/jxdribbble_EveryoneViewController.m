@@ -40,8 +40,6 @@
     [super viewDidLoad];
     
     self.title = @"Everyone";
-    
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>) self;
 
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
