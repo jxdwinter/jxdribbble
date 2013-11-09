@@ -470,7 +470,7 @@
     CGSize  size = rect.size;
     CGFloat height = ceilf(size.height);
     
-    return height + 75.0;
+    return height + 60.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -497,9 +497,9 @@
                                                context:nil];
     CGSize size = rect.size;
     
-    cell.frame = CGRectMake(0.0, 0.0, 320.0, size.height + 70.0);
+    cell.frame = CGRectMake(0.0, 0.0, 320.0, size.height + 60.0);
     
-    cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height);
+    cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height + 5.0);
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
     cell.avatarImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
@@ -532,7 +532,7 @@
         }
         
     }];
-    cell.created_atLabel.frame = CGRectMake(160.0, size.height + 50.0, 150.0, 10);
+    cell.created_atLabel.frame = CGRectMake(160.0, size.height + 45.0, 150.0, 10);
     cell.created_atLabel.text =  [comment.created_at substringToIndex:16];;
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
