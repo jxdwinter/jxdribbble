@@ -42,12 +42,7 @@
 	// Do any additional setup after loading the view.
     
     self.title = @"Likes";
-    
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
-    [menuButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    
+
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     

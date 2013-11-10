@@ -36,12 +36,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
-    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
+
     if ( self.viewControllerType == 1 )
     {
         self.title = @"Following";

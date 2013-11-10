@@ -22,7 +22,7 @@
         self.shot_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 225.0)];
         [self.contentView addSubview:self.shot_imageView];
         
-        UIImageView *viewsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15.0, 231.0, 13.0, 13.0)];
+        UIImageView *viewsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15.0, 230.0, 17.0, 17.0)];
         viewsImageView.image = [UIImage imageNamed:@"eye"];
         [self.contentView addSubview:viewsImageView];
 
