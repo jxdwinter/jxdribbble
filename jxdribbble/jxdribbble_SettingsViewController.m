@@ -14,6 +14,7 @@
 #import "EvernoteSession.h"
 #import "EvernoteUserStore.h"
 #import "jxdribbble_FindAPlayerViewController.h"
+#import "jxdribbble_PlayerLikesViewController.h"
 
 @interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
@@ -64,6 +65,7 @@
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setValue:@"" forKey:@"username"];
+    [userDefaults setBool:NO forKey:@"newuser"];
     [userDefaults synchronize];
     [self.tableView reloadData];
     self.logoutButton.hidden = YES;
@@ -73,7 +75,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -103,7 +104,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -120,7 +121,11 @@
     {
         return 2;
     }
-    else return 6;
+    else if ( section == 3 )
+    {
+        return 6;
+    }
+    else return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -235,16 +240,32 @@
         }
         else if ( row == 3 )
         {
-            cell.textLabel.text = @"Designer: @FloydJin";
+            cell.textLabel.text = @"Product designer : @FloydJin";
         }
         else if ( row == 4)
         {
-            cell.textLabel.text = @"Developer: @jxdwinter";
+            cell.textLabel.text = @"Developer & designer : @jxdwinter";
         }
         else if ( row == 5 )
         {
             NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
             cell.textLabel.text = [NSString stringWithFormat:@"Version : %@",version];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+        
+    }
+    else
+    {
+        if ( row == 0 )
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@",@"All screenshots © their respective owners."];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        else if ( row == 1 )
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@",@"Powered by  © Dribbble"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
@@ -274,7 +295,17 @@
             NSString *username = [userDefaults stringForKey:@"username"];
             if ( username && username.length != 0 )
             {
-                [self getUserWithUsername:username];
+                if ( [userDefaults boolForKey:@"newuser"] )
+                {
+                    jxdribbble_PlayerLikesViewController *likes = [[jxdribbble_PlayerLikesViewController alloc] init];
+                    jxdribbble_player *player = [[jxdribbble_player alloc] initWithUsername:username];
+                    likes.player = player;
+                    [self.navigationController pushViewController:likes animated:YES];
+                }
+                else
+                {
+                    [self getUserWithUsername:username];
+                }
             }
             else
             {
@@ -528,6 +559,16 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+            NSLog(@"-----------------------------%@",error);
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setValue:username forKey:@"username"];
+            [userDefaults setBool:YES forKey:@"newuser"];
+            [userDefaults synchronize];
+            self.logoutButton.hidden = NO;
+            [self.tableView reloadData];
+            
         }];
         
         [operation start];

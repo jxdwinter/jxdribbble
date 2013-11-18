@@ -28,11 +28,13 @@
         self.shot = shot;
         
         self.frame = CGRectMake(0.0, 0.0, 320.0, 44.0);
-        self.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8];
+        self.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        self.opaque = YES;
         
         UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 7.0, 30.0, 30.0)];
         avatarImageView.layer.masksToBounds = YES;
         avatarImageView.layer.cornerRadius = 15.0;
+        avatarImageView.opaque = YES;
         
         [avatarImageView setImageWithURL:[NSURL URLWithString:shot.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
         [self addSubview:avatarImageView];
@@ -41,12 +43,14 @@
         titleLabel.text = shot.title;
         titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
         titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        titleLabel.opaque = YES;
         [self addSubview:titleLabel];
         
         UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 25.0, 150.0, 14.0)];
         usernameLabel.text = [NSString stringWithFormat:@"by %@", shot.player.name];
         usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
         usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        usernameLabel.opaque = YES;
         [self addSubview:usernameLabel];
         
         UILabel *created_atLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 25.0, 107.0, 14.0)];
@@ -54,6 +58,7 @@
         created_atLabel.textAlignment = NSTextAlignmentRight;
         created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
         created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        created_atLabel.opaque = YES;
         [self addSubview:created_atLabel];
         
     }

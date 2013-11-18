@@ -374,8 +374,10 @@
                                  "<br />"
                                  "<span>by %@ </span>"
                                  "<br />"
+                                 "<span> %@ </span>"
+                                 "<br />"
                                  "%@"
-                                 "</en-note>",self.shot.title,self.shot.player.name,[ENMLUtility mediaTagWithDataHash:dataHash mime:@"image/png"]];
+                                 "</en-note>",self.shot.title,self.shot.player.name,self.shot.url,[ENMLUtility mediaTagWithDataHash:dataHash mime:@"image/png"]];
         NSMutableArray* resources = [NSMutableArray arrayWithArray:@[resource]];
         EDAMNote *newNote = [[EDAMNote alloc] initWithGuid:nil title:[NSString stringWithFormat:@"%@ by %@",self.shot.title,self.shot.player.name] content:noteContent contentHash:nil contentLength:noteContent.length created:0 updated:0 deleted:0 active:YES updateSequenceNum:0 notebookGuid:nil tagGuids:nil resources:resources attributes:nil tagNames:nil];
         
@@ -488,7 +490,7 @@
     
     cell.frame = CGRectMake(0.0, 0.0, 320.0, size.height + 60.0);
     
-    cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height + 5.0);
+    cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height + 10.0);
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
     cell.avatarImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
@@ -521,7 +523,7 @@
         }
         
     }];
-    cell.created_atLabel.frame = CGRectMake(160.0, size.height + 45.0, 150.0, 10);
+    cell.created_atLabel.frame = CGRectMake(160.0, size.height + 50.0, 150.0, 10);
     cell.created_atLabel.text =  [comment.created_at substringToIndex:16];;
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -574,7 +576,7 @@
             for (NSDictionary * commentsDic in comments)
             {
                 jxdribbble_comments  *comment = [[jxdribbble_comments alloc] initWithCommentInfo:commentsDic];
-                
+
                 if ( self.pageIndex != 1 )
                 {
                     bool isExist = NO;

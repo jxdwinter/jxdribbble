@@ -39,11 +39,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TTTAttributedLabel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0AF1AE1672D44B2982111E73</key>
+		<key>016170027D6E4103A19DC91B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>372EC743DE3D4618A42DF987</key>
+		<key>4C949F5E84C84774872823F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>642F0691EAE648BF92F575B8</key>
+		<key>7209F409FC8940278DA3EA66</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6B319B9D744B44C68EAAE50C</key>
+		<key>850B81BBC6B941FA871D53B5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73AB34AC162F42DB9971EE5E</key>
+		<key>8DCD3880E00B40A89069BC0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>86BF3031409D4F9BBEA56E07</key>
+		<key>A4D249B7FB7543A292CE5405</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A1B4640EEB294C76A94FCE1B</key>
+		<key>EC889CD59CC94508A1EB0BED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D51649E8F2604646A4347ECB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E9E72DBD750142CE92812FBF</key>
+		<key>F7734A11BA1B4983AAE3B6EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

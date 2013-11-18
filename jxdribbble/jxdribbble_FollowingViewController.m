@@ -22,6 +22,8 @@
 @property (strong, nonatomic) UIActivityIndicatorView *spinner;
 @property (strong, nonatomic) UIButton *refreshButton;
 
+@property (copy, nonatomic) NSString *username;
+
 @end
 
 @implementation jxdribbble_FollowingViewController
@@ -86,6 +88,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [userDefaults stringForKey:@"username"];
+    
     if ( !username || username.length == 0 )
     {
         [self.dataSource removeAllObjects];
@@ -102,8 +105,13 @@
     {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.refreshButton];
         self.refreshButton.hidden = NO;
+
+        if (![username isEqualToString:self.username])
+        {
+            [self refresh];
+            self.username = username;
+        }
     }
-    
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -135,12 +143,20 @@
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 [userDefaults setValue:username forKey:@"username"];
                 [userDefaults synchronize];
-                
+                self.username = username;
                 [self getData];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setValue:username forKey:@"username"];
+            [userDefaults setBool:YES forKey:@"newuser"];
+            [userDefaults synchronize];
+            self.username = username;
+            [self getData];
+            
         }];
         
         [operation start];

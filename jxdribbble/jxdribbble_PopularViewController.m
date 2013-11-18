@@ -189,8 +189,6 @@
 {
     if ([CheckNetwork isExistenceNetwork])
     {
-        NSLog(@"%lu",(unsigned long)self.pageIndex);
-        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
         UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
@@ -286,6 +284,10 @@
         [weakSelf getData];
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 

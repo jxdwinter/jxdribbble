@@ -32,6 +32,7 @@
 		7260D119180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D118180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m */; };
 		7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */; };
 		7277215A1811703F00DA740B /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 727721591811703F00DA740B /* more.png */; };
+		7279C0061834B2D800D557BD /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 7279C0051834B2D800D557BD /* refresh.png */; };
 		728DDD32182F6515006F7A8F /* spech.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DDD2F182F6515006F7A8F /* spech.png */; };
 		728DDD33182F6515006F7A8F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DDD30182F6515006F7A8F /* eye.png */; };
 		728DDD34182F6515006F7A8F /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DDD31182F6515006F7A8F /* heart.png */; };
@@ -70,7 +71,6 @@
 		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BA040C180833DC00BE15B1 /* CheckNetwork.m */; };
-		72C2F268183064B400BDA3DE /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 72C2F267183064B400BDA3DE /* refresh.png */; };
 		72D0C530182C95E2003804FF /* jxdribbble_WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D0C52F182C95E2003804FF /* jxdribbble_WebViewController.m */; };
 		72D6CBA7181E16C300022988 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBA6181E16C300022988 /* Dropbox.framework */; };
 		72D6CBA9181E16FC00022988 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBA8181E16FC00022988 /* Security.framework */; };
@@ -125,6 +125,7 @@
 		7260D11C180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerViewController.h; sourceTree = "<group>"; };
 		7260D11D180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerViewController.m; sourceTree = "<group>"; };
 		727721591811703F00DA740B /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		7279C0051834B2D800D557BD /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		728DDD2F182F6515006F7A8F /* spech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spech.png; sourceTree = "<group>"; };
 		728DDD30182F6515006F7A8F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		728DDD31182F6515006F7A8F /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
@@ -181,7 +182,6 @@
 		72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		72BA040B180833DC00BE15B1 /* CheckNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetwork.h; sourceTree = "<group>"; };
 		72BA040C180833DC00BE15B1 /* CheckNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetwork.m; sourceTree = "<group>"; };
-		72C2F267183064B400BDA3DE /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		72D0C52E182C95E2003804FF /* jxdribbble_WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_WebViewController.h; sourceTree = "<group>"; };
 		72D0C52F182C95E2003804FF /* jxdribbble_WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_WebViewController.m; sourceTree = "<group>"; };
 		72D6CBA6181E16C300022988 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
@@ -485,7 +485,7 @@
 				728DDD2F182F6515006F7A8F /* spech.png */,
 				728DDD30182F6515006F7A8F /* eye.png */,
 				728DDD31182F6515006F7A8F /* heart.png */,
-				72C2F267183064B400BDA3DE /* refresh.png */,
+				7279C0051834B2D800D557BD /* refresh.png */,
 			);
 			name = image;
 			sourceTree = "<group>";
@@ -606,7 +606,7 @@
 				7202796B18221FEA00B6E606 /* Icon-Spotlight-40@2x.png in Resources */,
 				728DDD34182F6515006F7A8F /* heart.png in Resources */,
 				72B8010E18064D4200A3BDA8 /* Images.xcassets in Resources */,
-				72C2F268183064B400BDA3DE /* refresh.png in Resources */,
+				7279C0061834B2D800D557BD /* refresh.png in Resources */,
 				7277215A1811703F00DA740B /* more.png in Resources */,
 				7210FF6C1821023C0069CF05 /* ico_more_pre@2x.png in Resources */,
 				7210FF5B1820FEC70069CF05 /* ico_people_pre@2x.png in Resources */,
