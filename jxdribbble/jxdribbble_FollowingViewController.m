@@ -132,7 +132,7 @@
     {
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@",username]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/%@",username]];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -149,14 +149,6 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setValue:username forKey:@"username"];
-            [userDefaults setBool:YES forKey:@"newuser"];
-            [userDefaults synchronize];
-            self.username = username;
-            [self getData];
-            
         }];
         
         [operation start];

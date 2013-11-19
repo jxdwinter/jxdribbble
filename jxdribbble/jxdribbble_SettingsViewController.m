@@ -65,7 +65,6 @@
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setValue:@"" forKey:@"username"];
-    [userDefaults setBool:NO forKey:@"newuser"];
     [userDefaults synchronize];
     [self.tableView reloadData];
     self.logoutButton.hidden = YES;
@@ -295,17 +294,7 @@
             NSString *username = [userDefaults stringForKey:@"username"];
             if ( username && username.length != 0 )
             {
-                if ( [userDefaults boolForKey:@"newuser"] )
-                {
-                    jxdribbble_PlayerLikesViewController *likes = [[jxdribbble_PlayerLikesViewController alloc] init];
-                    jxdribbble_player *player = [[jxdribbble_player alloc] initWithUsername:username];
-                    likes.player = player;
-                    [self.navigationController pushViewController:likes animated:YES];
-                }
-                else
-                {
-                    [self getUserWithUsername:username];
-                }
+                [self getUserWithUsername:username];
             }
             else
             {
@@ -542,7 +531,7 @@
     if ([CheckNetwork isExistenceNetwork])
     {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@",username]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/%@",username]];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -560,15 +549,6 @@
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             
-            NSLog(@"-----------------------------%@",error);
-            
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setValue:username forKey:@"username"];
-            [userDefaults setBool:YES forKey:@"newuser"];
-            [userDefaults synchronize];
-            self.logoutButton.hidden = NO;
-            [self.tableView reloadData];
-            
         }];
         
         [operation start];
@@ -584,7 +564,7 @@
         self.theCell.userInteractionEnabled = NO;
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@",username]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/%@",username]];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {

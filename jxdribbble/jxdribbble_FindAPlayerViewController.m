@@ -88,7 +88,7 @@
     {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         [_spinner startAnimating];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@",username]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/%@",username]];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
