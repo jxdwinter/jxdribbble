@@ -548,7 +548,9 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@":( No player named %@",username]
+                                                               delegate:nil cancelButtonTitle:@"I'll try another one" otherButtonTitles:nil, nil];
+            [alertView show];
         }];
         
         [operation start];
