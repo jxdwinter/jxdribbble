@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "jxdribbble_shots.h"
+#import "MBProgressHUD.h"
 
 @interface jxdribbble_TableViewCell : UITableViewCell
 
@@ -17,6 +18,6 @@
 @property (nonatomic, strong) UILabel *likesLabel;
 @property (nonatomic, strong) UILabel *commentsLabel;
 
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end

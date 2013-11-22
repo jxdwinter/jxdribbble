@@ -117,6 +117,7 @@
     UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 35.0, 35.0)];
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 17.5;
+    
     [avatarImageView setImageWithURL:[NSURL URLWithString:self.shot.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
     
     UIButton *userButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -148,25 +149,36 @@
     tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.delegate = self;
     [imageView addGestureRecognizer:tapGestureRecognizer];
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:imageView animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
     
-    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicatorView.center = CGPointMake(imageView.center.x - 10.0,imageView.center.y - 30.0);
-    [activityIndicatorView startAnimating];
-    [imageView addSubview:activityIndicatorView];
     __weak typeof(imageView) weakImageView = imageView;
-    [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.shot.image_url]]
-                               placeholderImage:[UIImage imageNamed:@"placeholder"]
-                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                            [activityIndicatorView stopAnimating];
-                                            [activityIndicatorView removeFromSuperview];
-                                            weakImageView.image = image;
-                                            self.shareImage = image;
-                                        }
-                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                            [activityIndicatorView stopAnimating];
-                                            [activityIndicatorView removeFromSuperview];
-                                            [weakImageView setImage:[UIImage imageNamed:@"placeholder"]];
-                                        }];
+
+    NSURL *url;
+    if ( [[self.shot.image_url substringWithRange:NSMakeRange(self.shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
+    {
+        url = [NSURL URLWithString:self.shot.image_teaser_url];
+    }
+    else
+    {
+        url = [NSURL URLWithString:self.shot.image_url];
+    }
+    
+    [imageView setImageWithURL:url
+                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                 options:SDWebImageLowPriority
+                                progress:^(NSUInteger receivedSize, long long expectedSize) {
+                                    double p = (double)receivedSize/(double)expectedSize;
+                                    hud.progress = p;
+                                } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                    if (!error)
+                                    {
+                                        weakImageView.image = image;
+                                        self.shareImage = image;
+                                    }
+                                    hud.hidden = YES;
+                                }];
     
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(278.0, 280.0, 30.0, 30.0)];
     [shareButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];

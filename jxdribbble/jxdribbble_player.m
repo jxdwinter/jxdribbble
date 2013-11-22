@@ -43,17 +43,4 @@
     
 }
 
-- (id)initWithUsername : (NSString *) username
-{
-    self = [super init];
-    
-    if (self)
-    {
-        _username = username;
-    }
-    
-    return self;
-    
-}
-
 @end

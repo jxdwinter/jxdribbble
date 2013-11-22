@@ -52,9 +52,9 @@
         self.commentsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
         [self.contentView addSubview:self.commentsLabel];
         
-        self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.activityIndicatorView.center = CGPointMake(self.shot_imageView.center.x - 10.0, self.shot_imageView.center.y);
-        [self.shot_imageView addSubview:self.activityIndicatorView];
+        self.hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+        
         
     }
     

@@ -24,6 +24,7 @@
 		7210FF68182101B70069CF05 /* ico_love_pre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7210FF66182101B70069CF05 /* ico_love_pre@2x.png */; };
 		7210FF6B1821023C0069CF05 /* ico_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7210FF691821023C0069CF05 /* ico_more@2x.png */; };
 		7210FF6C1821023C0069CF05 /* ico_more_pre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7210FF6A1821023C0069CF05 /* ico_more_pre@2x.png */; };
+		721F621F183EF3D200665F03 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F621E183EF3D200665F03 /* libFlurry_4.3.0.a */; };
 		723C7F1D181F6423004B2E2A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 723C7F1C181F6423004B2E2A /* libxml2.dylib */; };
 		72419ED01809111A004AC323 /* jxdribbble_player.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ECF1809111A004AC323 /* jxdribbble_player.m */; };
 		72419ED41809158A004AC323 /* jxdribbble_shots.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ED31809158A004AC323 /* jxdribbble_shots.m */; };
@@ -111,6 +112,8 @@
 		7210FF66182101B70069CF05 /* ico_love_pre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_love_pre@2x.png"; sourceTree = "<group>"; };
 		7210FF691821023C0069CF05 /* ico_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_more@2x.png"; sourceTree = "<group>"; };
 		7210FF6A1821023C0069CF05 /* ico_more_pre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_more_pre@2x.png"; sourceTree = "<group>"; };
+		721F621D183EF3D200665F03 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		721F621E183EF3D200665F03 /* libFlurry_4.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.0.a; sourceTree = "<group>"; };
 		723C7F1C181F6423004B2E2A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		72419ECE1809111A004AC323 /* jxdribbble_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_player.h; sourceTree = "<group>"; };
 		72419ECF1809111A004AC323 /* jxdribbble_player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_player.m; sourceTree = "<group>"; };
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				723C7F1D181F6423004B2E2A /* libxml2.dylib in Frameworks */,
+				721F621F183EF3D200665F03 /* libFlurry_4.3.0.a in Frameworks */,
 				72D6CBB0181E174800022988 /* libc++.dylib in Frameworks */,
 				72D6CBAD181E171F00022988 /* QuartzCore.framework in Frameworks */,
 				72D6CBAB181E170A00022988 /* SystemConfiguration.framework in Frameworks */,
@@ -232,6 +236,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		721F621C183EF3C200665F03 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				721F621D183EF3D200665F03 /* Flurry.h */,
+				721F621E183EF3D200665F03 /* libFlurry_4.3.0.a */,
+			);
+			name = Flurry;
+			sourceTree = "<group>";
+		};
 		72419ED11809111F004AC323 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +294,7 @@
 		7260D116180B9DFF00CB2A3E /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				721F621C183EF3C200665F03 /* Flurry */,
 				72B8010A18064D4200A3BDA8 /* jxdribbble_AppDelegate.h */,
 				72B8010B18064D4200A3BDA8 /* jxdribbble_AppDelegate.m */,
 				72BA040B180833DC00BE15B1 /* CheckNetwork.h */,
@@ -836,11 +850,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
+					/Users/jiangxiaodong/Downloads,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jxdribbble/jxdribbble-Prefix.pch";
 				INFOPLIST_FILE = "jxdribbble/jxdribbble-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jiangxiaodong/Documents/jxdribbble/jxdribbble,
+				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F587213A-B0B7-4417-AB36-B6B252B6B7DE";
@@ -860,11 +879,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
+					/Users/jiangxiaodong/Downloads,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jxdribbble/jxdribbble-Prefix.pch";
 				INFOPLIST_FILE = "jxdribbble/jxdribbble-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jiangxiaodong/Documents/jxdribbble/jxdribbble,
+				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ACD7359E-EC70-4343-9D77-7854978CE305";

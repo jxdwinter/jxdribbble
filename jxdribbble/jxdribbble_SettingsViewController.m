@@ -103,7 +103,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -121,6 +121,10 @@
         return 2;
     }
     else if ( section == 3 )
+    {
+        return 1;
+    }
+    else if ( section == 4 )
     {
         return 6;
     }
@@ -224,6 +228,17 @@
     {
         if ( row == 0 )
         {
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            long long size = [imageCache getSize]/1024/1024;
+            cell.textLabel.text = [NSString stringWithFormat:@"Clear cache : %lldM",size];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        }
+    }
+    else if ( section == 4 )
+    {
+        if ( row == 0 )
+        {
             cell.textLabel.text = @"Tell friends this App";
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
@@ -255,7 +270,7 @@
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
         
     }
-    else
+    else if ( section == 5 )
     {
         if ( row == 0 )
         {
@@ -377,6 +392,15 @@
         }
     }
     else if ( section == 3 )
+    {
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        [imageCache clearMemory];
+        [imageCache clearDisk];
+        [imageCache cleanDisk];
+        
+        [self.tableView reloadData];
+    }
+    else if ( section == 4 )
     {
         if ( row == 0 )
         {

@@ -17,4 +17,6 @@
     #import "AFNetworking.h"
     #import "CheckNetwork.h"
     #import "jxdribbble_AppDelegate.h"
+    #import "Flurry.h"
+    #import <SDWebImage/UIImageView+WebCache.h>
 #endif

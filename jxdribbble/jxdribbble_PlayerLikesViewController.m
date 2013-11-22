@@ -120,20 +120,29 @@
     {
         cell = [[jxdribbble_TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    [cell.activityIndicatorView startAnimating];
+    
+    cell.hud.hidden = NO;
     __weak typeof(cell) weakCell = cell;
-    [cell.shot_imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:shot.image_url]]
-                               placeholderImage:[UIImage imageNamed:@"placeholder"]
-                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                            [weakCell.activityIndicatorView stopAnimating];
-                                            //[weakCell.activityIndicatorView removeFromSuperview];
-                                            weakCell.shot_imageView.image = image;
-                                        }
-                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                            [weakCell.activityIndicatorView stopAnimating];
-                                            //[weakCell.activityIndicatorView removeFromSuperview];
-                                            [weakCell.shot_imageView setImage:[UIImage imageNamed:@"placeholder"]];
-                                        }];
+    
+    NSURL *url;
+    if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
+    {
+        url = [NSURL URLWithString:shot.image_teaser_url];
+    }
+    else
+    {
+        url = [NSURL URLWithString:shot.image_url];
+    }
+    [cell.shot_imageView setImageWithURL:url
+                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                 options:SDWebImageLowPriority
+                                progress:^(NSUInteger receivedSize, long long expectedSize) {
+                                    double p = (double)receivedSize/(double)expectedSize;
+                                    weakCell.hud.progress = p;
+                                } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                    weakCell.hud.hidden = YES;
+                                    weakCell.shot_imageView.image = image;
+                                }];
     
     cell.likesLabel.text = [NSString stringWithFormat:@"%@",shot.likes_count];
     cell.viewsLabel.text = [NSString stringWithFormat:@"%@",shot.views_count];

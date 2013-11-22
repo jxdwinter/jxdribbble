@@ -32,6 +32,5 @@
 @property (nonatomic, copy) NSString *created_at;
 
 - (id)initWithPlayerInfo : (NSDictionary *) playInfo;
-- (id)initWithUsername : (NSString *) username;
 
 @end
