@@ -142,10 +142,10 @@
                                 progress:^(NSUInteger receivedSize, long long expectedSize) {
                                     double p = (double)receivedSize/(double)expectedSize;
                                     weakCell.hud.progress = p;
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-        weakCell.hud.hidden = YES;
-        weakCell.shot_imageView.image = image;
-    }];
+                                } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                    weakCell.hud.hidden = YES;
+                                    weakCell.shot_imageView.image = image;
+                                }];
 
     cell.likesLabel.text = [NSString stringWithFormat:@"%@",shot.likes_count];
     cell.viewsLabel.text = [NSString stringWithFormat:@"%@",shot.views_count];
