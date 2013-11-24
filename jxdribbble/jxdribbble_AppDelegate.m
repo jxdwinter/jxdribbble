@@ -55,7 +55,7 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8];
+    shadow.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     shadow.shadowOffset = CGSizeMake(0, 0);
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor whiteColor],
@@ -65,9 +65,8 @@
                                                            NSFontAttributeName, nil]];
     
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
-    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8]];
 
-    
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.view.backgroundColor = [UIColor whiteColor];
     

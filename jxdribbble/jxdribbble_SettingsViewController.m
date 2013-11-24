@@ -228,7 +228,9 @@
     {
         if ( row == 0 )
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"Clear cache"];
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            long long number = [imageCache getSize]/1024/1024;
+            cell.textLabel.text = [NSString stringWithFormat:@"Clear cache : %lldM",number];
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
