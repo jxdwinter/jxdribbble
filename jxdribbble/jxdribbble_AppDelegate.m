@@ -46,6 +46,9 @@
                            consumerSecret:CONSUMER_SECRET];
     
     [Flurry startSession:@"XGS87XNNXS7B7C2P6FX7"];
+    
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    [imageCache setMaxCacheSize:1024*1024*200];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 

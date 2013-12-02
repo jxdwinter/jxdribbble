@@ -627,7 +627,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
         CGContextSetFillColorWithColor(context, self.color.CGColor);
     } else {
         //CGContextSetGrayFillColor(context, 0.0f, self.opacity);
-        CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:0.9].CGColor);
+        CGContextSetFillColorWithColor(context, [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0].CGColor);
+        //CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
     }
 
 	
@@ -769,6 +770,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		_progress = 0.f;
 		_annular = NO;
 		_progressTintColor = [[UIColor alloc] initWithWhite:1.f alpha:1.f];
+
+        //_progressTintColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
 		_backgroundTintColor = [[UIColor alloc] initWithWhite:1.f alpha:.1f];
 		[self registerForKVO];
 	}

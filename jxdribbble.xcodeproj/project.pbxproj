@@ -81,6 +81,7 @@
 		72D74E71180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D74E70180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m */; };
 		72D74E89180FD429007A1259 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 72D74E88180FD429007A1259 /* logout.png */; };
 		72D74E8B180FEF43007A1259 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D74E8A180FEF43007A1259 /* MessageUI.framework */; };
+		72EC81A818458EFB006C4A31 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EC81A718458EFB006C4A31 /* Reveal.framework */; };
 		72F581EB180EC6BC002904E0 /* jxdribbble_ReboundsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F581EA180EC6BC002904E0 /* jxdribbble_ReboundsViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -196,6 +197,7 @@
 		72D74E70180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_FindAPlayerViewController.m; sourceTree = "<group>"; };
 		72D74E88180FD429007A1259 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		72D74E8A180FEF43007A1259 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		72EC81A718458EFB006C4A31 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		72F581E9180EC6BC002904E0 /* jxdribbble_ReboundsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_ReboundsViewController.h; sourceTree = "<group>"; };
 		72F581EA180EC6BC002904E0 /* jxdribbble_ReboundsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_ReboundsViewController.m; sourceTree = "<group>"; };
 		A2F94FEC927F45BBB40815E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				72B8013D1806525000A3BDA8 /* Crashlytics.framework in Frameworks */,
 				72B8010018064D4200A3BDA8 /* UIKit.framework in Frameworks */,
 				72B800FC18064D4200A3BDA8 /* Foundation.framework in Frameworks */,
+				72EC81A818458EFB006C4A31 /* Reveal.framework in Frameworks */,
 				72D6CBA7181E16C300022988 /* Dropbox.framework in Frameworks */,
 				44CB78C8DA0F488DB7076FFE /* libPods.a in Frameworks */,
 			);
@@ -354,6 +357,7 @@
 		72B800FA18064D4200A3BDA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72EC81A718458EFB006C4A31 /* Reveal.framework */,
 				72D6CBAC181E171F00022988 /* QuartzCore.framework */,
 				72D6CBAA181E170A00022988 /* SystemConfiguration.framework */,
 				72D6CBA8181E16FC00022988 /* Security.framework */,
@@ -575,6 +579,17 @@
 				TargetAttributes = {
 					72B800F718064D4200A3BDA8 = {
 						DevelopmentTeam = LRW83L7QAK;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+							com.apple.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					72B8011218064D4200A3BDA8 = {
 						TestTargetID = 72B800F718064D4200A3BDA8;
@@ -846,7 +861,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaodong Jiang (P2X3356V75)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
@@ -862,7 +877,7 @@
 				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F587213A-B0B7-4417-AB36-B6B252B6B7DE";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -875,7 +890,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiaodong Jiang (LRW83L7QAK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
@@ -891,7 +906,7 @@
 				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ACD7359E-EC70-4343-9D77-7854978CE305";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
