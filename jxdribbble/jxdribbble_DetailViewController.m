@@ -19,8 +19,10 @@
 #import "EvernoteSDK.h"
 #import "MBProgressHUD.h"
 #import "jxdribbble_WebViewController.h"
+#import "JFDepthView/JFDepthView.h"
+#import "jxdribbble_WebPlayGIFViewController.h"
 
-@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
+@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate,JFDepthViewDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -33,6 +35,9 @@
 @property (copy, nonatomic) NSString *link;
 
 @property (strong, nonatomic) UIActionSheet *openWebActionSheet;
+
+@property (nonatomic, strong) JFDepthView* depthView;
+@property (nonatomic, strong) jxdribbble_WebPlayGIFViewController *topViewController;
 
 @end
 
@@ -53,7 +58,7 @@
 	// Do any additional setup after loading the view.
 
     self.title = @"Detail";
-    
+
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
@@ -94,6 +99,15 @@
         [self getData];
     }
 
+}
+
+- (void)show
+{
+    [self.depthView presentViewController:self.topViewController inView:self.view animated:YES];
+}
+- (void)dismiss
+{
+    [self.depthView dismissPresentedViewInView:self.view animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -159,6 +173,28 @@
     if ( [[self.shot.image_url substringWithRange:NSMakeRange(self.shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
     {
         url = [NSURL URLWithString:self.shot.image_teaser_url];
+        
+        self.topViewController = [[jxdribbble_WebPlayGIFViewController alloc] init];
+        self.topViewController.urlStr = self.shot.image_url;
+        UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+        self.depthView = [[JFDepthView alloc] init];
+        self.depthView.delegate = self;
+        
+        // Optional properties, use these to customize your presentations
+        self.depthView.presentedViewWidth = 320;
+        self.depthView.presentedViewOriginY = [[UIScreen mainScreen] bounds].size.height-240-49-44;
+        self.depthView.blurAmount = JFDepthViewBlurAmountLight;
+        self.depthView.recognizer = tapRec;
+        
+        self.topViewController.depthViewReference = self.depthView;
+        self.topViewController.presentedInView = self.view;
+        
+        UIImage *playImage = [UIImage imageNamed:@"play"];
+        UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [playButton setFrame:CGRectMake(0.0, 195.0, 30.0, 30.0)];
+        [playButton addTarget:self action:@selector(show) forControlEvents:UIControlEventTouchUpInside];
+        [playButton setImage:playImage forState:UIControlStateNormal];
+        [imageView addSubview:playButton];
     }
     else
     {
@@ -243,6 +279,8 @@
     {
         [self shareToSocialNetworking];
     }
+    
+    
   
 }
 
@@ -647,5 +685,24 @@
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }
+
+
+- (void)willPresentDepthView:(JFDepthView*)depthView {
+    NSLog(@"willPresentDepthView called!!!");
+}
+
+- (void)didPresentDepthView:(JFDepthView*)depthView {
+    NSLog(@"didPresentDepthView called!!!");
+}
+
+- (void)willDismissDepthView:(JFDepthView*)depthView {
+    NSLog(@"willDismissDepthView called!!!");
+}
+
+- (void)didDismissDepthView:(JFDepthView*)depthView {
+    NSLog(@"didDismissDepthView called!!!");
+}
+
+
 
 @end
