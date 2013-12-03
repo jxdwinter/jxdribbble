@@ -13,5 +13,7 @@
 @property (weak, nonatomic) JFDepthView* depthViewReference;
 @property (weak, nonatomic) UIView* presentedInView;
 @property (copy, nonatomic) NSString *urlStr;
-- (IBAction)closeView:(id)sender;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
+@property (copy, nonatomic) NSString *titleStr;
+- (void)closeView;
 @end

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="jxdribbble_WebPlayGIFViewController">
             <connections>
+                <outlet property="navItem" destination="XVN-hK-eKA" id="Vtv-2f-h28"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -14,17 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KGn-rI-eWc">
+                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bpX-Hw-rUz">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
-                        <navigationItem title="Gif" id="dH6-Cu-LPh">
-                            <barButtonItem key="rightBarButtonItem" title="Close" id="WCr-uH-ERX">
-                                <connections>
-                                    <action selector="closeView:" destination="-1" id="Ub2-eU-bog"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
+                        <navigationItem id="XVN-hK-eKA"/>
                     </items>
                 </navigationBar>
             </subviews>

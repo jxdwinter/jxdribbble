@@ -173,9 +173,11 @@
     if ( [[self.shot.image_url substringWithRange:NSMakeRange(self.shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
     {
         url = [NSURL URLWithString:self.shot.image_teaser_url];
-        
+
         self.topViewController = [[jxdribbble_WebPlayGIFViewController alloc] init];
         self.topViewController.urlStr = self.shot.image_url;
+        self.topViewController.titleStr = self.shot.title;
+        
         UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
         self.depthView = [[JFDepthView alloc] init];
         self.depthView.delegate = self;
@@ -191,7 +193,7 @@
         
         UIImage *playImage = [UIImage imageNamed:@"play"];
         UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [playButton setFrame:CGRectMake(0.0, 195.0, 30.0, 30.0)];
+        [playButton setFrame:CGRectMake(2.0, 193.0, 30.0, 30.0)];
         [playButton addTarget:self action:@selector(show) forControlEvents:UIControlEventTouchUpInside];
         [playButton setImage:playImage forState:UIControlStateNormal];
         [imageView addSubview:playButton];

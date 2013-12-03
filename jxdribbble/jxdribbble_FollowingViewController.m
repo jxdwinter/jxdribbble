@@ -190,12 +190,14 @@
     }
     
     cell.hud.hidden = NO;
+    cell.gifImageView.hidden = YES;
     __weak typeof(cell) weakCell = cell;
     
     NSURL *url;
     if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
     {
         url = [NSURL URLWithString:shot.image_teaser_url];
+        cell.gifImageView.hidden = NO;
     }
     else
     {

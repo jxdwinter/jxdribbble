@@ -119,6 +119,7 @@
         cell = [[jxdribbble_TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.hud.hidden = NO;
+    cell.gifImageView.hidden = YES;
     __weak typeof(cell) weakCell = cell;
     
     NSURL *url;

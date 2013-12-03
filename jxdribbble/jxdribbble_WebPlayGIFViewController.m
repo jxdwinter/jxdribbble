@@ -8,7 +8,7 @@
 
 #import "jxdribbble_WebPlayGIFViewController.h"
 
-@interface jxdribbble_WebPlayGIFViewController ()
+@interface jxdribbble_WebPlayGIFViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIWebView *webView;
 @end
 
@@ -28,17 +28,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.navItem.title = self.titleStr;
+
     self.view.backgroundColor = [UIColor whiteColor];
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, 320, 240)];
     self.webView.backgroundColor = [UIColor redColor];
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
     [self.view addSubview:self.webView];
+    
+    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeView)];
+    tapRec.delegate = self;
+    tapRec.numberOfTapsRequired = 1;
+    [self.webView addGestureRecognizer:tapRec];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -53,7 +65,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)closeView:(id)sender {
+- (void)closeView
+{
     [self.depthViewReference dismissPresentedViewInView:self.presentedInView animated:YES];
 }
 

@@ -23,6 +23,10 @@
         self.shot_imageView.opaque = YES;
         [self.contentView addSubview:self.shot_imageView];
         
+        self.gifImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2.0, 193.0, 30.0, 30.0)];
+        self.gifImageView.image = [UIImage imageNamed:@"Gif"];
+        [self.shot_imageView addSubview:self.gifImageView];
+        
         UIImageView *viewsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15.0, 230.0, 17.0, 17.0)];
         viewsImageView.image = [UIImage imageNamed:@"eye"];
         [self.contentView addSubview:viewsImageView];

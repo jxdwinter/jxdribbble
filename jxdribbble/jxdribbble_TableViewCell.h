@@ -20,4 +20,6 @@
 
 @property (nonatomic, strong) MBProgressHUD *hud;
 
+@property (nonatomic, strong) UIImageView *gifImageView;
+
 @end
