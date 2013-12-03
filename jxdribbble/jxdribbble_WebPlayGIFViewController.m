@@ -8,8 +8,9 @@
 
 #import "jxdribbble_WebPlayGIFViewController.h"
 
-@interface jxdribbble_WebPlayGIFViewController ()<UIGestureRecognizerDelegate>
+@interface jxdribbble_WebPlayGIFViewController ()<UIGestureRecognizerDelegate,UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView *webView;
+@property (strong, nonatomic) UIActivityIndicatorView *spinner;
 @end
 
 @implementation jxdribbble_WebPlayGIFViewController
@@ -29,9 +30,18 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navItem.title = self.titleStr;
+    
+    
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [_spinner setCenter:CGPointMake(300.0 , 20.0)];
+    [self.view addSubview:_spinner];
+    [_spinner startAnimating];
+    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_spinner];
+    [self navigationItem].rightBarButtonItem = barButton;
 
     self.view.backgroundColor = [UIColor whiteColor];
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, 320, 240)];
+    self.webView.delegate = self;
     self.webView.backgroundColor = [UIColor redColor];
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
@@ -41,11 +51,12 @@
     tapRec.delegate = self;
     tapRec.numberOfTapsRequired = 1;
     [self.webView addGestureRecognizer:tapRec];
+
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    
+    [_spinner stopAnimating];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
