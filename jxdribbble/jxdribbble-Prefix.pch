@@ -19,4 +19,5 @@
     #import "jxdribbble_AppDelegate.h"
     #import "Flurry.h"
     #import <SDWebImage/UIImageView+WebCache.h>
+    #import "jxdribbble_Global.h"
 #endif

@@ -54,7 +54,7 @@
 
     // Override point for customization after application launch.
 
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
+    [[UINavigationBar appearance] setBarTintColor:[jxdribbble_Global globlaColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     NSShadow *shadow = [[NSShadow alloc] init];
@@ -64,10 +64,10 @@
                                                            [UIColor whiteColor],
                                                            NSForegroundColorAttributeName,
                                                            shadow, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0],
+                                                           [jxdribbble_Global globlaFontWithSize:20],
                                                            NSFontAttributeName, nil]];
     
-    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0]];
+    [[UITabBar appearance] setTintColor:[jxdribbble_Global globlaColor]];
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8]];
 
     self.tabBarController = [[UITabBarController alloc] init];

@@ -9,7 +9,6 @@
 #import "jxdribbble_WebPlayGIFViewController.h"
 
 @interface jxdribbble_WebPlayGIFViewController ()<UIGestureRecognizerDelegate,UIWebViewDelegate>
-@property (nonatomic, strong) UIWebView *webView;
 @property (strong, nonatomic) UIActivityIndicatorView *spinner;
 @end
 
@@ -40,9 +39,7 @@
     [self navigationItem].rightBarButtonItem = barButton;
 
     self.view.backgroundColor = [UIColor whiteColor];
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, 320, 240)];
     self.webView.delegate = self;
-    self.webView.backgroundColor = [UIColor redColor];
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
     [self.view addSubview:self.webView];
@@ -52,6 +49,11 @@
     tapRec.numberOfTapsRequired = 1;
     [self.webView addGestureRecognizer:tapRec];
 
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    self.webView = nil;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

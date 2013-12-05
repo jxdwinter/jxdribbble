@@ -98,6 +98,7 @@
 		72B8F93C180BE38700F556AC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93B180BE38700F556AC /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		72B8F93F180BE3B700F556AC /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BA040C180833DC00BE15B1 /* CheckNetwork.m */; };
+		72C8098C18501DA000296EEA /* jxdribbble_Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C8098B18501DA000296EEA /* jxdribbble_Global.m */; };
 		72D0C530182C95E2003804FF /* jxdribbble_WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D0C52F182C95E2003804FF /* jxdribbble_WebViewController.m */; };
 		72D6CBA7181E16C300022988 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBA6181E16C300022988 /* Dropbox.framework */; };
 		72D6CBA9181E16FC00022988 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D6CBA8181E16FC00022988 /* Security.framework */; };
@@ -256,6 +257,8 @@
 		72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		72BA040B180833DC00BE15B1 /* CheckNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetwork.h; sourceTree = "<group>"; };
 		72BA040C180833DC00BE15B1 /* CheckNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetwork.m; sourceTree = "<group>"; };
+		72C8098A18501DA000296EEA /* jxdribbble_Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_Global.h; sourceTree = "<group>"; };
+		72C8098B18501DA000296EEA /* jxdribbble_Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_Global.m; sourceTree = "<group>"; };
 		72D0C52E182C95E2003804FF /* jxdribbble_WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_WebViewController.h; sourceTree = "<group>"; };
 		72D0C52F182C95E2003804FF /* jxdribbble_WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_WebViewController.m; sourceTree = "<group>"; };
 		72D6CBA6181E16C300022988 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				72B8F93B180BE38700F556AC /* NSString+HTML.m */,
 				72B8F93D180BE3B700F556AC /* GTMNSString+HTML.h */,
 				72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */,
+				72C8098A18501DA000296EEA /* jxdribbble_Global.h */,
+				72C8098B18501DA000296EEA /* jxdribbble_Global.m */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -910,6 +915,7 @@
 				7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */,
 				72B8F939180BC77100F556AC /* jxdribbble_CommentCell.m in Sources */,
 				72456307184CD16000F7D4EF /* GLProgram.m in Sources */,
+				72C8098C18501DA000296EEA /* jxdribbble_Global.m in Sources */,
 				72456305184CD16000F7D4EF /* JFDepthView.m in Sources */,
 				72D74E71180F72FD007A1259 /* jxdribbble_FindAPlayerViewController.m in Sources */,
 				72BA040D180833DC00BE15B1 /* CheckNetwork.m in Sources */,

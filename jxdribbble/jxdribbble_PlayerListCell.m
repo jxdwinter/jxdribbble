@@ -25,13 +25,13 @@
         [self.contentView addSubview:self.avatarImageView];
         
         self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60.0, 12.0, 150.0, 18.0)];
-        self.usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
-        self.usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        self.usernameLabel.font = [jxdribbble_Global globlaFontWithSize:15];
+        self.usernameLabel.textColor = [jxdribbble_Global globlaColor];
         [self.contentView addSubview:self.usernameLabel];
         
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60.0, 35.0, 150.0, 10.0)];
-        self.nameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-        self.nameLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        self.nameLabel.font = [jxdribbble_Global globlaFontWithSize:10];
+        self.nameLabel.textColor = [jxdribbble_Global globlaTextColor];
         [self.contentView addSubview:self.nameLabel];
         
     }

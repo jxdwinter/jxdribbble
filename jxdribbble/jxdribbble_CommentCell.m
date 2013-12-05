@@ -22,19 +22,19 @@
         [self.contentView addSubview:self.avatarImageView];
         
         self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 12.0, 150.0, 18.0)];
-        self.usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
-        self.usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+        self.usernameLabel.font = [jxdribbble_Global globlaFontWithSize:15];
+        self.usernameLabel.textColor = [jxdribbble_Global globlaColor];
         [self.contentView addSubview:self.usernameLabel];
         
         self.bodyLabel = [[STTweetLabel alloc] init];
-        self.bodyLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        self.bodyLabel.textColor = [jxdribbble_Global globlaTextColor];
         [self.bodyLabel setNumberOfLines:0];
         self.bodyLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self.contentView addSubview:self.bodyLabel];
 
         self.created_atLabel = [[UILabel alloc] init];
-        self.created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-        self.created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+        self.created_atLabel.textColor = [jxdribbble_Global globlaTextColor];
+        self.created_atLabel.font = [jxdribbble_Global globlaFontWithSize:10];
         self.created_atLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.created_atLabel];
         

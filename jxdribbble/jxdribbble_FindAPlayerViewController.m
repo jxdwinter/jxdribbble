@@ -47,8 +47,8 @@
     self.usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(60.0, 150.0, 200.0, 20.0)];
     self.usernameTextField.delegate = self;
     self.usernameTextField.placeholder = @"Enter a player name";
-    self.usernameTextField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
-    self.usernameTextField.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    self.usernameTextField.font = [jxdribbble_Global globlaFontWithSize:15];
+    self.usernameTextField.textColor = [jxdribbble_Global globlaColor];
     self.usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.usernameTextField.returnKeyType = UIReturnKeySearch;
@@ -57,7 +57,7 @@
     [self.view addSubview:self.usernameTextField];
     
     UIImageView *lineView = [[UIImageView alloc] initWithFrame:CGRectMake(60.0, 170.5, 200.0, 0.5)];
-    lineView.backgroundColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    lineView.backgroundColor = [jxdribbble_Global globlaColor];
     [self.view addSubview:lineView];
     
     [self.usernameTextField becomeFirstResponder];

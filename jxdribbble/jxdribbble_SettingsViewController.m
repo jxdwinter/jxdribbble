@@ -161,7 +161,7 @@
                 cell.textLabel.text = @"Are you a player?";
             }
             self.theCell = cell;
-            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+            cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         }
     }
     else if ( section == 1 )
@@ -169,7 +169,7 @@
         if ( row == 0 )
         {
             cell.textLabel.text = [NSString stringWithFormat:@"Find a Player"];
-            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+            cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         }
     }
     else if (section == 2 )
@@ -217,7 +217,7 @@
             else cell.textLabel.text = [NSString stringWithFormat:@"%@", @"Link to Evernote"];
         }
        
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+        cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
     else if ( section == 3 )
@@ -252,7 +252,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+        cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         
     }
     else if ( section == 4 )
@@ -268,12 +268,12 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
+        cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         
     }
     
     
-    cell.textLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    cell.textLabel.textColor = [jxdribbble_Global globlaColor];
     
     return cell;
     
@@ -488,8 +488,8 @@
     for (UIView *subview in actionSheet.subviews) {
         if ([subview isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)subview;
-            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
-            button.titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+            button.titleLabel.font = [jxdribbble_Global globlaFontWithSize:15];
+            button.titleLabel.textColor = [jxdribbble_Global globlaColor];
         }
     }
 }

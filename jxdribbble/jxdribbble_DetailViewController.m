@@ -103,11 +103,31 @@
 
 - (void)show
 {
+    self.topViewController = [[jxdribbble_WebPlayGIFViewController alloc] init];
+    self.topViewController.urlStr = self.shot.image_url;
+    self.topViewController.titleStr = self.shot.title;
+    
+    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+    self.depthView = [[JFDepthView alloc] init];
+    self.depthView.delegate = self;
+    
+    // Optional properties, use these to customize your presentations
+    self.depthView.presentedViewWidth = 320;
+    self.depthView.presentedViewOriginY = [[UIScreen mainScreen] bounds].size.height-240-49-44;
+    self.depthView.blurAmount = JFDepthViewBlurAmountLight;
+    self.depthView.recognizer = tapRec;
+    
+    self.topViewController.depthViewReference = self.depthView;
+    self.topViewController.presentedInView = self.view;
+    
     [self.depthView presentViewController:self.topViewController inView:self.view animated:YES];
+    
 }
 - (void)dismiss
 {
     [self.depthView dismissPresentedViewInView:self.view animated:YES];
+    self.topViewController = nil;
+    self.depthView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -142,19 +162,19 @@
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 5.0, 250.0, 20.0)];
     titleLabel.text = self.shot.title;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
-    titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    titleLabel.font = [jxdribbble_Global globlaFontWithSize:15];
+    titleLabel.textColor = [jxdribbble_Global globlaColor];
     
     UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 30.0, 150.0, 15.0)];
     usernameLabel.text = [NSString stringWithFormat:@"by %@", self.shot.player.name];
-    usernameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-    usernameLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+    usernameLabel.font = [jxdribbble_Global globlaFontWithSize:10];
+    usernameLabel.textColor = [jxdribbble_Global globlaColor];
     
     UILabel *created_atLabel = [[UILabel alloc] initWithFrame:CGRectMake(200.0, 30.0, 107.0, 15.0)];
     created_atLabel.text = [self.shot.created_at substringToIndex:16];
     created_atLabel.textAlignment = NSTextAlignmentRight;
-    created_atLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-    created_atLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    created_atLabel.font = [jxdribbble_Global globlaFontWithSize:10];
+    created_atLabel.textColor = [jxdribbble_Global globlaTextColor];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
     imageView.userInteractionEnabled = YES;
@@ -174,23 +194,6 @@
     {
         url = [NSURL URLWithString:self.shot.image_teaser_url];
 
-        self.topViewController = [[jxdribbble_WebPlayGIFViewController alloc] init];
-        self.topViewController.urlStr = self.shot.image_url;
-        self.topViewController.titleStr = self.shot.title;
-        
-        UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-        self.depthView = [[JFDepthView alloc] init];
-        self.depthView.delegate = self;
-        
-        // Optional properties, use these to customize your presentations
-        self.depthView.presentedViewWidth = 320;
-        self.depthView.presentedViewOriginY = [[UIScreen mainScreen] bounds].size.height-240-49-44;
-        self.depthView.blurAmount = JFDepthViewBlurAmountLight;
-        self.depthView.recognizer = tapRec;
-        
-        self.topViewController.depthViewReference = self.depthView;
-        self.topViewController.presentedInView = self.view;
-        
         UIImage *playImage = [UIImage imageNamed:@"play"];
         UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [playButton setFrame:CGRectMake(2.0, 193.0, 30.0, 30.0)];
@@ -291,8 +294,8 @@
     for (UIView *subview in actionSheet.subviews) {
         if ([subview isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)subview;
-            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
-            button.titleLabel.textColor = [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0];
+            button.titleLabel.font = [jxdribbble_Global globlaFontWithSize:15];
+            button.titleLabel.textColor = [jxdribbble_Global globlaColor];
         }
     }
 }
@@ -504,7 +507,7 @@
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
      attributes:@
      {
-        NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]
+        NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12]
      }];
     
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
@@ -532,7 +535,7 @@
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
      attributes:@
      {
-        NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]
+        NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12]
      }];
     
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
@@ -690,19 +693,19 @@
 
 
 - (void)willPresentDepthView:(JFDepthView*)depthView {
-    NSLog(@"willPresentDepthView called!!!");
+
 }
 
 - (void)didPresentDepthView:(JFDepthView*)depthView {
-    NSLog(@"didPresentDepthView called!!!");
+
 }
 
 - (void)willDismissDepthView:(JFDepthView*)depthView {
-    NSLog(@"willDismissDepthView called!!!");
+
 }
 
 - (void)didDismissDepthView:(JFDepthView*)depthView {
-    NSLog(@"didDismissDepthView called!!!");
+
 }
 
 

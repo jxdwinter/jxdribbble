@@ -32,8 +32,8 @@
         [self.contentView addSubview:viewsImageView];
 
         self.viewsLabel = [[UILabel alloc] initWithFrame:CGRectMake(33.0, 230.0, 65.0, 15.0)];
-        self.viewsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-        self.viewsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        self.viewsLabel.font = [jxdribbble_Global globlaFontWithSize:10];
+        self.viewsLabel.textColor = [jxdribbble_Global globlaTextColor];
         self.viewsLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.viewsLabel];
         
@@ -42,8 +42,8 @@
         [self.contentView addSubview:likesImageView];
         
         self.likesLabel = [[UILabel alloc] initWithFrame:CGRectMake(165.0, 230.0, 45.0, 15.0)];
-        self.likesLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-        self.likesLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        self.likesLabel.font = [jxdribbble_Global globlaFontWithSize:10];
+        self.likesLabel.textColor = [jxdribbble_Global globlaTextColor];
         [self.contentView addSubview:self.likesLabel];
         
         
@@ -52,8 +52,8 @@
         [self.contentView addSubview:commentsImageView];
         
         self.commentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(285.0, 230.0, 35.0, 15.0)];
-        self.commentsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-        self.commentsLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+        self.commentsLabel.font = [jxdribbble_Global globlaFontWithSize:10];
+        self.commentsLabel.textColor = [jxdribbble_Global globlaTextColor];
         [self.contentView addSubview:self.commentsLabel];
         
         self.hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
