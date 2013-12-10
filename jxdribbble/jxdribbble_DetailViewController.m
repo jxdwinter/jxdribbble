@@ -36,11 +36,6 @@
 @property (strong, nonatomic) UIControl *headerView;
 @property (strong, nonatomic) UIActivityIndicatorView *spinner;
 
-/*
-@property (nonatomic, strong) JFDepthView* depthView;
-@property (nonatomic, strong) jxdribbble_WebPlayGIFViewController *topViewController;
-*/
-
 @end
 
 @implementation jxdribbble_DetailViewController
@@ -108,6 +103,10 @@
 
 }
 
+
+/**
+ *  
+ */
 - (void)rebounds
 {
     jxdribbble_ReboundsViewController *rebounds = [[jxdribbble_ReboundsViewController alloc] init];
@@ -262,7 +261,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    self.webView = nil;
+
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -293,7 +292,7 @@
      */
     if ( account && session.isAuthenticated)
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",@"Save to Evernote",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -302,7 +301,7 @@
      */
     else if (account && !session.isAuthenticated)
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -311,7 +310,7 @@
      */
     else if (!account && session.isAuthenticated)
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Evernote",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -321,7 +320,7 @@
     else if (!account && !session.isAuthenticated)
     {
         //[self shareToSocialNetworking];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -557,6 +556,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+
+    if([self isViewLoaded] && ![[self view] window])
+    {
+        if (self.webView)
+        {
+            [self.webView removeFromSuperview];
+            self.webView = nil;
+        }
+        if (self.headerView)
+        {
+            [self.headerView removeFromSuperview];
+            self.headerView = nil;
+        }
+    }
 }
 
 - (void)userInfo
@@ -564,11 +577,6 @@
     jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
     playerViewController.player = self.shot.player;
     [self.navigationController pushViewController:playerViewController animated:YES];
-}
-
-- (void)backToPreViewController
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -768,25 +776,5 @@
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }
-
-/*
-
-- (void)willPresentDepthView:(JFDepthView*)depthView {
-
-}
-
-- (void)didPresentDepthView:(JFDepthView*)depthView {
-
-}
-
-- (void)willDismissDepthView:(JFDepthView*)depthView {
-
-}
-
-- (void)didDismissDepthView:(JFDepthView*)depthView {
-
-}
-
-*/
 
 @end
