@@ -19,10 +19,9 @@
 #import "EvernoteSDK.h"
 #import "MBProgressHUD.h"
 #import "jxdribbble_WebViewController.h"
-#import "JFDepthView/JFDepthView.h"
-#import "jxdribbble_WebPlayGIFViewController.h"
 
-@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate,JFDepthViewDelegate>
+
+@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -30,14 +29,17 @@
 
 @property (strong, nonatomic) UIImage *shareImage;
 @property (strong, nonatomic) UIButton *reboundsButton;
-
-@property (strong, nonatomic) UIActionSheet *openLinkActionSheet;
 @property (copy, nonatomic) NSString *link;
+@property (strong, nonatomic) UIActionSheet *openLinkActionSheet;
 
-@property (strong, nonatomic) UIActionSheet *openWebActionSheet;
+@property (strong, nonatomic) UIWebView *webView;
+@property (strong, nonatomic) UIControl *headerView;
+@property (strong, nonatomic) UIActivityIndicatorView *spinner;
 
+/*
 @property (nonatomic, strong) JFDepthView* depthView;
 @property (nonatomic, strong) jxdribbble_WebPlayGIFViewController *topViewController;
+*/
 
 @end
 
@@ -101,35 +103,6 @@
 
 }
 
-- (void)show
-{
-    self.topViewController = [[jxdribbble_WebPlayGIFViewController alloc] init];
-    self.topViewController.urlStr = self.shot.image_url;
-    self.topViewController.titleStr = self.shot.title;
-    
-    UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-    self.depthView = [[JFDepthView alloc] init];
-    self.depthView.delegate = self;
-    
-    // Optional properties, use these to customize your presentations
-    self.depthView.presentedViewWidth = 320;
-    self.depthView.presentedViewOriginY = [[UIScreen mainScreen] bounds].size.height-240-49-44;
-    self.depthView.blurAmount = JFDepthViewBlurAmountLight;
-    self.depthView.recognizer = tapRec;
-    
-    self.topViewController.depthViewReference = self.depthView;
-    self.topViewController.presentedInView = self.view;
-    
-    [self.depthView presentViewController:self.topViewController inView:self.view animated:YES];
-    
-}
-- (void)dismiss
-{
-    [self.depthView dismissPresentedViewInView:self.view animated:YES];
-    self.topViewController = nil;
-    self.depthView = nil;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
 
@@ -145,7 +118,7 @@
 - (UIControl *)setUpHeaderView
 {
     
-    UIControl *headerView = [[UIControl alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 320.0)];
+    self.headerView = [[UIControl alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 320.0)];
     
     //UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 7.0, 35.0, 35.0)];
     UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 35.0, 35.0)];
@@ -178,11 +151,6 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
     imageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
-                                     initWithTarget:self action:@selector(openWeb)];
-    tapGestureRecognizer.numberOfTapsRequired = 1;
-    tapGestureRecognizer.delegate = self;
-    [imageView addGestureRecognizer:tapGestureRecognizer];
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:imageView animated:YES];
     hud.mode = MBProgressHUDModeAnnularDeterminate;
@@ -193,11 +161,18 @@
     if ( [[self.shot.image_url substringWithRange:NSMakeRange(self.shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
     {
         url = [NSURL URLWithString:self.shot.image_teaser_url];
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                        initWithTarget:self action:@selector(openWeb)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.delegate = self;
+        [imageView addGestureRecognizer:tapGestureRecognizer];
+
 
         UIImage *playImage = [UIImage imageNamed:@"play"];
         UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [playButton setFrame:CGRectMake(2.0, 193.0, 30.0, 30.0)];
-        [playButton addTarget:self action:@selector(show) forControlEvents:UIControlEventTouchUpInside];
+        //[playButton addTarget:self action:@selector(show) forControlEvents:UIControlEventTouchUpInside];
         [playButton setImage:playImage forState:UIControlStateNormal];
         [imageView addSubview:playButton];
     }
@@ -225,22 +200,85 @@
     [shareButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     
-    [headerView addSubview:userButton];
-    [headerView addSubview:titleLabel];
-    [headerView addSubview:usernameLabel];
-    [headerView addSubview:created_atLabel];
-    [headerView addSubview:imageView];
-    [headerView addSubview:shareButton];
+    [self.headerView addSubview:userButton];
+    [self.headerView addSubview:titleLabel];
+    [self.headerView addSubview:usernameLabel];
+    [self.headerView addSubview:created_atLabel];
+    [self.headerView addSubview:imageView];
+    [self.headerView addSubview:shareButton];
     
-    return headerView;
+    return self.headerView;
     
 }
 
+
 - (void)openWeb
 {
-    self.openWebActionSheet = [[UIActionSheet alloc] initWithTitle:self.shot.short_url delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open",@"Open in Safari",nil];
-    self.openWebActionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
-    [self.openWebActionSheet showInView:self.view];
+    if (!self.webView)
+    {
+
+        
+        self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
+        
+        UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeWeb)];
+        tapRec.delegate = self;
+        tapRec.numberOfTapsRequired = 1;
+        [self.webView addGestureRecognizer:tapRec];
+        
+        self.webView.delegate = self;
+        self.webView.scalesPageToFit = YES;
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.shot.image_url]]];
+        
+        UIImage *playImage = [UIImage imageNamed:@"stop"];
+        UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [playButton setFrame:CGRectMake(2.0, 193.0, 30.0, 30.0)];
+        [playButton setImage:playImage forState:UIControlStateNormal];
+        [self.webView addSubview:playButton];
+        
+        
+        _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [_spinner setColor:[jxdribbble_Global globlaColor]];
+        [_spinner setCenter:CGPointMake(150 , 115)];
+        [self.webView addSubview:_spinner];
+        [_spinner startAnimating];
+        
+    }
+
+    
+    [self.headerView addSubview:self.webView];
+
+    
+}
+
+- (void)closeWeb
+{
+
+    if (self.webView)
+    {
+        [self.webView removeFromSuperview];
+    }
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    self.webView = nil;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [_spinner stopAnimating];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.webView stopLoading];
 }
 
 - (void)share
@@ -255,7 +293,7 @@
      */
     if ( account && session.isAuthenticated)
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",@"Save to Evernote",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -264,7 +302,7 @@
      */
     else if (account && !session.isAuthenticated)
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Dropbox",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -273,7 +311,7 @@
      */
     else if (!account && session.isAuthenticated)
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Evernote",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -282,7 +320,10 @@
      */
     else if (!account && !session.isAuthenticated)
     {
-        [self shareToSocialNetworking];
+        //[self shareToSocialNetworking];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share to Social",@"Open",@"Open in Safari",nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+        [actionSheet showInView:self.view];
     }
     
     
@@ -319,20 +360,6 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.link]]];
         }
     }
-    else if (actionSheet == self.openWebActionSheet)
-    {
-        if ( buttonIndex == 0 )
-        {
-            jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
-            webViewController.urlString = self.shot.short_url;
-            webViewController.titleString = self.shot.title;
-            [self.navigationController pushViewController:webViewController animated:YES];
-        }
-        else if ( buttonIndex == 1 )
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
-        }
-    }
     else
     {
         DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
@@ -362,6 +389,17 @@
                     [self evernote];
                 }
             }
+            else if ( buttonIndex == 3 )
+            {
+                jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
+                webViewController.urlString = self.shot.short_url;
+                webViewController.titleString = self.shot.title;
+                [self.navigationController pushViewController:webViewController animated:YES];
+            }
+            else if ( buttonIndex ==4 )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.link]]];
+            }
         }
         /**
          *  如果dropbox授权,evernote没有授权
@@ -379,6 +417,17 @@
                     [self dropbox];
                 }
             }
+            else if ( buttonIndex == 2 )
+            {
+                jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
+                webViewController.urlString = self.shot.short_url;
+                webViewController.titleString = self.shot.title;
+                [self.navigationController pushViewController:webViewController animated:YES];
+            }
+            else if ( buttonIndex == 3 )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
+            }
         }
         /**
          *  如果dropbox没授权,evernote授权
@@ -395,6 +444,35 @@
                 {
                     [self evernote];
                 }
+            }
+            else if ( buttonIndex == 2 )
+            {
+                jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
+                webViewController.urlString = self.shot.short_url;
+                webViewController.titleString = self.shot.title;
+                [self.navigationController pushViewController:webViewController animated:YES];
+            }
+            else if ( buttonIndex == 3 )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
+            }
+        }
+        else if ( !account && !session.isAuthenticated )
+        {
+            if ( buttonIndex == 0 )
+            {
+                [self shareToSocialNetworking];
+            }
+            else if ( buttonIndex == 1 )
+            {
+                jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
+                webViewController.urlString = self.shot.short_url;
+                webViewController.titleString = self.shot.title;
+                [self.navigationController pushViewController:webViewController animated:YES];
+            }
+            else if ( buttonIndex == 2 )
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
             }
         }
     }
@@ -691,6 +769,7 @@
     });
 }
 
+/*
 
 - (void)willPresentDepthView:(JFDepthView*)depthView {
 
@@ -708,6 +787,6 @@
 
 }
 
-
+*/
 
 @end
