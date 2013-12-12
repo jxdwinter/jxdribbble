@@ -4,9 +4,9 @@ PODS:
     - SSKeychain (= 0.2.1)
   - MBProgressHUD (0.8)
   - Reachability (3.1.1)
-  - SDWebImage (3.5):
+  - SDWebImage (3.5.1):
     - SDWebImage/Core
-  - SDWebImage/Core (3.5)
+  - SDWebImage/Core (3.5.1)
   - SSKeychain (0.2.1)
   - STTweetLabel (3.1.2)
   - SVPullToRefresh (0.4.1)
@@ -25,7 +25,7 @@ SPEC CHECKSUMS:
   Evernote-SDK-iOS: 9294970e3c28083d7e7aa3c2c882c0c93ef526e7
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SDWebImage: f1a72472f8a2d54445f1fedafe2090593d9caf7f
+  SDWebImage: a408b548a634b792372e07e753fc1079aff5032a
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
   STTweetLabel: 274fc1504d886be3e6be5be198ff4c5c900116dd
   SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
