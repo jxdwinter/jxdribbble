@@ -593,7 +593,7 @@
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
      attributes:@
      {
-        NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12]
+        NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12.5]
      }];
     
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
@@ -621,7 +621,7 @@
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
      attributes:@
      {
-        NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12]
+        NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12.5]
      }];
     
     CGRect rect = [attributedText boundingRectWithSize:(CGSize){250.0, CGFLOAT_MAX}
@@ -634,10 +634,9 @@
     cell.bodyLabel.frame = CGRectMake(50.0, 35.0, 250.0, size.height + 10.0);
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString:comment.player.avatar_url] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];
     cell.avatarImageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
-    tapGesture.numberOfTapsRequired = 1;
-    tapGesture.delegate = self;
-    [cell.avatarImageView addGestureRecognizer:tapGesture];
+    
+    [cell.avatarButton addTarget:self action:@selector(avatarButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
     cell.usernameLabel.text = comment.player.name;
     cell.bodyLabel.text = [comment.body stringByConvertingHTMLToPlainText];
     [cell.bodyLabel setDetectionBlock:^(STTweetHotWord hotWord, NSString *string, NSString *protocol, NSRange range) {
@@ -674,14 +673,14 @@
 }
 
 /**
- *  tap the avatar imageview in cell
+ *  click cell'avatar push to playerViewController
  *
- *  @param tapGestureRecognizer
+ *  @param sender avatarButton of the click which clicked
  */
-- (void) tapGesture: (UITapGestureRecognizer *) tapGestureRecognizer
+- (void) avatarButtonTouched: (UIButton *)sender
 {
-    jxdribbble_CommentCell *cell = (jxdribbble_CommentCell*)[[[tapGestureRecognizer.view superview] superview] superview];
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    jxdribbble_CommentCell *cell = (jxdribbble_CommentCell *)[[[[sender superview] superview] superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     jxdribbble_PlayerViewController *playerViewController = [[jxdribbble_PlayerViewController alloc] init];
     playerViewController.player = [(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] player];
     [self.navigationController pushViewController:playerViewController animated:YES];

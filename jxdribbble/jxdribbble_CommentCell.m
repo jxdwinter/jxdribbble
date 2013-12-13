@@ -15,11 +15,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        
+        
+        
 
         self.avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 15.0, 30.0, 30.0)];
         self.avatarImageView.layer.masksToBounds = YES;
         self.avatarImageView.layer.cornerRadius = 15.0;
         [self.contentView addSubview:self.avatarImageView];
+        
+        self.avatarButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30.0, 30.0)];
+        [self.avatarImageView addSubview:self.avatarButton];
         
         self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 12.0, 150.0, 18.0)];
         self.usernameLabel.font = [jxdribbble_Global globlaFontWithSize:15];

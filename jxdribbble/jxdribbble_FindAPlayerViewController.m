@@ -45,6 +45,7 @@
     [self navigationItem].rightBarButtonItem = barButton;
     
     self.usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(60.0, 150.0, 200.0, 20.0)];
+    self.usernameTextField.tintColor = [jxdribbble_Global globlaColor];
     self.usernameTextField.delegate = self;
     self.usernameTextField.placeholder = @"Enter a player name";
     self.usernameTextField.font = [jxdribbble_Global globlaFontWithSize:15];

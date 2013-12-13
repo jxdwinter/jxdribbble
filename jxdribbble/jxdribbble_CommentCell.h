@@ -12,6 +12,7 @@
 
 @interface jxdribbble_CommentCell : UITableViewCell
 
+@property (nonatomic, strong) UIButton *avatarButton;
 @property (nonatomic, strong) UIImageView *avatarImageView ;
 @property (nonatomic, strong) UILabel *usernameLabel ;
 @property (nonatomic, strong) STTweetLabel *bodyLabel ;
