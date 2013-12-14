@@ -251,7 +251,6 @@
 
 - (void)closeWeb
 {
-
     if (self.webView)
     {
         [self.webView removeFromSuperview];
@@ -261,7 +260,8 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-
+    [self.webView removeFromSuperview];
+    self.webView = nil;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
