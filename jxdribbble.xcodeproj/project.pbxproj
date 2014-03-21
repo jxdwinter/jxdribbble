@@ -19,6 +19,7 @@
 		7210FF6B1821023C0069CF05 /* ico_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7210FF691821023C0069CF05 /* ico_more@2x.png */; };
 		7210FF6C1821023C0069CF05 /* ico_more_pre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7210FF6A1821023C0069CF05 /* ico_more_pre@2x.png */; };
 		721F621F183EF3D200665F03 /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F621E183EF3D200665F03 /* libFlurry_4.3.0.a */; };
+		72291D9518D6E47D0080BC05 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72291D9418D6E47D0080BC05 /* ImageIO.framework */; };
 		723C7F1D181F6423004B2E2A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 723C7F1C181F6423004B2E2A /* libxml2.dylib */; };
 		72419ED01809111A004AC323 /* jxdribbble_player.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ECF1809111A004AC323 /* jxdribbble_player.m */; };
 		72419ED41809158A004AC323 /* jxdribbble_shots.m in Sources */ = {isa = PBXBuildFile; fileRef = 72419ED31809158A004AC323 /* jxdribbble_shots.m */; };
@@ -31,6 +32,9 @@
 		7245631E184CD1DC00F7D4EF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7245631D184CD1DC00F7D4EF /* AVFoundation.framework */; };
 		72456320184CD1F200F7D4EF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7245631F184CD1F200F7D4EF /* CoreImage.framework */; };
 		72456329184CE4AA00F7D4EF /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 72456328184CE4AA00F7D4EF /* play.png */; };
+		72471FFA18DB383F00DBC82D /* VVeboImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 72471FF518DB383F00DBC82D /* VVeboImage.m */; };
+		72471FFB18DB383F00DBC82D /* VVeboImageTicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 72471FF718DB383F00DBC82D /* VVeboImageTicker.m */; };
+		72471FFC18DB383F00DBC82D /* VVeboImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72471FF918DB383F00DBC82D /* VVeboImageView.m */; };
 		7247A8E81856ED9500FEC4DB /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 7247A8E71856ED9500FEC4DB /* stop.png */; };
 		72566D121840EFA000071335 /* headimg_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 72566D111840EFA000071335 /* headimg_bg.png */; };
 		7260D119180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D118180B9E2B00CB2A3E /* jxdribbble_DetailViewController.m */; };
@@ -40,6 +44,7 @@
 		728DDD32182F6515006F7A8F /* spech.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DDD2F182F6515006F7A8F /* spech.png */; };
 		728DDD33182F6515006F7A8F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DDD30182F6515006F7A8F /* eye.png */; };
 		728DDD34182F6515006F7A8F /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 728DDD31182F6515006F7A8F /* heart.png */; };
+		72922C7C18D2A6FC00860B74 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72922C7B18D2A6FC00860B74 /* Reveal.framework */; };
 		72A53071180E1DA10054C073 /* jxdribbble_PlayerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A53070180E1DA10054C073 /* jxdribbble_PlayerHeaderView.m */; };
 		72A53073180E2DB80054C073 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A53072180E2DB80054C073 /* location.png */; };
 		72A53076180E2FF90054C073 /* website.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A53074180E2FF90054C073 /* website.png */; };
@@ -118,6 +123,7 @@
 		7210FF6A1821023C0069CF05 /* ico_more_pre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_more_pre@2x.png"; sourceTree = "<group>"; };
 		721F621D183EF3D200665F03 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		721F621E183EF3D200665F03 /* libFlurry_4.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.0.a; sourceTree = "<group>"; };
+		72291D9418D6E47D0080BC05 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		723C7F1C181F6423004B2E2A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		72419ECE1809111A004AC323 /* jxdribbble_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_player.h; sourceTree = "<group>"; };
 		72419ECF1809111A004AC323 /* jxdribbble_player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_player.m; sourceTree = "<group>"; };
@@ -134,6 +140,12 @@
 		7245631D184CD1DC00F7D4EF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7245631F184CD1F200F7D4EF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		72456328184CE4AA00F7D4EF /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		72471FF418DB383F00DBC82D /* VVeboImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVeboImage.h; sourceTree = "<group>"; };
+		72471FF518DB383F00DBC82D /* VVeboImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVeboImage.m; sourceTree = "<group>"; };
+		72471FF618DB383F00DBC82D /* VVeboImageTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVeboImageTicker.h; sourceTree = "<group>"; };
+		72471FF718DB383F00DBC82D /* VVeboImageTicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVeboImageTicker.m; sourceTree = "<group>"; };
+		72471FF818DB383F00DBC82D /* VVeboImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVeboImageView.h; sourceTree = "<group>"; };
+		72471FF918DB383F00DBC82D /* VVeboImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVeboImageView.m; sourceTree = "<group>"; };
 		7247A8E71856ED9500FEC4DB /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		72566D111840EFA000071335 /* headimg_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headimg_bg.png; sourceTree = "<group>"; };
 		7260D117180B9E2B00CB2A3E /* jxdribbble_DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_DetailViewController.h; sourceTree = "<group>"; };
@@ -145,6 +157,7 @@
 		728DDD2F182F6515006F7A8F /* spech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spech.png; sourceTree = "<group>"; };
 		728DDD30182F6515006F7A8F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		728DDD31182F6515006F7A8F /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		72922C7B18D2A6FC00860B74 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		72A5306F180E1DA10054C073 /* jxdribbble_PlayerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jxdribbble_PlayerHeaderView.h; sourceTree = "<group>"; };
 		72A53070180E1DA10054C073 /* jxdribbble_PlayerHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jxdribbble_PlayerHeaderView.m; sourceTree = "<group>"; };
 		72A53072180E2DB80054C073 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
@@ -227,6 +240,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72291D9518D6E47D0080BC05 /* ImageIO.framework in Frameworks */,
+				72922C7C18D2A6FC00860B74 /* Reveal.framework in Frameworks */,
 				72456320184CD1F200F7D4EF /* CoreImage.framework in Frameworks */,
 				7245631E184CD1DC00F7D4EF /* AVFoundation.framework in Frameworks */,
 				7245631C184CD1D300F7D4EF /* OpenGLES.framework in Frameworks */,
@@ -332,6 +347,12 @@
 				72B8F93E180BE3B700F556AC /* GTMNSString+HTML.m */,
 				72C8098A18501DA000296EEA /* jxdribbble_Global.h */,
 				72C8098B18501DA000296EEA /* jxdribbble_Global.m */,
+				72471FF418DB383F00DBC82D /* VVeboImage.h */,
+				72471FF518DB383F00DBC82D /* VVeboImage.m */,
+				72471FF618DB383F00DBC82D /* VVeboImageTicker.h */,
+				72471FF718DB383F00DBC82D /* VVeboImageTicker.m */,
+				72471FF818DB383F00DBC82D /* VVeboImageView.h */,
+				72471FF918DB383F00DBC82D /* VVeboImageView.m */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -383,6 +404,8 @@
 		72B800FA18064D4200A3BDA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72291D9418D6E47D0080BC05 /* ImageIO.framework */,
+				72922C7B18D2A6FC00860B74 /* Reveal.framework */,
 				7245631F184CD1F200F7D4EF /* CoreImage.framework */,
 				7245631D184CD1DC00F7D4EF /* AVFoundation.framework */,
 				7245631B184CD1D300F7D4EF /* OpenGLES.framework */,
@@ -757,6 +780,7 @@
 				72B8014F18065D9300A3BDA8 /* jxdribbble_DebutsViewController.m in Sources */,
 				72419ED01809111A004AC323 /* jxdribbble_player.m in Sources */,
 				72B8010C18064D4200A3BDA8 /* jxdribbble_AppDelegate.m in Sources */,
+				72471FFA18DB383F00DBC82D /* VVeboImage.m in Sources */,
 				72D0C530182C95E2003804FF /* jxdribbble_WebViewController.m in Sources */,
 				72A53081180E77CF0054C073 /* jxdribbble_PlayerListViewController.m in Sources */,
 				72B8014C18065C9300A3BDA8 /* jxdribbble_EveryoneViewController.m in Sources */,
@@ -766,7 +790,9 @@
 				72B8015218065DB300A3BDA8 /* jxdribbble_PopularViewController.m in Sources */,
 				72A5307E180E745F0054C073 /* jxdribbble_PlayerLikesViewController.m in Sources */,
 				72F581EB180EC6BC002904E0 /* jxdribbble_ReboundsViewController.m in Sources */,
+				72471FFB18DB383F00DBC82D /* VVeboImageTicker.m in Sources */,
 				72419EDC18093386004AC323 /* jxdribbble_TableViewCell.m in Sources */,
+				72471FFC18DB383F00DBC82D /* VVeboImageView.m in Sources */,
 				72A53084180E81550054C073 /* jxdribbble_PlayerListCell.m in Sources */,
 				72A53071180E1DA10054C073 /* jxdribbble_PlayerHeaderView.m in Sources */,
 				7260D11E180BAC6B00CB2A3E /* jxdribbble_PlayerViewController.m in Sources */,
@@ -899,11 +925,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaodong Jiang (P2X3356V75)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
 					/Users/jiangxiaodong/Downloads,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jxdribbble/jxdribbble-Prefix.pch";
@@ -928,11 +955,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiaodong Jiang (LRW83L7QAK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jiangxiaodong/Documents/jxdribbble,
 					/Users/jiangxiaodong/Downloads,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jxdribbble/jxdribbble-Prefix.pch";

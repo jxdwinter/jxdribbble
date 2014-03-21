@@ -20,8 +20,12 @@
 #import "MBProgressHUD.h"
 #import "jxdribbble_WebViewController.h"
 
+#import "VVeboImageView.h"
+#import "VVeboImage.h"
 
-@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate>
+
+
+@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnectionDataDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -32,9 +36,7 @@
 @property (copy, nonatomic) NSString *link;
 @property (strong, nonatomic) UIActionSheet *openLinkActionSheet;
 
-@property (strong, nonatomic) UIWebView *webView;
 @property (strong, nonatomic) UIControl *headerView;
-@property (strong, nonatomic) UIActivityIndicatorView *spinner;
 
 @end
 
@@ -147,54 +149,66 @@
     created_atLabel.textAlignment = NSTextAlignmentRight;
     created_atLabel.font = [jxdribbble_Global globlaFontWithSize:10];
     created_atLabel.textColor = [jxdribbble_Global globlaTextColor];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
-    imageView.userInteractionEnabled = YES;
 
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:imageView animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    
-    __weak typeof(imageView) weakImageView = imageView;
-
-    NSURL *url;
     if ( [[self.shot.image_url substringWithRange:NSMakeRange(self.shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
     {
-        url = [NSURL URLWithString:self.shot.image_teaser_url];
-        
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
-                                                        initWithTarget:self action:@selector(openWeb)];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        tapGestureRecognizer.delegate = self;
-        [imageView addGestureRecognizer:tapGestureRecognizer];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.shot.image_url]];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.headerView animated:YES];
+        hud.mode = MBProgressHUDModeAnnularDeterminate;
 
+        AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:self.shot.image_url]];
+        AFHTTPRequestOperation * operation = [client HTTPRequestOperationWithRequest:request
+                                                                             success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:responseObject]];
+            gifView.frame = CGRectMake(10.0, 50.0, 300.0, 225.0);
+            [self.headerView addSubview:gifView];
 
-        UIImage *playImage = [UIImage imageNamed:@"play"];
-        UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [playButton setFrame:CGRectMake(2.0, 193.0, 30.0, 30.0)];
-        //[playButton addTarget:self action:@selector(show) forControlEvents:UIControlEventTouchUpInside];
-        [playButton setImage:playImage forState:UIControlStateNormal];
-        [imageView addSubview:playButton];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        }];
+        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+            double progressNo = ((float)totalBytesRead) / totalBytesExpectedToRead;
+            hud.progress = progressNo;
+            if (totalBytesRead == totalBytesExpectedToRead) {
+                hud.hidden = YES;
+            }
+        }];
+
+        [operation start];
+
     }
     else
     {
-        url = [NSURL URLWithString:self.shot.image_url];
+
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
+        imageView.userInteractionEnabled = YES;
+
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:imageView animated:YES];
+        hud.mode = MBProgressHUDModeAnnularDeterminate;
+
+        __weak typeof(imageView) weakImageView = imageView;
+
+        [imageView setImageWithURL:[NSURL URLWithString:self.shot.image_url]
+                  placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                           options:SDWebImageLowPriority
+                          progress:^(NSUInteger receivedSize, long long expectedSize) {
+                              double p = (double)receivedSize/(double)expectedSize;
+                              hud.progress = p;
+                          } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                              if (!error)
+                              {
+                                  weakImageView.image = image;
+                                  self.shareImage = image;
+                              }
+                              hud.hidden = YES;
+                          }];
+
+        [self.headerView addSubview:imageView];
     }
-    
-    [imageView setImageWithURL:url
-                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                 options:SDWebImageLowPriority
-                                progress:^(NSUInteger receivedSize, long long expectedSize) {
-                                    double p = (double)receivedSize/(double)expectedSize;
-                                    hud.progress = p;
-                                } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                    if (!error)
-                                    {
-                                        weakImageView.image = image;
-                                        self.shareImage = image;
-                                    }
-                                    hud.hidden = YES;
-                                }];
-    
+
+
+
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(278.0, 280.0, 30.0, 30.0)];
     [shareButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
@@ -203,87 +217,21 @@
     [self.headerView addSubview:titleLabel];
     [self.headerView addSubview:usernameLabel];
     [self.headerView addSubview:created_atLabel];
-    [self.headerView addSubview:imageView];
     [self.headerView addSubview:shareButton];
     
     return self.headerView;
     
 }
 
-
-- (void)openWeb
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    if (!self.webView)
-    {
-
-        
-        self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
-        
-        UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeWeb)];
-        tapRec.delegate = self;
-        tapRec.numberOfTapsRequired = 1;
-        [self.webView addGestureRecognizer:tapRec];
-        
-        self.webView.delegate = self;
-        self.webView.scalesPageToFit = YES;
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.shot.image_url]]];
-        
-        UIImage *playImage = [UIImage imageNamed:@"stop"];
-        UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [playButton setFrame:CGRectMake(2.0, 193.0, 30.0, 30.0)];
-        [playButton setImage:playImage forState:UIControlStateNormal];
-        [self.webView addSubview:playButton];
-        
-        
-        _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        [_spinner setColor:[jxdribbble_Global globlaColor]];
-        [_spinner setCenter:CGPointMake(150 , 115)];
-        [self.webView addSubview:_spinner];
-        [_spinner startAnimating];
-        
-    }
-
-    
-    [self.headerView addSubview:self.webView];
-
-    
-}
-
-- (void)closeWeb
-{
-    if (self.webView)
-    {
-        [self.webView removeFromSuperview];
-    }
-}
-
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [self.webView removeFromSuperview];
-    self.webView = nil;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [_spinner stopAnimating];
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.webView stopLoading];
+    NSLog(@"=========");
 }
 
 - (void)share
 {
 
-    
+
     DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
     EvernoteSession *session = [EvernoteSession sharedSession];
     
@@ -556,19 +504,9 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-
-    if([self isViewLoaded] && ![[self view] window])
-    {
-        if (self.webView)
-        {
-            [self.webView removeFromSuperview];
-            self.webView = nil;
-        }
-        if (self.headerView)
-        {
-            [self.headerView removeFromSuperview];
-            self.headerView = nil;
-        }
+    if (!self.view.window) {
+        NSLog(@"didReceiveMemoryWarning");
+        [self.headerView removeFromSuperview];
     }
 }
 
@@ -736,7 +674,7 @@
                 }
 
             }
-            if ( [dataArray count ]< 20 )
+            if ( [dataArray count ] < 20 )
             {
                 self.tableView.showsInfiniteScrolling = NO;
             }
