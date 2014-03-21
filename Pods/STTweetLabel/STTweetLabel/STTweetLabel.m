@@ -97,8 +97,8 @@
     _textSelectable = YES;
     _selectionColor = [UIColor colorWithWhite:0.9 alpha:1.0];
     
-    _attributesText = @{NSForegroundColorAttributeName: self.textColor, NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
-    _attributesHandle = @{NSForegroundColorAttributeName: [UIColor redColor], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
+    _attributesText = @{NSForegroundColorAttributeName: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
+    _attributesHandle = @{NSForegroundColorAttributeName: [UIColor colorWithRed:(236.0/255.0) green:(71.0/255.0) blue:(137.0/255.0) alpha:1.0], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
     _attributesHashtag = @{NSForegroundColorAttributeName: [[UIColor alloc] initWithWhite:170.0/255.0 alpha:1.0], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
     _attributesLink = @{NSForegroundColorAttributeName: [[UIColor alloc] initWithRed:129.0/255.0 green:171.0/255.0 blue:193.0/255.0 alpha:1.0], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]};
     
