@@ -131,15 +131,16 @@
     {
         url = [NSURL URLWithString:shot.image_url];
     }
+
     [cell.shot_imageView setImageWithURL:url
                         placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                  options:SDWebImageLowPriority
-                                progress:^(NSUInteger receivedSize, long long expectedSize) {
+                                progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                                     double p = (double)receivedSize/(double)expectedSize;
                                     weakCell.hud.progress = p;
                                 } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                    weakCell.hud.hidden = YES;
                                     weakCell.shot_imageView.image = image;
+                                    weakCell.hud.hidden = YES;
                                 }];
     
     cell.likesLabel.text = [NSString stringWithFormat:@"%@",shot.likes_count];

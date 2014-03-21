@@ -192,7 +192,7 @@
         [imageView setImageWithURL:[NSURL URLWithString:self.shot.image_url]
                   placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                            options:SDWebImageLowPriority
-                          progress:^(NSUInteger receivedSize, long long expectedSize) {
+                          progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                               double p = (double)receivedSize/(double)expectedSize;
                               hud.progress = p;
                           } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {

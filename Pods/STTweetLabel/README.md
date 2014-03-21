@@ -9,7 +9,7 @@ A custom UILabel for iOS with certain words tappable like Twitter (#Hashtag, @Ha
 
 Please use CocoaPods and include STTweetLabel in your Podfile.
 
-Important: STTweetLabel 3.0 is based on TextKit and is not compatible under iOS 7.
+Important: STTweetLabel 3.0 is based on TextKit and is only compatible with iOS 7 and above.
 
 ## Demo
 
@@ -43,8 +43,8 @@ Blocks are easy. All you need to do is add a few lines of code:
 
 ## Methods
 
-- `-[STTweetLabel setAttributes:(NSDictionary *)attributes]`: Dictionary with attributes for all text. (Important: You need to specify `NSForegroundColorAttributeName` and `NSFontAttributeName` mandatory).
-- `-[STTweetLabel setAttributes:(NSDictionary *)attributes hotWord:(STTweetHotWord)hotWord]`: Dictionary with attributes for specific STTweetHotWord. (Important: You need to specify `NSForegroundColorAttributeName` and `NSFontAttributeName` mandatory).
+- `-[STTweetLabel setAttributes:(NSDictionary *)attributes]`: Dictionary with attributes for all text.
+- `-[STTweetLabel setAttributes:(NSDictionary *)attributes hotWord:(STTweetHotWord)hotWord]`: Dictionary with attributes for specific STTweetHotWord.
 - `-[STTweetLabel suggestedFrameSizeToFitEntireStringConstraintedToWidth:(CGFloat)width`: Returns the CGSize calculated for the text submitted.
 
 ## Credits

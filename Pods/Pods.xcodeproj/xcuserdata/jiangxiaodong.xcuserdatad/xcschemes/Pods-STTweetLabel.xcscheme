@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5DC7239FE58D4EFABC160510"
+               BlueprintIdentifier = "6B8892CEE2974FF69B374905"
                BuildableName = "libPods-STTweetLabel.a"
                BlueprintName = "Pods-STTweetLabel"
                ReferencedContainer = "container:Pods.xcodeproj">

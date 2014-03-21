@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6FC4C1B5AB4040A59873CF95"
+               BlueprintIdentifier = "6F2B493C851B433B8E62B79F"
                BuildableName = "libPods-Evernote-SDK-iOS.a"
                BlueprintName = "Pods-Evernote-SDK-iOS"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -50,11 +50,9 @@
  @param url The URL used for the image request.
  @param placeholderImage The image to be set initially, until the image request finishes. If `nil`, the image view will not change its image until the image request finishes.
  */
-
-/*
 - (void)setImageWithURL:(NSURL *)url
        placeholderImage:(UIImage *)placeholderImage;
-*/
+
 /**
  Creates and enqueues an image request operation, which asynchronously downloads the image with the specified URL request object. Any previous image request for the receiver will be cancelled. If the image is cached locally, the image is set immediately, otherwise the specified placeholder image will be set immediately, and then the remote image will be set once the request is finished.
  
