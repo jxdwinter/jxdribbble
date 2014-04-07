@@ -23,6 +23,9 @@
 #import "VVeboImageView.h"
 #import "VVeboImage.h"
 
+#import <YLGIFImage.h>
+#import <YLImageView.h>
+
 
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnectionDataDelegate>
@@ -61,8 +64,7 @@
     [self.navigationController.navigationBar setTranslucent:YES];
     self.view.backgroundColor = [UIColor whiteColor];
 
-    if ([self.shot.rebounds_count integerValue] > 0 )
-    {
+    if ([self.shot.rebounds_count integerValue] > 0 ){
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: [NSString stringWithFormat:@"%@ rebounds",self.shot.rebounds_count]
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
@@ -93,8 +95,7 @@
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
     
-    if ([self.shot.comments_count integerValue] > 0 )
-    {
+    if ([self.shot.comments_count integerValue] > 0 ){
         [self getData];
     }
 
@@ -160,9 +161,23 @@
         AFHTTPRequestOperation * operation = [client HTTPRequestOperationWithRequest:request
                                                                              success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
+
+            /*!
+             *  相比之下,还是VVeboImgeView内存和CPU控制的比较好
+             */
+
+
             VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:responseObject]];
             gifView.frame = CGRectMake(10.0, 50.0, 300.0, 225.0);
             [self.headerView addSubview:gifView];
+
+
+
+            /*
+            YLImageView* imageView = [[YLImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
+            imageView.image = [YLGIFImage imageWithData:responseObject];
+            [self.headerView addSubview:imageView];
+             */
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
@@ -196,8 +211,7 @@
                               double p = (double)receivedSize/(double)expectedSize;
                               hud.progress = p;
                           } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                              if (!error)
-                              {
+                              if (!error){
                                   weakImageView.image = image;
                                   self.shareImage = image;
                               }
@@ -238,8 +252,7 @@
     /**
      *  如果都授权
      */
-    if ( account && session.isAuthenticated)
-    {
+    if ( account && session.isAuthenticated){
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
@@ -247,8 +260,7 @@
     /**
      *  如果dropbox授权,evernote没有授权
      */
-    else if (account && !session.isAuthenticated)
-    {
+    else if (account && !session.isAuthenticated){
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
@@ -256,8 +268,7 @@
     /**
      *  如果dropbox没授权,evernote授权
      */
-    else if (!account && session.isAuthenticated)
-    {
+    else if (!account && session.isAuthenticated){
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
@@ -265,8 +276,7 @@
     /**
      *  如果都没授权
      */
-    else if (!account && !session.isAuthenticated)
-    {
+    else if (!account && !session.isAuthenticated){
         //[self shareToSocialNetworking];
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
@@ -292,18 +302,14 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet == self.openLinkActionSheet)
-    {
+    if (actionSheet == self.openLinkActionSheet){
         NSLog(@"%@",self.link);
         
-        if ( buttonIndex == 0 )
-        {
+        if ( buttonIndex == 0 ){
             jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
             webViewController.urlString = self.link;
             [self.navigationController pushViewController:webViewController animated:YES];
-        }
-        else if ( buttonIndex == 1 )
-        {
+        }else if ( buttonIndex == 1 ){
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.link]]];
         }
     }
@@ -318,33 +324,22 @@
         if ( account && session.isAuthenticated)
         {
             
-            if ( buttonIndex == 0 )
-            {
+            if ( buttonIndex == 0 ){
                 [self shareToSocialNetworking];
-            }
-            else if ( buttonIndex == 1 )
-            {
-                if (self.shareImage)
-                {
+            }else if ( buttonIndex == 1 ){
+                if (self.shareImage){
                     [self dropbox];
                 }
-            }
-            else if ( buttonIndex == 2 )
-            {
-                if (self.shareImage)
-                {
+            }else if ( buttonIndex == 2 ){
+                if (self.shareImage){
                     [self evernote];
                 }
-            }
-            else if ( buttonIndex == 3 )
-            {
+            }else if ( buttonIndex == 3 ){
                 jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
                 webViewController.urlString = self.shot.short_url;
                 webViewController.titleString = self.shot.title;
                 [self.navigationController pushViewController:webViewController animated:YES];
-            }
-            else if ( buttonIndex ==4 )
-            {
+            }else if ( buttonIndex ==4 ){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.link]]];
             }
         }
@@ -353,72 +348,48 @@
          */
         else if (account && !session.isAuthenticated)
         {
-            if ( buttonIndex == 0 )
-            {
+            if ( buttonIndex == 0 ){
                 [self shareToSocialNetworking];
-            }
-            else if ( buttonIndex == 1 )
-            {
-                if (self.shareImage)
-                {
+            }else if ( buttonIndex == 1 ){
+                if (self.shareImage){
                     [self dropbox];
                 }
-            }
-            else if ( buttonIndex == 2 )
-            {
+            }else if ( buttonIndex == 2 ){
                 jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
                 webViewController.urlString = self.shot.short_url;
                 webViewController.titleString = self.shot.title;
                 [self.navigationController pushViewController:webViewController animated:YES];
-            }
-            else if ( buttonIndex == 3 )
-            {
+            }else if ( buttonIndex == 3 ){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
             }
         }
         /**
          *  如果dropbox没授权,evernote授权
          */
-        else if (!account && session.isAuthenticated)
-        {
-            if ( buttonIndex == 0 )
-            {
+        else if (!account && session.isAuthenticated){
+            if ( buttonIndex == 0 ){
                 [self shareToSocialNetworking];
-            }
-            else if ( buttonIndex == 1 )
-            {
-                if (self.shareImage)
-                {
+            }else if ( buttonIndex == 1 ){
+                if (self.shareImage){
                     [self evernote];
                 }
-            }
-            else if ( buttonIndex == 2 )
-            {
+            }else if ( buttonIndex == 2 ){
                 jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
                 webViewController.urlString = self.shot.short_url;
                 webViewController.titleString = self.shot.title;
                 [self.navigationController pushViewController:webViewController animated:YES];
-            }
-            else if ( buttonIndex == 3 )
-            {
+            }else if ( buttonIndex == 3 ){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
             }
-        }
-        else if ( !account && !session.isAuthenticated )
-        {
-            if ( buttonIndex == 0 )
-            {
+        }else if ( !account && !session.isAuthenticated ){
+            if ( buttonIndex == 0 ){
                 [self shareToSocialNetworking];
-            }
-            else if ( buttonIndex == 1 )
-            {
+            }else if ( buttonIndex == 1 ){
                 jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
                 webViewController.urlString = self.shot.short_url;
                 webViewController.titleString = self.shot.title;
                 [self.navigationController pushViewController:webViewController animated:YES];
-            }
-            else if ( buttonIndex == 2 )
-            {
+            }else if ( buttonIndex == 2 ){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
             }
         }
@@ -488,11 +459,9 @@
     NSString *textToShare = [NSString stringWithFormat:@"%@ by @\%@ from @jxdribbble",self.shot.title,self.shot.player.username];
     NSURL *urlToShare = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]];
     NSArray *activityItems;
-    if (self.shareImage)
-    {
+    if (self.shareImage){
         activityItems = @[textToShare, self.shareImage, urlToShare];
-    }
-    else activityItems = @[textToShare, urlToShare];
+    }else activityItems = @[textToShare, urlToShare];
     
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
     activityViewController.excludedActivityTypes = @[UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePrint,UIActivityTypeCopyToPasteboard];
@@ -547,8 +516,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     jxdribbble_CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if ( cell == nil )
-    {
+    if ( cell == nil ){
         cell = [[jxdribbble_CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
