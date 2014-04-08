@@ -23,7 +23,6 @@
 #import "VVeboImageView.h"
 #import "VVeboImage.h"
 
-#import <CommonCrypto/CommonDigest.h>
 
 
 @interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,
@@ -150,13 +149,11 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
 
     if ( [[self.shot.image_url substringWithRange:NSMakeRange(self.shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
     {
-
-
-        NSString *md5str = [self getMD5Value:self.shot.image_url];
+        NSString *md5str = [jxdribbble_Global getMD5Value:self.shot.image_url];
         NSString *Path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
         NSString *filename = [Path stringByAppendingPathComponent:md5str];
 
-        if ([self is_file_exist:filename]) {
+        if ([jxdribbble_Global is_file_exist:filename]) {
 
             NSData *data = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
             VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:data]];
@@ -681,27 +678,5 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }
-
-
-- (NSString *) getMD5Value:(NSString *) input
-{
-    const char *cStr = [input UTF8String];
-    unsigned char digest[CC_MD5_DIGEST_LENGTH];
-    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
-
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-
-    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-
-    return  output;
-}
-
--(BOOL)is_file_exist:(NSString *)name
-{
-    NSFileManager *file_manager = [NSFileManager defaultManager];
-    return [file_manager fileExistsAtPath:name];
-}
-
 
 @end

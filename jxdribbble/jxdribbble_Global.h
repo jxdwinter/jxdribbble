@@ -13,5 +13,7 @@
 + (UIColor *)globlaColor;
 + (UIFont  *)globlaFontWithSize : (CGFloat) size;
 + (UIColor *)globlaTextColor;
++ (BOOL)is_file_exist:(NSString *)name;
++ (NSString *) getMD5Value:(NSString *) input;
 
 @end

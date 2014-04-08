@@ -66,6 +66,22 @@
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
 
+    NSString *Path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *filename = [Path stringByAppendingPathComponent:@"everyone"];
+    if ([jxdribbble_Global is_file_exist:filename]) {
+        NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
+        NSArray *shots = [dic objectForKey:@"shots"];
+        NSMutableArray *dataArray = [[NSMutableArray alloc] initWithCapacity:50];
+        for (NSDictionary * shotDic in shots){
+            jxdribbble_shots  *shot = [[jxdribbble_shots alloc] initWithShotInfo:shotDic];
+            [self.dataSource addObject:shot];
+        }
+
+        [self.dataSource addObjectsFromArray:dataArray];
+        [self.tableView reloadData];
+        
+    }
+
     [self getData];
 
 }
@@ -117,13 +133,10 @@
     __weak typeof(cell) weakCell = cell;
     
     NSURL *url;
-    if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
-    {
+    if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] ){
         url = [NSURL URLWithString:shot.image_teaser_url];
         cell.gifImageView.hidden = NO;
-    }
-    else
-    {
+    }else{
         url = [NSURL URLWithString:shot.image_url];
     }
 
@@ -200,27 +213,29 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;
+
+            if (self.pageIndex == 1) {
+                NSString *Path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+                NSString *filename = [Path stringByAppendingPathComponent:@"everyone"];
+                [NSKeyedArchiver archiveRootObject:jsonDic toFile:filename];
+            }
+
             NSArray *shots = [jsonDic objectForKey:@"shots"];
             NSMutableArray *dataArray = [[NSMutableArray alloc] initWithCapacity:50];
             for (NSDictionary * shotDic in shots)
             {
                 jxdribbble_shots  *shot = [[jxdribbble_shots alloc] initWithShotInfo:shotDic];
                 
-                if ( self.pageIndex != 1 )
-                {
+                if ( self.pageIndex != 1 ){
                     bool isExist = NO;
-                    for ( jxdribbble_shots *s in self.dataSource )
-                    {
-                        if ( [[NSString stringWithFormat:@"%@",s.id] isEqualToString:[NSString stringWithFormat:@"%@",shot.id]] )
-                        {
+                    for ( jxdribbble_shots *s in self.dataSource ){
+                        if ( [[NSString stringWithFormat:@"%@",s.id] isEqualToString:[NSString stringWithFormat:@"%@",shot.id]] ){
                             isExist = YES;
                             break;
                         }
                     }
                     if (!isExist)[ dataArray addObject:shot];
-                }
-                else
-                {
+                }else{
                     [ dataArray addObject:shot];
                 }
             }
@@ -228,8 +243,7 @@
             /**
              *  if refresh
              */
-            if ( self.pageIndex == 1 )
-            {
+            if ( self.pageIndex == 1 ){
                 [self.dataSource removeAllObjects];
             }
             
