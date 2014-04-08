@@ -23,12 +23,11 @@
 #import "VVeboImageView.h"
 #import "VVeboImage.h"
 
-#import <YLGIFImage.h>
-#import <YLImageView.h>
+#import <CommonCrypto/CommonDigest.h>
 
 
-
-@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnectionDataDelegate>
+@interface jxdribbble_DetailViewController ()<UITableViewDataSource, UITableViewDelegate,
+UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnectionDataDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -72,9 +71,9 @@
     }
     
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height )
+                                                  style:UITableViewStylePlain];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0,49, 0);
-    
     __weak jxdribbble_DetailViewController *weakSelf = self;
     // setup infinite scrolling
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -89,8 +88,6 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-    
-    
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:50];
     self.pageIndex = 1;
@@ -153,45 +150,47 @@
 
     if ( [[self.shot.image_url substringWithRange:NSMakeRange(self.shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
     {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.shot.image_url]];
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.headerView animated:YES];
-        hud.mode = MBProgressHUDModeAnnularDeterminate;
-
-        AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:self.shot.image_url]];
-        AFHTTPRequestOperation * operation = [client HTTPRequestOperationWithRequest:request
-                                                                             success:^(AFHTTPRequestOperation *operation, id responseObject)
-        {
-
-            /*!
-             *  相比之下,还是VVeboImgeView内存和CPU控制的比较好
-             */
 
 
-            VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:responseObject]];
+        NSString *md5str = [self getMD5Value:self.shot.image_url];
+        NSString *Path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        NSString *filename = [Path stringByAppendingPathComponent:md5str];
+
+        if ([self is_file_exist:filename]) {
+
+            NSData *data = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
+            VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:data]];
             gifView.frame = CGRectMake(10.0, 50.0, 300.0, 225.0);
             [self.headerView addSubview:gifView];
+            
+        }else{
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.shot.image_url]];
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.headerView animated:YES];
+            hud.mode = MBProgressHUDModeAnnularDeterminate;
 
+            AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:self.shot.image_url]];
+            AFHTTPRequestOperation * operation = [client HTTPRequestOperationWithRequest:request
+                                                                                 success:^(AFHTTPRequestOperation *operation, id responseObject)
+                                                                                 {
+                                                                                     VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:responseObject]];
+                                                                                     gifView.frame = CGRectMake(10.0, 50.0, 300.0, 225.0);
+                                                                                     [self.headerView addSubview:gifView];
 
+                                                                                     [NSKeyedArchiver archiveRootObject:responseObject toFile:filename];
 
-            /*
-            YLImageView* imageView = [[YLImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
-            imageView.image = [YLGIFImage imageWithData:responseObject];
-            [self.headerView addSubview:imageView];
-             */
+                                                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-        }];
-        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-            double progressNo = ((float)totalBytesRead) / totalBytesExpectedToRead;
-            hud.progress = progressNo;
-            if (totalBytesRead == totalBytesExpectedToRead) {
-                hud.hidden = YES;
-            }
-        }];
-
-        [operation start];
-
+                                                                            }];
+            [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+                double progressNo = ((float)totalBytesRead) / totalBytesExpectedToRead;
+                hud.progress = progressNo;
+                if (totalBytesRead == totalBytesExpectedToRead) {
+                    hud.hidden = YES;
+                }
+            }];
+            
+            [operation start];
+        }
     }
     else
     {
@@ -253,7 +252,11 @@
      *  如果都授权
      */
     if ( account && session.isAuthenticated){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Save to Evernote",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -261,7 +264,11 @@
      *  如果dropbox授权,evernote没有授权
      */
     else if (account && !session.isAuthenticated){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Share and Save",@"Save to Dropbox",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -269,7 +276,11 @@
      *  如果dropbox没授权,evernote授权
      */
     else if (!account && session.isAuthenticated){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Save to Evernote",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Share and Save",@"Save to Evernote",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -278,7 +289,10 @@
      */
     else if (!account && !session.isAuthenticated){
         //[self shareToSocialNetworking];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Open",@"Open in Safari",nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil otherButtonTitles:@"Share and Save",@"Open",@"Open in Safari",nil];
         actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
         [actionSheet showInView:self.view];
     }
@@ -399,8 +413,7 @@
 
 - (void)dropbox
 {
-    if ([CheckNetwork isExistenceNetwork])
-    {
+    if ([CheckNetwork isExistenceNetwork]){
         DBPath *newPath = [[DBPath root] childPath:[NSString stringWithFormat:@"%@_%@.png",[self.shot.title stringByReplacingOccurrencesOfString:@" " withString:@""],[self.shot.player.name stringByReplacingOccurrencesOfString:@" " withString:@""]]];
          
         DBFile *file = [[DBFilesystem sharedFilesystem] createFile:newPath error:nil];
@@ -411,8 +424,7 @@
 
 - (void)evernote
 {
-    if ([CheckNetwork isExistenceNetwork])
-    {
+    if ([CheckNetwork isExistenceNetwork]){
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         NSData *imageData = UIImagePNGRepresentation(self.shareImage);
         NSData *dataHash = [imageData enmd5];
@@ -498,8 +510,7 @@
     NSAttributedString *attributedText =
     [[NSAttributedString alloc]
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
-     attributes:@
-     {
+     attributes:@{
         NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12.5]
      }];
     
@@ -525,8 +536,7 @@
     NSAttributedString *attributedText =
     [[NSAttributedString alloc]
      initWithString:[[(jxdribbble_comments *)[self.dataSource objectAtIndex:indexPath.row] body] stringByConvertingHTMLToPlainText]
-     attributes:@
-     {
+     attributes:@{
         NSFontAttributeName: [jxdribbble_Global globlaFontWithSize:12.5]
      }];
     
@@ -557,10 +567,8 @@
                      (protocol != nil) ? [NSString stringWithFormat:@" *%@*",protocol] : @""]
               );
         
-        if ([hotWords[hotWord] length] > 0)
-        {
-            if ([hotWords[hotWord] isEqualToString:@"Link"])
-            {
+        if ([hotWords[hotWord] length] > 0){
+            if ([hotWords[hotWord] isEqualToString:@"Link"]){
                 self.link = string;
                 self.openLinkActionSheet = [[UIActionSheet alloc] initWithTitle:string delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open",@"Open in Safari",nil];
                 self.openLinkActionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
@@ -615,35 +623,29 @@
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/shots/%@/comments?page=%@&per_page=20",self.shot.id,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
 
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;
             NSArray *comments = [jsonDic objectForKey:@"comments"];
             NSMutableArray *dataArray = [[NSMutableArray alloc] initWithCapacity:50];
-            for (NSDictionary * commentsDic in comments)
-            {
+            for (NSDictionary * commentsDic in comments){
                 jxdribbble_comments  *comment = [[jxdribbble_comments alloc] initWithCommentInfo:commentsDic];
 
-                if ( self.pageIndex != 1 )
-                {
+                if ( self.pageIndex != 1 ){
                     bool isExist = NO;
-                    for ( jxdribbble_comments *s in self.dataSource )
-                    {
-                        if ( [[NSString stringWithFormat:@"%@",s.id] isEqualToString:[NSString stringWithFormat:@"%@",comment.id]] )
-                        {
+                    for ( jxdribbble_comments *s in self.dataSource ){
+                        if ( [[NSString stringWithFormat:@"%@",s.id] isEqualToString:[NSString stringWithFormat:@"%@",comment.id]] ){
                             isExist = YES;
                             break;
                         }
                     }
                     if (!isExist)[ dataArray addObject:comment];
-                }
-                else
-                {
+                }else{
                     [ dataArray addObject:comment];
                 }
 
             }
-            if ( [dataArray count ] < 20 )
-            {
+            if ( [dataArray count ] < 20 ){
                 self.tableView.showsInfiniteScrolling = NO;
             }
             
@@ -659,9 +661,7 @@
         }];
         
         [operation start];
-    }
-    else
-    {
+    }else{
         if(self.pageIndex > 1)self.pageIndex--;
     }
     
@@ -681,5 +681,27 @@
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
     });
 }
+
+
+- (NSString *) getMD5Value:(NSString *) input
+{
+    const char *cStr = [input UTF8String];
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+
+    return  output;
+}
+
+-(BOOL)is_file_exist:(NSString *)name
+{
+    NSFileManager *file_manager = [NSFileManager defaultManager];
+    return [file_manager fileExistsAtPath:name];
+}
+
 
 @end

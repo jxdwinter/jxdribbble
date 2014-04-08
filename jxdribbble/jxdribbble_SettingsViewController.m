@@ -16,7 +16,8 @@
 #import "jxdribbble_FindAPlayerViewController.h"
 #import "jxdribbble_PlayerLikesViewController.h"
 
-@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
+@interface jxdribbble_SettingsViewController ()<UITableViewDataSource, UITableViewDelegate,
+MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView    *tableView;
 @property (strong, nonatomic) UIButton *logoutButton;
@@ -41,14 +42,14 @@
 {
     [super viewDidLoad];
     self.title = @"Others";
-    
+
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.view.backgroundColor = [UIColor whiteColor];
+
     self.logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 25.0)];
     [self.logoutButton setImage:[UIImage imageNamed:@"logout"] forState:UIControlStateNormal];
     [self.logoutButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.logoutButton];
-    
-    [self.navigationController.navigationBar setTranslucent:YES];
-    self.view.backgroundColor = [UIColor whiteColor];
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStyleGrouped];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0,49, 0);
@@ -103,28 +104,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ( section == 0 )
-    {
+    if ( section == 0 ){
         return 1;
-    }
-    else if ( section == 1 )
-    {
+    }else if ( section == 1 ){
         return 1;
-    }
-    else if ( section == 2)
-    {
+    }else if ( section == 2){
         return 2;
-    }
-    else if ( section == 3 )
-    {
+    }else if ( section == 3 ){
+        return 1;
+    }else if ( section == 4 ){
         return 6;
-    }
-    else return 2;
+    }else return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,65 +135,44 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if ( cell == nil )
-    {
+    if ( cell == nil ){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    if ( section == 0)
-    {
-        if ( row == 0 )
-        {
+    if ( section == 0){
+        if ( row == 0 ){
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *username = [userDefaults stringForKey:@"username"];
-            if ( username && username.length != 0 )
-            {
+            if ( username && username.length != 0 ){
                 cell.textLabel.text = username;
-            }
-            else
-            {
+            }else{
                 cell.textLabel.text = @"Are you a player?";
             }
             self.theCell = cell;
             cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         }
-    }
-    else if ( section == 1 )
-    {
-        if ( row == 0 )
-        {
+    }else if ( section == 1 ){
+        if ( row == 0 ){
             cell.textLabel.text = [NSString stringWithFormat:@"Find a Player"];
             cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         }
-    }
-    else if (section == 2 )
-    {
-        if ( row == 0 )
-        {
+    }else if (section == 2 ){
+        if ( row == 0 ){
             DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-            if (account)
-            {
-                if (!account.info.userName || [account.info.userName isKindOfClass:[NSNull class]])
-                {
+            if (account){
+                if (!account.info.userName || [account.info.userName isKindOfClass:[NSNull class]]){
                     cell.textLabel.text = [NSString stringWithFormat:@"Dropbox : "];
-                }
-                else cell.textLabel.text = [NSString stringWithFormat:@"Dropbox : %@",account.info.userName];
-            }
-            else
-            {
+                }else cell.textLabel.text = [NSString stringWithFormat:@"Dropbox : %@",account.info.userName];
+            }else{
                 cell.textLabel.text = @"Link to Dropbox";
             }
-        }
-        else if ( row == 1 )
-        {
+        }else if ( row == 1 ){
             EvernoteSession *session = [EvernoteSession sharedSession];
-            if ( session.isAuthenticated )
-            {
+            if ( session.isAuthenticated ){
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 NSString *username = [userDefaults stringForKey:@"evernote_uesrname"];
-                if (!username || [username isKindOfClass:[NSNull class]])
-                {
+                if (!username || [username isKindOfClass:[NSNull class]]){
                     EvernoteUserStore *userStore = [EvernoteUserStore userStore];
                     [userStore getUserWithSuccess:^(EDAMUser *user) {
                         // success
@@ -219,51 +193,36 @@
        
         cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-    }
-    else if ( section == 3 )
-    {
-        if ( row == 0 )
-        {
+    }else if ( section == 3 ){
+        cell.textLabel.text = [NSString stringWithFormat:@"Clear cache"];
+        cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
+    }else if ( section == 4 ){
+        if ( row == 0 ){
             cell.textLabel.text = @"Tell friends this App";
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        }
-        else if ( row == 1)
-        {
+        }else if ( row == 1){
             cell.textLabel.text = @"Rate this App";
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        }
-        else if ( row == 2 )
-        {
+        }else if ( row == 2 ){
             cell.textLabel.text = @"Contact jxdribbble";
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        }
-        else if ( row == 3 )
-        {
+        }else if ( row == 3 ){
             cell.textLabel.text = @"Product designer : @FloydJin";
-        }
-        else if ( row == 4)
-        {
+        }else if ( row == 4){
             cell.textLabel.text = @"Developer & designer : @jxdwinter";
-        }
-        else if ( row == 5 )
-        {
+        }else if ( row == 5 ){
             NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
             cell.textLabel.text = [NSString stringWithFormat:@"Version : %@",version];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        
+
         cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         
-    }
-    else if ( section == 4 )
-    {
-        if ( row == 0 )
-        {
+    }else if ( section == 4 ){
+        if ( row == 0 ){
             cell.textLabel.text = [NSString stringWithFormat:@"%@",@"All screenshots © their respective owners."];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        else if ( row == 1 )
-        {
+        }else if ( row == 1 ){
             cell.textLabel.text = [NSString stringWithFormat:@"%@",@"Powered by  © Dribbble"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
@@ -287,17 +246,13 @@
     NSUInteger row = [indexPath row];
     if ( section == 0)
     {
-        if ( row == 0 )
-        {
+        if ( row == 0 ){
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *username = [userDefaults stringForKey:@"username"];
-            if ( username && username.length != 0 )
-            {
+            if ( username && username.length != 0 ){
                 [self getUserWithUsername:username];
-            }
-            else
-            {
+            }else{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"A Dribbble Player?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
                 [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
                 UITextField * textField = [alertView textFieldAtIndex:0];
@@ -306,33 +261,22 @@
                 [alertView show];
             }
         }
-    }
-    else if ( section == 1 )
-    {
-        if ( row == 0 )
-        {
+    }else if ( section == 1 ){
+        if ( row == 0 ){
             jxdribbble_FindAPlayerViewController *findAPlayerViewController = [[jxdribbble_FindAPlayerViewController alloc] init];
             [self.navigationController pushViewController:findAPlayerViewController animated:YES];
         }
-    }
-    else if ( section == 2 )
-    {
-        if ( row == 0 )
-        {
+    }else if ( section == 2 ){
+        if ( row == 0 ){
             DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-            if (account)
-            {
+            if (account){
                 self.unlinkDropbox = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"NO" destructiveButtonTitle:@"Unlink Dropbox" otherButtonTitles:nil, nil];
                 self.unlinkDropbox.actionSheetStyle = UIActionSheetStyleDefault;
                 [self.unlinkDropbox showInView:self.view];
-            }
-            else
-            {
+            }else{
                 [[DBAccountManager sharedManager] linkFromController:self];
             }
-        }
-        else if ( row == 1 )
-        {
+        }else if ( row == 1 ){
             EvernoteSession *session = [EvernoteSession sharedSession];
             NSLog(@"Session host: %@", [session host]);
             NSLog(@"Session key: %@", [session consumerKey]);
@@ -341,14 +285,15 @@
             /**
              *  如果已经授权
              */
-            if ( session.isAuthenticated )
-            {
-                self.unlinkEvernote = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"NO" destructiveButtonTitle:@"Unlink Evernote" otherButtonTitles:nil, nil];
+            if ( session.isAuthenticated ){
+                self.unlinkEvernote = [[UIActionSheet alloc] initWithTitle:nil
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"NO"
+                                                    destructiveButtonTitle:@"Unlink Evernote"
+                                                         otherButtonTitles:nil, nil];
                 self.unlinkEvernote.actionSheetStyle = UIActionSheetStyleDefault;
                 [self.unlinkEvernote showInView:self.view];
-            }
-            else
-            {
+            }else{
                 [session authenticateWithViewController:self completionHandler:^(NSError *error) {
                     if (error || !session.isAuthenticated){
                         if (error) {
@@ -375,9 +320,24 @@
                 }];
             }
         }
-    }
-    else if ( section == 3 )
-    {
+    }else if (section == 3 ){
+        if ( row == 0 ){
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            [imageCache clearMemory];
+            [imageCache clearDisk];
+            [imageCache cleanDisk];
+
+            [self clearCache];
+
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:@"Successful"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil, nil];
+            [alertView show];
+
+        }
+    }else if ( section == 4 ){
         if ( row == 0 )
         {
             NSString *textToShare = [NSString stringWithFormat:@"Check out this awesome dribbble client %@",@"https://itunes.apple.com/us/app/jxdribbble/id729549824?ls=1&mt=8"];
@@ -386,16 +346,10 @@
             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
             activityViewController.excludedActivityTypes = @[UIActivityTypePostToVimeo,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard,UIActivityTypePostToFlickr,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll];
             [self presentViewController:activityViewController animated:YES completion:nil];
-        }
-        
-        else if ( row == 1 )
-        {
+        }else if ( row == 1 ){
             NSString *urlStr = @"https://itunes.apple.com/us/app/jxdribbble/id729549824?ls=1&mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-        }
-        
-        else if ( row == 2 )
-        {
+        }else if ( row == 2 ){
             UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                                      delegate:self
                                                             cancelButtonTitle:@"cancel"
@@ -403,29 +357,19 @@
                                                             otherButtonTitles:@"Twitter me",@"Email me", nil];
             actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
             [actionSheet showInView:self.view];
-        }
-        else if ( row == 3)
-        {
+        }else if ( row == 3){
             BOOL isTweetbotInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/FloydJin"]]];
-            if ( isTweetbotInstalled )
-            {
+            if ( isTweetbotInstalled ){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/FloydJin"]]];
-            }
-            else
-            {
+            }else{
                 NSString *urlStr = @"https://twitter.com/FloydJin";
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
             }
-        }
-        else if ( row == 4 )
-        {
+        }else if ( row == 4 ){
             BOOL isTweetbotInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/jxdwinter"]]];
-            if ( isTweetbotInstalled )
-            {
+            if ( isTweetbotInstalled ){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///user_profile/jxdwinter"]]];
-            }
-            else
-            {
+            }else{
                 NSString *urlStr = @"https://twitter.com/jxdwinter";
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
             }
@@ -438,39 +382,26 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ( actionSheet == self.unlinkDropbox )
-    {
-        if (buttonIndex == 0)
-        {
+    if ( actionSheet == self.unlinkDropbox ){
+        if (buttonIndex == 0){
             DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
             [account unlink];
             [self.tableView reloadData];
         }
-    }
-    else if ( actionSheet == self.unlinkEvernote )
-    {
-        if (buttonIndex == 0)
-        {
+    }else if ( actionSheet == self.unlinkEvernote ){
+        if (buttonIndex == 0){
             [[EvernoteSession sharedSession] logout];
             [self.tableView reloadData];
         }
-    }
-    else
-    {
-        if (buttonIndex == 0)
-        {
+    }else{
+        if (buttonIndex == 0){
             BOOL isTweetbotInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///post?text=@jxdribbble"]]];
-            if ( isTweetbotInstalled )
-            {
+            if ( isTweetbotInstalled ){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot:///post?text=@jxdribbble"]]];
-            }
-            else
-            {
+            }else{
                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/jxdribbble"]]];
             }
-        }
-        else if ( buttonIndex == 1 )
-        {
+        }else if ( buttonIndex == 1 ){
             MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
             controller.mailComposeDelegate = self;
             [controller setSubject:@""];
@@ -499,12 +430,9 @@
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error;
 {
-    if (result == MFMailComposeResultSent)
-    {
+    if (result == MFMailComposeResultSent){
         
-    }
-    else if (result == MFMailComposeResultCancelled)
-    {
+    }else if (result == MFMailComposeResultCancelled){
         
     }
     
@@ -534,7 +462,8 @@
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/%@",username]];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;
             jxdribbble_player *player = [[jxdribbble_player alloc] initWithPlayerInfo:jsonDic];
             if (player)
@@ -548,8 +477,11 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@":( No player named %@",username]
-                                                               delegate:nil cancelButtonTitle:@"I'll try another one" otherButtonTitles:nil, nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:[NSString stringWithFormat:@":( No player named %@",username]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"I'll try another one"
+                                                      otherButtonTitles:nil, nil];
             [alertView show];
         }];
         
@@ -569,7 +501,8 @@
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/%@",username]];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSDictionary *jsonDic = JSON;
             jxdribbble_player *player = [[jxdribbble_player alloc] initWithPlayerInfo:jsonDic];
             if (player)
@@ -588,6 +521,31 @@
         [operation start];
     }
     
+}
+
+- (void)clearCache
+{
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSArray  *files = [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:nil];
+
+    while (files.count > 0) {
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSArray *directoryContents = [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:&error];
+        if (error == nil) {
+            for (NSString *path in directoryContents) {
+                NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:path];
+                BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
+                files = [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:nil];
+                if (!removeSuccess) {
+                }
+            }
+        } else {
+
+        }
+    }
 }
 
 @end
