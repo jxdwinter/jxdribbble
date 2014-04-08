@@ -131,11 +131,12 @@
     __weak typeof(cell) weakCell = cell;
     
     NSURL *url;
+
     if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] ){
         url = [NSURL URLWithString:shot.image_teaser_url];
         cell.gifImageView.hidden = NO;
     }else{
-        url = [NSURL URLWithString:shot.image_teaser_url];
+        url = [NSURL URLWithString:shot.image_url];
     }
 
     [cell.shot_imageView setImageWithURL:url
@@ -145,9 +146,15 @@
                                     double p = (double)receivedSize/(double)expectedSize;
                                     weakCell.hud.progress = p;
                                 } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                    weakCell.shot_imageView.image = image;
+                                    if (error) {
+
+                                    }else{
+                                        weakCell.shot_imageView.image = image;
+                                    }
+
                                     weakCell.hud.hidden = YES;
                                 }];
+
 
     cell.likesLabel.text = [NSString stringWithFormat:@"%@",shot.likes_count];
     cell.viewsLabel.text = [NSString stringWithFormat:@"%@",shot.views_count];
@@ -299,9 +306,10 @@
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
-}
 
+    return UIStatusBarStyleLightContent;
+    
+}
 
 
 @end

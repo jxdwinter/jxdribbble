@@ -24,12 +24,12 @@
         self.avatarImageView.layer.cornerRadius = 20.0;
         [self.contentView addSubview:self.avatarImageView];
         
-        self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60.0, 12.0, 150.0, 18.0)];
+        self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60.0, 10.0, 150.0, 20.0)];
         self.usernameLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         self.usernameLabel.textColor = [jxdribbble_Global globlaColor];
         [self.contentView addSubview:self.usernameLabel];
         
-        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60.0, 35.0, 150.0, 10.0)];
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60.0, 35.0, 150.0, 15.0)];
         self.nameLabel.font = [jxdribbble_Global globlaFontWithSize:10];
         self.nameLabel.textColor = [jxdribbble_Global globlaTextColor];
         [self.contentView addSubview:self.nameLabel];

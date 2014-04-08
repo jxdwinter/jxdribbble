@@ -129,7 +129,7 @@
         url = [NSURL URLWithString:shot.image_teaser_url];
         cell.gifImageView.hidden = NO;
     }else{
-        url = [NSURL URLWithString:shot.image_teaser_url];
+        url = [NSURL URLWithString:shot.image_url];
     }
 
     [cell.shot_imageView setImageWithURL:url

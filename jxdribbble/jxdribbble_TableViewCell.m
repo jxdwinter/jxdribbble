@@ -20,6 +20,7 @@
 
         
         self.shot_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 225.0)];
+        self.shot_imageView.userInteractionEnabled = YES;
         self.shot_imageView.opaque = YES;
         [self.contentView addSubview:self.shot_imageView];
         

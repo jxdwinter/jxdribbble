@@ -160,16 +160,11 @@
         self.refreshButton.hidden = YES;
         
         NSURL *url;
-        if (self.viewControllerType == 1)
-        {
+        if (self.viewControllerType == 1){
             url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@/following?page=%@",self.player.username,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
-        }
-        else if (self.viewControllerType == 2)
-        {
+        }else if (self.viewControllerType == 2){
             url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@/followers?page=%@",self.player.username,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
-        }
-        else if ( self.viewControllerType == 3 )
-        {
+        }else if ( self.viewControllerType == 3 ){
             url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.dribbble.com/players/%@/draftees?page=%@",self.player.username,[NSString stringWithFormat:@"%lu",(unsigned long)self.pageIndex]]];
         }
 
@@ -209,7 +204,7 @@
             {
                 [self.dataSource removeAllObjects];
             }
-            if ( [dataArray count ]< 15 )
+            if ( [dataArray count ] < 15 )
             {
                 self.tableView.showsInfiniteScrolling = NO;
             }
