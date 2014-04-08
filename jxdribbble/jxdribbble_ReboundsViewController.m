@@ -114,8 +114,7 @@
     jxdribbble_shots *shot =  [self.dataSource objectAtIndex:section];
     //NSString *url = shot.image_url;
     jxdribbble_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if ( cell == nil )
-    {
+    if ( cell == nil ){
         cell = [[jxdribbble_TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.hud.hidden = NO;
@@ -123,13 +122,10 @@
     __weak typeof(cell) weakCell = cell;
     
     NSURL *url;
-    if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
-    {
+    if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] ){
         url = [NSURL URLWithString:shot.image_teaser_url];
-    }
-    else
-    {
-        url = [NSURL URLWithString:shot.image_url];
+    }else{
+        url = [NSURL URLWithString:shot.image_teaser_url];
     }
 
     [cell.shot_imageView setImageWithURL:url
@@ -212,21 +208,16 @@
             {
                 jxdribbble_shots  *shot = [[jxdribbble_shots alloc] initWithShotInfo:shotDic];
                 
-                if ( self.pageIndex != 1 )
-                {
+                if ( self.pageIndex != 1 ){
                     bool isExist = NO;
-                    for ( jxdribbble_shots *s in self.dataSource )
-                    {
-                        if ( [[NSString stringWithFormat:@"%@",s.id] isEqualToString:[NSString stringWithFormat:@"%@",shot.id]] )
-                        {
+                    for ( jxdribbble_shots *s in self.dataSource ){
+                        if ( [[NSString stringWithFormat:@"%@",s.id] isEqualToString:[NSString stringWithFormat:@"%@",shot.id]] ){
                             isExist = YES;
                             break;
                         }
                     }
                     if (!isExist)[ dataArray addObject:shot];
-                }
-                else
-                {
+                }else{
                     [ dataArray addObject:shot];
                 }
             }
@@ -234,11 +225,10 @@
             /**
              *  if refresh
              */
-            if ( self.pageIndex == 1 )
-            {
+            if ( self.pageIndex == 1 ){
                 [self.dataSource removeAllObjects];
             }
-            if ( [dataArray count ]< 15 )
+            if ( [dataArray count ] < 15 )
             {
                 self.tableView.showsInfiniteScrolling = NO;
             }

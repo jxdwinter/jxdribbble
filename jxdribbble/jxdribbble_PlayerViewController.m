@@ -145,8 +145,7 @@
     jxdribbble_shots *shot =  [self.dataSource objectAtIndex:section];
     //NSString *url = shot.image_url;
     jxdribbble_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if ( cell == nil )
-    {
+    if ( cell == nil ){
         cell = [[jxdribbble_TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
@@ -155,14 +154,11 @@
     __weak typeof(cell) weakCell = cell;
     
     NSURL *url;
-    if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] )
-    {
+    if ( [[shot.image_url substringWithRange:NSMakeRange(shot.image_url.length - 4,4)] isEqualToString:@".gif"] ){
         url = [NSURL URLWithString:shot.image_teaser_url];
         cell.gifImageView.hidden = NO;
-    }
-    else
-    {
-        url = [NSURL URLWithString:shot.image_url];
+    }else{
+        url = [NSURL URLWithString:shot.image_teaser_url];
     }
 
     [cell.shot_imageView setImageWithURL:url

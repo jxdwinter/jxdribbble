@@ -135,7 +135,7 @@
         url = [NSURL URLWithString:shot.image_teaser_url];
         cell.gifImageView.hidden = NO;
     }else{
-        url = [NSURL URLWithString:shot.image_url];
+        url = [NSURL URLWithString:shot.image_teaser_url];
     }
 
     [cell.shot_imageView setImageWithURL:url
@@ -247,8 +247,7 @@
             if ( self.pageIndex == 1 ){
                 [self.dataSource removeAllObjects];
             }
-            
-            
+
             [self.dataSource addObjectsFromArray:dataArray];
             [self.tableView reloadData];
 
