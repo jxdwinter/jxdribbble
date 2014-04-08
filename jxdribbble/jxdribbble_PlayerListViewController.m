@@ -121,8 +121,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     jxdribbble_PlayerListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
+    if (cell == nil){
         cell = [[jxdribbble_PlayerListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     [cell.avatarImageView setImageWithURL:[NSURL URLWithString: [(jxdribbble_player *)[self.dataSource objectAtIndex:indexPath.row] avatar_url]] placeholderImage:[UIImage imageNamed:@"headimg_bg"]];

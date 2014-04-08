@@ -168,7 +168,13 @@
                                     double p = (double)receivedSize/(double)expectedSize;
                                     weakCell.hud.progress = p;
                                 } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                    weakCell.shot_imageView.image = image;
+                                    if (error) {
+
+
+                                    }else{
+                                        weakCell.shot_imageView.image = image;
+                                    }
+
                                     weakCell.hud.hidden = YES;
                                 }];
     

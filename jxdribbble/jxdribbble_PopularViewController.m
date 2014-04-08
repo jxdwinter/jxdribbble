@@ -56,7 +56,7 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMore];
     }];
-    //self.scrollForHideNavigation = self.tableView;
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.scrollsToTop = YES;
@@ -147,6 +147,7 @@
                                     weakCell.hud.progress = p;
                                 } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                                     if (error) {
+
 
                                     }else{
                                         weakCell.shot_imageView.image = image;
@@ -274,9 +275,7 @@
         }];
         
         [operation start];
-    }
-    else
-    {
+    }else{
         if(self.pageIndex > 1)self.pageIndex--;
     }
     
@@ -305,11 +304,10 @@
     });
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle{
 
     return UIStatusBarStyleLightContent;
     
 }
-
 
 @end
