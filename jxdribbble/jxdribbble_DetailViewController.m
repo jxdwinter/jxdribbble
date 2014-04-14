@@ -350,8 +350,8 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
                 webViewController.urlString = self.shot.short_url;
                 webViewController.titleString = self.shot.title;
                 [self.navigationController pushViewController:webViewController animated:YES];
-            }else if ( buttonIndex ==4 ){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.link]]];
+            }else if ( buttonIndex == 4 ){
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",self.shot.short_url]]];
             }
         }
         /**

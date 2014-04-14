@@ -218,7 +218,7 @@ MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
         cell.textLabel.font = [jxdribbble_Global globlaFontWithSize:15];
         
-    }else if ( section == 4 ){
+    }else if ( section == 5 ){
         if ( row == 0 ){
             cell.textLabel.text = [NSString stringWithFormat:@"%@",@"All screenshots © their respective owners."];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
