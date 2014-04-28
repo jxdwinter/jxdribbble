@@ -648,17 +648,21 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
             
             [self.dataSource addObjectsFromArray:dataArray];
             [self.tableView reloadData];
-            
+
+
+            [self.tableView.infiniteScrollingView stopAnimating];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
             NSLog(@"%@",error);
+            [self.tableView.infiniteScrollingView stopAnimating];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if(self.pageIndex > 1)self.pageIndex--;
         }];
         
         [operation start];
     }else{
+        [self.tableView.infiniteScrollingView stopAnimating];
         if(self.pageIndex > 1)self.pageIndex--;
     }
     
@@ -668,15 +672,8 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
 
 - (void)loadMore
 {
-    __weak jxdribbble_DetailViewController *weakSelf = self;
-    
-    int64_t delayInSeconds = 1.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        weakSelf.pageIndex++;
-        [weakSelf getData];
-        [weakSelf.tableView.infiniteScrollingView stopAnimating];
-    });
+    self.pageIndex++;
+    [self getData];
 }
 
 @end
