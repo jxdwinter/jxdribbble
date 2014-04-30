@@ -176,14 +176,14 @@ MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
                     EvernoteUserStore *userStore = [EvernoteUserStore userStore];
                     [userStore getUserWithSuccess:^(EDAMUser *user) {
                         // success
-                        NSLog(@"Authenticated as %@", [user username]);
+
                         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                         [userDefaults setValue:[user username] forKey:@"evernote_uesrname"];
                         [userDefaults synchronize];
                         [self.tableView reloadData];
                     } failure:^(NSError *error) {
                         // failure
-                        NSLog(@"Error getting user: %@", error);
+
                     } ];
                 }
                 cell.textLabel.text = [NSString stringWithFormat:@"Evernote : %@",username];
@@ -278,10 +278,7 @@ MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
             }
         }else if ( row == 1 ){
             EvernoteSession *session = [EvernoteSession sharedSession];
-            NSLog(@"Session host: %@", [session host]);
-            NSLog(@"Session key: %@", [session consumerKey]);
-            NSLog(@"Session secret: %@", [session consumerSecret]);
-            
+
             /**
              *  如果已经授权
              */
@@ -297,24 +294,20 @@ MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
                 [session authenticateWithViewController:self completionHandler:^(NSError *error) {
                     if (error || !session.isAuthenticated){
                         if (error) {
-                            NSLog(@"Error authenticating with Evernote Cloud API: %@", error);
                         }
                         if (!session.isAuthenticated) {
-                            NSLog(@"Session not authenticated");
                         }
                     } else {
                         // We're authenticated!
                         EvernoteUserStore *userStore = [EvernoteUserStore userStore];
                         [userStore getUserWithSuccess:^(EDAMUser *user) {
                             // success
-                            NSLog(@"Authenticated as %@", [user username]);
                             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                             [userDefaults setValue:[user username] forKey:@"evernote_uesrname"];
                             [userDefaults synchronize];
                             [self.tableView reloadData];
                         } failure:^(NSError *error) {
                             // failure
-                            NSLog(@"Error getting user: %@", error);
                         } ];
                     }
                 }];

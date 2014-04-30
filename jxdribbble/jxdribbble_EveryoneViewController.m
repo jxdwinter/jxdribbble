@@ -112,7 +112,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 255.0;
+    return 270.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -264,7 +264,7 @@
             self.refreshButton.hidden = NO;
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-            NSLog(@"%@",error);
+
             [self.tableView.infiniteScrollingView stopAnimating];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [_spinner stopAnimating];

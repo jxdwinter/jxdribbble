@@ -60,9 +60,7 @@
     self.refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
     [self.refreshButton setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
     [self.refreshButton addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
-    
-    NSLog(@"%@", NSStringFromCGRect([UIScreen mainScreen].bounds));
-    
+
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, [UIScreen mainScreen].bounds.size.height ) style:UITableViewStylePlain];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0,49, 0);
     __weak jxdribbble_PlayerListViewController *weakSelf = self;
@@ -220,7 +218,7 @@
             self.refreshButton.hidden = NO;
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-            NSLog(@"%@",error);
+
             [self.tableView.infiniteScrollingView stopAnimating];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [_spinner stopAnimating];

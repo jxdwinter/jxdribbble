@@ -394,7 +394,7 @@
             self.refreshButton.hidden = NO;
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-            NSLog(@"%@",error);
+
             [self.tableView.infiniteScrollingView stopAnimating];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [_spinner stopAnimating];

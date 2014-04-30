@@ -157,7 +157,7 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
 
             NSData *data = [NSKeyedUnarchiver unarchiveObjectWithFile:filename];
             VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:data]];
-            gifView.frame = CGRectMake(10.0, 50.0, 300.0, 225.0);
+            gifView.frame = CGRectMake(0.0, 50.0, 320.0, 240.0);
             [self.headerView addSubview:gifView];
             
         }else{
@@ -170,7 +170,7 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
                                                                                  success:^(AFHTTPRequestOperation *operation, id responseObject)
                                                                                  {
                                                                                      VVeboImageView *gifView = [[VVeboImageView alloc] initWithImage:[VVeboImage gifWithData:responseObject]];
-                                                                                     gifView.frame = CGRectMake(10.0, 50.0, 300.0, 225.0);
+                                                                                     gifView.frame = CGRectMake(0.0, 50.0, 320.0, 240.0);
                                                                                      [self.headerView addSubview:gifView];
 
                                                                                      [NSKeyedArchiver archiveRootObject:responseObject toFile:filename];
@@ -192,7 +192,7 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
     else
     {
 
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 50.0, 300.0, 225.0)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 50.0, 320.0, 240.0)];
         imageView.userInteractionEnabled = YES;
 
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:imageView animated:YES];
@@ -219,7 +219,7 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
 
 
 
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(278.0, 280.0, 30.0, 30.0)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(278.0, 290.0, 30.0, 30.0)];
     [shareButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     
@@ -235,7 +235,7 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"=========");
+
 }
 
 - (void)share
@@ -314,8 +314,6 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet == self.openLinkActionSheet){
-        NSLog(@"%@",self.link);
-        
         if ( buttonIndex == 0 ){
             jxdribbble_WebViewController *webViewController = [[jxdribbble_WebViewController alloc] init];
             webViewController.urlString = self.link;
@@ -445,18 +443,15 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
         hud.mode = MBProgressHUDModeAnnularDeterminate;
         
         [[EvernoteNoteStore noteStore] setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-            NSLog(@"Total bytes written : %lld , Total bytes expected to be written : %lld",totalBytesWritten,totalBytesExpectedToWrite);
             double p = (double)totalBytesWritten/(double)totalBytesExpectedToWrite;
             hud.progress = p;
         }];
         
         [[EvernoteNoteStore noteStore] createNote:newNote success:^(EDAMNote *note) {
-            NSLog(@"Note created successfully.");
             [hud hide:YES];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         } failure:^(NSError *error) {
             [hud hide:YES];
-            NSLog(@"Error creating note : %@",error);
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         }];
     }
@@ -483,7 +478,6 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     if (!self.view.window) {
-        NSLog(@"didReceiveMemoryWarning");
         [self.headerView removeFromSuperview];
     }
 }
@@ -556,14 +550,6 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
        
         
         NSArray *hotWords = @[@"Handle", @"Hashtag", @"Link"];
-        NSLog(@"%@",[NSString stringWithFormat:@"%@ [%d,%d]: %@%@",
-                     hotWords[hotWord],
-                     (int)range.location,
-                     (int)range.length,
-                     string,
-                     (protocol != nil) ? [NSString stringWithFormat:@" *%@*",protocol] : @""]
-              );
-        
         if ([hotWords[hotWord] length] > 0){
             if ([hotWords[hotWord] isEqualToString:@"Link"]){
                 self.link = string;
@@ -654,7 +640,7 @@ UIGestureRecognizerDelegate,UIActionSheetDelegate,UIWebViewDelegate,NSURLConnect
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-            NSLog(@"%@",error);
+
             [self.tableView.infiniteScrollingView stopAnimating];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if(self.pageIndex > 1)self.pageIndex--;
